@@ -1,0 +1,11 @@
+{
+    "extends": "square_201_IGA2x2_9IP_PE_NO_AN+30_ND_T500",
+    "overrides": {
+        "parent_input_file": "ortho_an_square_201_IGA2x2_9IP_PE_OA_AN+30_ND",
+        "solution_parameters": {
+            "displacement_control_parameters": {
+                "maximum_controlled_displacement": 0.015
+            }
+        }
+    }
+}

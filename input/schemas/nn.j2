@@ -1,0 +1,1 @@
+{% set stem = parent_input_file.split('/')[-1] %}{{ stem }}_{{network_type | network_abbr}}_{{hidden_count}}x{{hidden_size}}{{rff_params|rff_abbr}}_{{activation|activation_abbr}}{{transfer_learning|transfer_learning_abbr}}_{{optimiser|optimiser_abbr}}_{{displacement_parameters|displacement_steps_abbr}}.json

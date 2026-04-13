@@ -1,0 +1,10 @@
+{
+    "extends": "square_201_IGA2x2_9IP_PE_NO_AN+30_ND",
+    "overrides": {
+        "material_rotation": {
+            "angle": 20,
+            "number_of_slices": 3
+        },
+        "strain_split": "orthotropic_anisotropy_none"
+    }
+}

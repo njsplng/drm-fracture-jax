@@ -1,0 +1,17 @@
+{
+    "extends": "square_101_IGA2x2_9IP_PE_NO_AN+30_ND",
+    "overrides": {
+        "gamma_parameters": {
+            "gamma11": 1.0
+        },
+        "material_rotation": {
+            "angle": -30.0
+        },
+        "mesh": {
+            "filename": "square_201"
+        },
+        "problem_type": "anisotropic",
+        "strain_split": "cubic_anisotropy_none",
+        "title_prefix": "cubic_an"
+    }
+}

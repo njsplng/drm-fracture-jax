@@ -1,0 +1,2350 @@
+2026-03-13 14:38:42,961 - INFO - --------------------------------------------------
+2026-03-13 14:38:42,961 - INFO - Using [CudaDevice(id=0)]
+2026-03-13 14:38:42,961 - INFO - Input dictionary used:
+2026-03-13 14:38:42,963 - INFO - {
+    "adaptive_upsampling": {
+        "change_tolerance": 0.02,
+        "enabled": false,
+        "factor": 2,
+        "frequency": 50,
+        "grace_period_factor": 5,
+        "max_elements": 100,
+        "neighbor_layers": 4,
+        "start": 250
+    },
+    "aggregate_timings": true,
+    "boundary_conditions": {
+        "fixed_window_directions": ["y", "xy"],
+        "fixed_window_parameters": [
+            {
+                "L": 0.6,
+                "d0": 0.05,
+                "order": 2,
+                "smooth_end": false,
+                "theta": -90,
+                "x_init": -0.5,
+                "y_init": 0.0
+            },
+            {
+                "L": 0.1,
+                "d0": 0.05,
+                "order": 2,
+                "smooth_end": true,
+                "theta": 0,
+                "x_init": 0.498,
+                "y_init": 0.0
+            }
+        ],
+        "load_window_parameters": [
+            {
+                "L": 0.6,
+                "d0": 0.05,
+                "order": 2,
+                "smooth_end": false,
+                "theta": 90,
+                "x_init": -0.5,
+                "y_init": 0.0
+            }
+        ]
+    },
+    "debug": false,
+    "displacement_parameters": {
+        "coarse_end": 0.0,
+        "end": 0.015,
+        "increments_coarse": 0,
+        "increments_fine": 100,
+        "loading_angle": 90,
+        "start": 0
+    },
+    "error_calculation": {
+        "loadsteps_to_compare": [],
+        "reference_data_file": "square+30"
+    },
+    "gamma_parameters": {
+        "gamma11": 20,
+        "gamma12": 0.0,
+        "gamma22": 1.0,
+        "gamma44": 18.5
+    },
+    "generate_plots": [
+        {
+            "plot_energy": {
+                "title": "Energy over displacement increments"
+            }
+        }
+    ],
+    "material_parameters": {
+        "cubic_anisotropy": {
+            "shear_modulus": 1.92307692e+5
+        },
+        "orthotropic_anisotropy": {
+            "E_11": 2.0e+7,
+            "E_22": 1.0e+6,
+            "E_33": 1.0e+6,
+            "G_12": 3.84615385e+5,
+            "G_23": 3.7037037e+5,
+            "G_31": 3.84615385e+5,
+            "nu_12": 0.3,
+            "nu_23": 0.35,
+            "nu_31": 0.3
+        },
+        "poissons_ratio": 0.3,
+        "thickness": 1,
+        "youngs_modulus": 1.0e+6
+    },
+    "material_rotation": {
+        "angle": 30,
+        "number_of_slices": 1,
+        "slicing_direction": "x"
+    },
+    "mesh": {
+        "filename": "square_201",
+        "number_of_integration_points": -1,
+        "type": "nurbs"
+    },
+    "model_energy_scale": "log",
+    "network": {
+        "activation": {
+            "function": "tanh",
+            "initial_coefficient": 2.0,
+            "trainable": true,
+            "trainable_global": true
+        },
+        "hidden_count": 24,
+        "hidden_size": 300,
+        "input_size": 2,
+        "output_size": 3,
+        "rff": {
+            "enabled": true,
+            "features": 192,
+            "scale": 0.1
+        },
+        "rwf": {
+            "enabled": false,
+            "mu": 1.0,
+            "sigma": 0.1
+        },
+        "type": "resnet4",
+        "weight_initialisation_type": "xavier_normal"
+    },
+    "nondimensionalise": true,
+    "output_parameters": {
+        "energy_plot_parameters": {
+            "burn_first_entry": true
+        },
+        "log_parameters": {
+            "calculate_sparsity": false,
+            "output_activation_coefficients": true
+        },
+        "loss_landscape_generation_parameters": {
+            "enabled": false,
+            "n_points_per_axis": 51,
+            "output_range": [-1, 1],
+            "target_displacement_increments": []
+        },
+        "loss_plot_parameters": {
+            "burn_first_entry": true,
+            "smoothing_window_size": 200
+        },
+        "postprocessed_quantities_to_checkpoints": false,
+        "push_to_remote": false,
+        "pvd_gif_parameters": {
+            "axis_limits": [
+                [0, 1]
+            ],
+            "distortion_scaling": 1.0,
+            "enabled": true,
+            "fps": 20,
+            "include_every_n": 1,
+            "mesh_outline": false,
+            "target_fields": ["phasefield"]
+        },
+        "save_energy_evolution_plot": false,
+        "save_logs": true,
+        "save_loss_plot": true,
+        "save_pvd": true,
+        "save_training_trajectories": false,
+        "timestamp": true,
+        "training_snapshots": {
+            "enabled": false,
+            "frequency": 50
+        }
+    },
+    "parent_input_file": "ortho_an_square_201_IGA2x2_9IP_PE_OA_AN+30_ND",
+    "phasefield": {
+        "constraint": {
+            "numerical_coefficient": 1.0e-3,
+            "numerical_offset": 0.0,
+            "numerical_support": 8.0,
+            "type": "numerical"
+        },
+        "irreversibility_tolerance": 0.02
+    },
+    "phasefield_parameters": {
+        "G_c": 0.5,
+        "initial_crack_parameters": [],
+        "l_0": 0.01
+    },
+    "plane": "strain",
+    "postprocessing_stress_type": "hydrostatic",
+    "pretrained_model": "",
+    "pretraining_parameters": {
+        "enabled": true,
+        "mesh": {
+            "filename": "square_101",
+            "number_of_integration_points": -1,
+            "type": "nurbs"
+        },
+        "optimiser": ["ssBroydenArmijo_ME1000_MEM10"],
+        "reset_activation_coefficient": false,
+        "save_model": false
+    },
+    "problem_domain": {
+        "x": [-0.5, 0.5],
+        "y": [-0.5, 0.5]
+    },
+    "problem_type": "anisotropic",
+    "profile_memory": true,
+    "recorded_values": ["displacement", "phasefield", "ip_strain_energy", "ip_fracture_energy"],
+    "seed": 1,
+    "split_output_keys": ["displacement"],
+    "strain_split": "orthotropic_anisotropy_none",
+    "target_dof": {
+        "coordinates": [-0.5, 0.5],
+        "direction": "y"
+    },
+    "time_functions": true,
+    "title_prefix": "ortho_an",
+    "training_parameters": {
+        "early_stopping": {
+            "absolute_threshold": 5.0e-6,
+            "enabled": true,
+            "mode": "relative",
+            "patience": 50,
+            "pretraining_stop": true,
+            "relative_threshold": 5.0e-5
+        },
+        "inject_pretraining_parameters_every": -1,
+        "loss_terms": {
+            "energy_elastic": true,
+            "energy_irreversibility": true,
+            "energy_phasefield": true,
+            "weight_decay": true
+        },
+        "optimiser": ["rprop_LR1-5_ME10000"],
+        "save_model_every": 100,
+        "weight_decay": 1.0e-5
+    },
+    "transfer_learning": {
+        "enabled": true,
+        "n_trainable_connections": -1,
+        "n_transferable_states": 1,
+        "transfer_optimiser": true
+    }
+}
+2026-03-13 14:38:42,963 - INFO - --------------------------------------------------
+2026-03-13 14:38:42,965 - INFO - Loading mesh from square_201 of type nurbs...
+2026-03-13 14:38:48,600 - INFO - Mesh parsed successfully.
+2026-03-13 14:38:57,520 - INFO - Found 41209 nodes and 40401 elements.
+2026-03-13 14:38:57,978 - INFO - Target DOF located at index 82013.
+2026-03-13 14:38:58,068 - INFO - Finished creating dataclasses.
+2026-03-13 14:38:59,377 - INFO - Finished setting up strain energy (orthotropic_anisotropy_none) and phase field (anisotropic) models.
+2026-03-13 14:39:03,375 - INFO - Initial phasefield values set up completed.
+2026-03-13 14:39:03,376 - INFO - Render output flag set to True.
+2026-03-13 14:39:03,624 - INFO - Displacement iterator set up with length 101.
+2026-03-13 14:39:03,628 - INFO - Loading mesh from square_101 of type nurbs...
+2026-03-13 14:39:05,112 - INFO - Mesh parsed successfully.
+2026-03-13 14:39:14,752 - INFO - Found pretraining mesh with 10609 nodes and 10201 elements.
+2026-03-13 14:39:15,216 - INFO - Initialising RFF with input 2, 192 features and scale 0.1.
+2026-03-13 14:39:22,396 - INFO - Trainable network initialised with 24 layers (300 neurons per hidden).
+2026-03-13 14:39:22,864 - INFO - Main training parameters set up.
+2026-03-13 14:39:22,864 - INFO - Output streaming into checkpoints: False
+2026-03-13 14:39:22,864 - INFO - Set up time: 39.927902
+2026-03-13 14:39:22,864 - INFO - --------------------------------------------------
+2026-03-13 14:39:22,864 - INFO - Saving current training parameters to buffers...
+2026-03-13 14:39:22,864 - INFO - Overwriting training parameters with pretraining ones...
+2026-03-13 14:39:22,864 - INFO - Saving current model parameters to buffers...
+2026-03-13 14:39:22,864 - INFO - Attaching pretraining parameters to the model...
+2026-03-13 14:39:23,159 - INFO - Pretraining parameters attached.
+2026-03-13 14:39:23,961 - INFO - --------------------------------------------------
+2026-03-13 14:39:23,961 - INFO - Starting pretraining...
+2026-03-13 14:39:24,006 - INFO [ssBroydenArmijo] - Starting training step
+2026-03-13 14:40:12,219 - INFO [ssBroydenArmijo] - Epoch: 100, Loss: -1.0038e+01, Best loss: -1.0038e+01
+2026-03-13 14:40:32,126 - INFO [ssBroydenArmijo] - Epoch: 200, Loss: -1.1182e+01, Best loss: -1.1182e+01
+2026-03-13 14:40:52,406 - INFO [ssBroydenArmijo] - Epoch: 300, Loss: -1.1522e+01, Best loss: -1.1522e+01
+2026-03-13 14:41:12,865 - INFO [ssBroydenArmijo] - Epoch: 400, Loss: -1.2033e+01, Best loss: -1.2033e+01
+2026-03-13 14:41:34,121 - INFO [ssBroydenArmijo] - Epoch: 500, Loss: -1.2703e+01, Best loss: -1.2703e+01
+2026-03-13 14:41:56,437 - INFO [ssBroydenArmijo] - Epoch: 600, Loss: -1.3436e+01, Best loss: -1.3436e+01
+2026-03-13 14:42:19,782 - INFO [ssBroydenArmijo] - Epoch: 700, Loss: -1.3837e+01, Best loss: -1.3837e+01
+2026-03-13 14:42:43,487 - INFO [ssBroydenArmijo] - Epoch: 800, Loss: -1.4130e+01, Best loss: -1.4130e+01
+2026-03-13 14:43:07,248 - INFO [ssBroydenArmijo] - Epoch: 900, Loss: -1.4223e+01, Best loss: -1.4223e+01
+2026-03-13 14:43:30,804 - INFO [ssBroydenArmijo] - Epoch: 1000, Loss: -1.4274e+01, Best loss: -1.4274e+01
+2026-03-13 14:43:30,806 - INFO - Pretraining completed in 246.844718 seconds.
+2026-03-13 14:43:30,806 - INFO - Restoring training parameters from buffers...
+2026-03-13 14:43:30,806 - INFO - Freeing buffers...
+2026-03-13 14:43:30,806 - INFO - Reattaching training parameters to the model...
+2026-03-13 14:43:31,145 - INFO - Freeing buffers...
+2026-03-13 14:43:31,175 - INFO - Training parameters restored.
+2026-03-13 14:43:38,305 - INFO [memory after increment -1] -  Host: 3613.0 MB
+2026-03-13 14:43:38,305 - INFO - --------------------------------------------------
+2026-03-13 14:43:38,305 - INFO - Starting training step 1/100...
+2026-03-13 14:43:38,389 - INFO [rprop] - Starting training step
+2026-03-13 14:44:10,823 - INFO [rprop] - Epoch: 100, Loss: -3.9105e+00, Best loss: -3.9105e+00
+2026-03-13 14:44:37,088 - INFO [rprop] - Epoch: 200, Loss: -4.0647e+00, Best loss: -4.0647e+00
+2026-03-13 14:45:03,562 - INFO [rprop] - Epoch: 300, Loss: -4.0987e+00, Best loss: -4.0987e+00
+2026-03-13 14:45:30,266 - INFO [rprop] - Epoch: 400, Loss: -4.1093e+00, Best loss: -4.1093e+00
+2026-03-13 14:45:56,989 - INFO [rprop] - Epoch: 500, Loss: -4.1143e+00, Best loss: -4.1143e+00
+2026-03-13 14:46:23,719 - INFO [rprop] - Epoch: 600, Loss: -4.1176e+00, Best loss: -4.1176e+00
+2026-03-13 14:46:50,377 - INFO [rprop] - Epoch: 700, Loss: -4.1197e+00, Best loss: -4.1197e+00
+2026-03-13 14:47:16,159 - INFO [rprop] - Epoch: 800, Loss: -4.1213e+00, Best loss: -4.1213e+00
+2026-03-13 14:47:43,030 - INFO [rprop] - Epoch: 900, Loss: -4.1228e+00, Best loss: -4.1228e+00
+2026-03-13 14:48:09,336 - INFO [rprop] - Epoch: 1000, Loss: -4.1238e+00, Best loss: -4.1238e+00
+2026-03-13 14:48:35,966 - INFO [rprop] - Epoch: 1100, Loss: -4.1247e+00, Best loss: -4.1247e+00
+2026-03-13 14:49:02,900 - INFO [rprop] - Epoch: 1200, Loss: -4.1254e+00, Best loss: -4.1254e+00
+2026-03-13 14:49:29,224 - INFO [rprop] - Epoch: 1300, Loss: -4.1260e+00, Best loss: -4.1260e+00
+2026-03-13 14:49:55,627 - INFO [rprop] - Epoch: 1400, Loss: -4.1265e+00, Best loss: -4.1265e+00
+2026-03-13 14:50:22,312 - INFO [rprop] - Epoch: 1500, Loss: -4.1270e+00, Best loss: -4.1270e+00
+2026-03-13 14:50:44,839 - INFO [rprop] - Epoch: 1584, Loss: -4.1273e+00, Best loss: -4.1273e+00
+2026-03-13 14:50:44,839 - INFO [rprop] - Early stopping triggered at epoch 1583
+2026-03-13 14:50:44,964 - INFO - Step 1 training completed in 426.659220 seconds.
+2026-03-13 14:50:47,859 - INFO [memory after increment 0] -  Host: 3659.6 MB
+2026-03-13 14:50:47,860 - INFO - --------------------------------------------------
+2026-03-13 14:50:47,862 - INFO - Starting training step 2/100...
+2026-03-13 14:50:47,972 - INFO [rprop] - Starting training step
+2026-03-13 14:51:24,259 - INFO [rprop] - Epoch: 100, Loss: -3.7820e+00, Best loss: -3.7823e+00
+2026-03-13 14:51:48,755 - INFO [rprop] - Epoch: 200, Loss: -3.7835e+00, Best loss: -3.7835e+00
+2026-03-13 14:52:11,238 - INFO [rprop] - Epoch: 300, Loss: -3.7842e+00, Best loss: -3.7842e+00
+2026-03-13 14:52:34,970 - INFO [rprop] - Epoch: 400, Loss: -3.7849e+00, Best loss: -3.7849e+00
+2026-03-13 14:52:59,998 - INFO [rprop] - Epoch: 500, Loss: -3.7855e+00, Best loss: -3.7855e+00
+2026-03-13 14:53:25,304 - INFO [rprop] - Epoch: 600, Loss: -3.7859e+00, Best loss: -3.7859e+00
+2026-03-13 14:53:48,718 - INFO [rprop] - Epoch: 700, Loss: -3.7863e+00, Best loss: -3.7863e+00
+2026-03-13 14:53:55,188 - INFO [rprop] - Epoch: 725, Loss: -3.7864e+00, Best loss: -3.7864e+00
+2026-03-13 14:53:55,188 - INFO [rprop] - Early stopping triggered at epoch 724
+2026-03-13 14:53:55,340 - INFO - Step 2 training completed in 187.480176 seconds.
+2026-03-13 14:53:58,600 - INFO [memory after increment 1] -  Host: 3666.2 MB
+2026-03-13 14:53:58,602 - INFO - --------------------------------------------------
+2026-03-13 14:53:58,604 - INFO - Starting training step 3/100...
+2026-03-13 14:53:58,771 - INFO [rprop] - Starting training step
+2026-03-13 14:54:33,480 - INFO [rprop] - Epoch: 100, Loss: -3.5445e+00, Best loss: -3.5445e+00
+2026-03-13 14:55:01,133 - INFO [rprop] - Epoch: 200, Loss: -3.5461e+00, Best loss: -3.5461e+00
+2026-03-13 14:55:30,946 - INFO [rprop] - Epoch: 300, Loss: -3.5475e+00, Best loss: -3.5475e+00
+2026-03-13 14:55:58,447 - INFO [rprop] - Epoch: 400, Loss: -3.5484e+00, Best loss: -3.5484e+00
+2026-03-13 14:56:29,562 - INFO [rprop] - Epoch: 500, Loss: -3.5492e+00, Best loss: -3.5492e+00
+2026-03-13 14:56:59,371 - INFO [rprop] - Epoch: 600, Loss: -3.5499e+00, Best loss: -3.5499e+00
+2026-03-13 14:57:32,283 - INFO [rprop] - Epoch: 700, Loss: -3.5506e+00, Best loss: -3.5506e+00
+2026-03-13 14:58:03,535 - INFO [rprop] - Epoch: 800, Loss: -3.5511e+00, Best loss: -3.5511e+00
+2026-03-13 14:58:34,122 - INFO [rprop] - Epoch: 900, Loss: -3.5516e+00, Best loss: -3.5516e+00
+2026-03-13 14:59:05,528 - INFO [rprop] - Epoch: 1000, Loss: -3.5520e+00, Best loss: -3.5520e+00
+2026-03-13 14:59:37,747 - INFO [rprop] - Epoch: 1099, Loss: -3.5524e+00, Best loss: -3.5524e+00
+2026-03-13 14:59:37,748 - INFO [rprop] - Early stopping triggered at epoch 1098
+2026-03-13 14:59:38,418 - INFO - Step 3 training completed in 339.816680 seconds.
+2026-03-13 14:59:42,168 - INFO [memory after increment 2] -  Host: 3684.4 MB
+2026-03-13 14:59:42,170 - INFO - --------------------------------------------------
+2026-03-13 14:59:42,173 - INFO - Starting training step 4/100...
+2026-03-13 14:59:42,336 - INFO [rprop] - Starting training step
+2026-03-13 15:00:15,198 - INFO [rprop] - Epoch: 100, Loss: -3.3702e+00, Best loss: -3.3702e+00
+2026-03-13 15:00:37,262 - INFO [rprop] - Epoch: 200, Loss: -3.3719e+00, Best loss: -3.3719e+00
+2026-03-13 15:01:01,247 - INFO [rprop] - Epoch: 300, Loss: -3.3731e+00, Best loss: -3.3731e+00
+2026-03-13 15:01:28,253 - INFO [rprop] - Epoch: 400, Loss: -3.3741e+00, Best loss: -3.3741e+00
+2026-03-13 15:01:54,858 - INFO [rprop] - Epoch: 500, Loss: -3.3749e+00, Best loss: -3.3749e+00
+2026-03-13 15:02:22,211 - INFO [rprop] - Epoch: 600, Loss: -3.3756e+00, Best loss: -3.3756e+00
+2026-03-13 15:02:49,418 - INFO [rprop] - Epoch: 700, Loss: -3.3762e+00, Best loss: -3.3762e+00
+2026-03-13 15:03:16,917 - INFO [rprop] - Epoch: 800, Loss: -3.3766e+00, Best loss: -3.3766e+00
+2026-03-13 15:03:44,044 - INFO [rprop] - Epoch: 900, Loss: -3.3770e+00, Best loss: -3.3770e+00
+2026-03-13 15:04:11,466 - INFO [rprop] - Epoch: 1000, Loss: -3.3774e+00, Best loss: -3.3774e+00
+2026-03-13 15:04:14,208 - INFO [rprop] - Epoch: 1010, Loss: -3.3774e+00, Best loss: -3.3774e+00
+2026-03-13 15:04:14,208 - INFO [rprop] - Early stopping triggered at epoch 1009
+2026-03-13 15:04:14,345 - INFO - Step 4 training completed in 272.175141 seconds.
+2026-03-13 15:04:17,292 - INFO [memory after increment 3] -  Host: 3702.4 MB
+2026-03-13 15:04:17,294 - INFO - --------------------------------------------------
+2026-03-13 15:04:17,294 - INFO - Starting training step 5/100...
+2026-03-13 15:04:17,408 - INFO [rprop] - Starting training step
+2026-03-13 15:04:55,528 - INFO [rprop] - Epoch: 100, Loss: -3.2289e+00, Best loss: -3.2339e+00
+2026-03-13 15:05:20,944 - INFO [rprop] - Epoch: 200, Loss: -3.2351e+00, Best loss: -3.2351e+00
+2026-03-13 15:05:50,804 - INFO [rprop] - Epoch: 300, Loss: -3.2364e+00, Best loss: -3.2364e+00
+2026-03-13 15:06:23,808 - INFO [rprop] - Epoch: 400, Loss: -3.2373e+00, Best loss: -3.2373e+00
+2026-03-13 15:06:55,949 - INFO [rprop] - Epoch: 500, Loss: -3.2380e+00, Best loss: -3.2380e+00
+2026-03-13 15:07:29,081 - INFO [rprop] - Epoch: 600, Loss: -3.2386e+00, Best loss: -3.2386e+00
+2026-03-13 15:08:02,127 - INFO [rprop] - Epoch: 700, Loss: -3.2391e+00, Best loss: -3.2391e+00
+2026-03-13 15:08:34,987 - INFO [rprop] - Epoch: 800, Loss: -3.2394e+00, Best loss: -3.2394e+00
+2026-03-13 15:09:00,009 - INFO [rprop] - Epoch: 875, Loss: -3.2397e+00, Best loss: -3.2397e+00
+2026-03-13 15:09:00,012 - INFO [rprop] - Early stopping triggered at epoch 874
+2026-03-13 15:09:00,719 - INFO - Step 5 training completed in 283.424897 seconds.
+2026-03-13 15:09:04,403 - INFO [memory after increment 4] -  Host: 3720.4 MB
+2026-03-13 15:09:04,409 - INFO - --------------------------------------------------
+2026-03-13 15:09:04,409 - INFO - Starting training step 6/100...
+2026-03-13 15:09:04,576 - INFO [rprop] - Starting training step
+2026-03-13 15:09:42,482 - INFO [rprop] - Epoch: 100, Loss: -3.1231e+00, Best loss: -3.1231e+00
+2026-03-13 15:10:08,401 - INFO [rprop] - Epoch: 200, Loss: -3.1246e+00, Best loss: -3.1246e+00
+2026-03-13 15:10:33,763 - INFO [rprop] - Epoch: 300, Loss: -3.1251e+00, Best loss: -3.1251e+00
+2026-03-13 15:11:00,985 - INFO [rprop] - Epoch: 400, Loss: -3.1255e+00, Best loss: -3.1255e+00
+2026-03-13 15:11:32,117 - INFO [rprop] - Epoch: 500, Loss: -3.1259e+00, Best loss: -3.1259e+00
+2026-03-13 15:12:04,681 - INFO [rprop] - Epoch: 600, Loss: -3.1264e+00, Best loss: -3.1264e+00
+2026-03-13 15:12:35,123 - INFO [rprop] - Epoch: 700, Loss: -3.1269e+00, Best loss: -3.1269e+00
+2026-03-13 15:13:04,939 - INFO [rprop] - Epoch: 800, Loss: -3.1273e+00, Best loss: -3.1273e+00
+2026-03-13 15:13:37,977 - INFO [rprop] - Epoch: 900, Loss: -3.1277e+00, Best loss: -3.1277e+00
+2026-03-13 15:14:10,965 - INFO [rprop] - Epoch: 1000, Loss: -3.1280e+00, Best loss: -3.1280e+00
+2026-03-13 15:14:14,744 - INFO [rprop] - Epoch: 1011, Loss: -3.1280e+00, Best loss: -3.1280e+00
+2026-03-13 15:14:14,746 - INFO [rprop] - Early stopping triggered at epoch 1010
+2026-03-13 15:14:14,916 - INFO - Step 6 training completed in 310.507230 seconds.
+2026-03-13 15:14:18,633 - INFO [memory after increment 5] -  Host: 3738.8 MB
+2026-03-13 15:14:18,639 - INFO - --------------------------------------------------
+2026-03-13 15:14:18,642 - INFO - Starting training step 7/100...
+2026-03-13 15:14:18,803 - INFO [rprop] - Starting training step
+2026-03-13 15:14:51,451 - INFO [rprop] - Epoch: 100, Loss: -3.0098e+00, Best loss: -3.0303e+00
+2026-03-13 15:15:13,188 - INFO [rprop] - Epoch: 200, Loss: -3.0321e+00, Best loss: -3.0321e+00
+2026-03-13 15:15:35,124 - INFO [rprop] - Epoch: 300, Loss: -3.0328e+00, Best loss: -3.0328e+00
+2026-03-13 15:15:59,677 - INFO [rprop] - Epoch: 400, Loss: -3.0333e+00, Best loss: -3.0333e+00
+2026-03-13 15:16:23,938 - INFO [rprop] - Epoch: 500, Loss: -3.0337e+00, Best loss: -3.0337e+00
+2026-03-13 15:16:42,099 - INFO [rprop] - Epoch: 571, Loss: -3.0339e+00, Best loss: -3.0339e+00
+2026-03-13 15:16:42,101 - INFO [rprop] - Early stopping triggered at epoch 570
+2026-03-13 15:16:42,238 - INFO - Step 7 training completed in 143.599816 seconds.
+2026-03-13 15:16:45,490 - INFO [memory after increment 6] -  Host: 3758.2 MB
+2026-03-13 15:16:45,494 - INFO - --------------------------------------------------
+2026-03-13 15:16:45,494 - INFO - Starting training step 8/100...
+2026-03-13 15:16:45,663 - INFO [rprop] - Starting training step
+2026-03-13 15:17:17,758 - INFO [rprop] - Epoch: 100, Loss: -2.9494e+00, Best loss: -2.9518e+00
+2026-03-13 15:17:39,781 - INFO [rprop] - Epoch: 200, Loss: -2.9529e+00, Best loss: -2.9529e+00
+2026-03-13 15:18:03,206 - INFO [rprop] - Epoch: 300, Loss: -2.9536e+00, Best loss: -2.9536e+00
+2026-03-13 15:18:27,545 - INFO [rprop] - Epoch: 400, Loss: -2.9541e+00, Best loss: -2.9541e+00
+2026-03-13 15:18:53,394 - INFO [rprop] - Epoch: 500, Loss: -2.9545e+00, Best loss: -2.9545e+00
+2026-03-13 15:19:19,215 - INFO [rprop] - Epoch: 600, Loss: -2.9548e+00, Best loss: -2.9548e+00
+2026-03-13 15:19:34,005 - INFO [rprop] - Epoch: 656, Loss: -2.9550e+00, Best loss: -2.9550e+00
+2026-03-13 15:19:34,007 - INFO [rprop] - Early stopping triggered at epoch 655
+2026-03-13 15:19:34,127 - INFO - Step 8 training completed in 168.632936 seconds.
+2026-03-13 15:19:37,067 - INFO [memory after increment 7] -  Host: 3777.6 MB
+2026-03-13 15:19:37,071 - INFO - --------------------------------------------------
+2026-03-13 15:19:37,073 - INFO - Starting training step 9/100...
+2026-03-13 15:19:37,188 - INFO [rprop] - Starting training step
+2026-03-13 15:20:08,097 - INFO [rprop] - Epoch: 100, Loss: -2.8834e+00, Best loss: -2.8841e+00
+2026-03-13 15:20:31,081 - INFO [rprop] - Epoch: 200, Loss: -2.8851e+00, Best loss: -2.8851e+00
+2026-03-13 15:20:56,121 - INFO [rprop] - Epoch: 300, Loss: -2.8856e+00, Best loss: -2.8856e+00
+2026-03-13 15:21:21,215 - INFO [rprop] - Epoch: 400, Loss: -2.8860e+00, Best loss: -2.8860e+00
+2026-03-13 15:21:48,097 - INFO [rprop] - Epoch: 500, Loss: -2.8863e+00, Best loss: -2.8863e+00
+2026-03-13 15:21:51,450 - INFO [rprop] - Epoch: 512, Loss: -2.8864e+00, Best loss: -2.8864e+00
+2026-03-13 15:21:51,453 - INFO [rprop] - Early stopping triggered at epoch 511
+2026-03-13 15:21:51,577 - INFO - Step 9 training completed in 134.506118 seconds.
+2026-03-13 15:21:54,799 - INFO [memory after increment 8] -  Host: 3796.5 MB
+2026-03-13 15:21:54,803 - INFO - --------------------------------------------------
+2026-03-13 15:21:54,808 - INFO - Starting training step 10/100...
+2026-03-13 15:21:54,974 - INFO [rprop] - Starting training step
+2026-03-13 15:22:31,313 - INFO [rprop] - Epoch: 100, Loss: -2.8245e+00, Best loss: -2.8245e+00
+2026-03-13 15:22:59,407 - INFO [rprop] - Epoch: 200, Loss: -2.8251e+00, Best loss: -2.8251e+00
+2026-03-13 15:23:30,013 - INFO [rprop] - Epoch: 300, Loss: -2.8255e+00, Best loss: -2.8255e+00
+2026-03-13 15:24:00,251 - INFO [rprop] - Epoch: 400, Loss: -2.8258e+00, Best loss: -2.8258e+00
+2026-03-13 15:24:04,205 - INFO [rprop] - Epoch: 413, Loss: -2.8258e+00, Best loss: -2.8258e+00
+2026-03-13 15:24:04,208 - INFO [rprop] - Early stopping triggered at epoch 412
+2026-03-13 15:24:04,346 - INFO - Step 10 training completed in 129.543088 seconds.
+2026-03-13 15:24:07,919 - INFO [memory after increment 9] -  Host: 3814.3 MB
+2026-03-13 15:24:07,925 - INFO - --------------------------------------------------
+2026-03-13 15:24:07,928 - INFO - Starting training step 11/100...
+2026-03-13 15:24:08,084 - INFO [rprop] - Starting training step
+2026-03-13 15:24:40,405 - INFO [rprop] - Epoch: 100, Loss: -2.7699e+00, Best loss: -2.7705e+00
+2026-03-13 15:25:03,201 - INFO [rprop] - Epoch: 200, Loss: -2.7710e+00, Best loss: -2.7710e+00
+2026-03-13 15:25:28,567 - INFO [rprop] - Epoch: 300, Loss: -2.7714e+00, Best loss: -2.7714e+00
+2026-03-13 15:25:55,584 - INFO [rprop] - Epoch: 400, Loss: -2.7717e+00, Best loss: -2.7717e+00
+2026-03-13 15:26:11,255 - INFO [rprop] - Epoch: 458, Loss: -2.7718e+00, Best loss: -2.7718e+00
+2026-03-13 15:26:11,258 - INFO [rprop] - Early stopping triggered at epoch 457
+2026-03-13 15:26:11,372 - INFO - Step 11 training completed in 123.446354 seconds.
+2026-03-13 15:26:14,286 - INFO [memory after increment 10] -  Host: 3833.1 MB
+2026-03-13 15:26:14,290 - INFO - --------------------------------------------------
+2026-03-13 15:26:14,290 - INFO - Starting training step 12/100...
+2026-03-13 15:26:14,408 - INFO [rprop] - Starting training step
+2026-03-13 15:26:46,244 - INFO [rprop] - Epoch: 100, Loss: -2.7219e+00, Best loss: -2.7219e+00
+2026-03-13 15:27:10,361 - INFO [rprop] - Epoch: 200, Loss: -2.7223e+00, Best loss: -2.7223e+00
+2026-03-13 15:27:37,720 - INFO [rprop] - Epoch: 300, Loss: -2.7226e+00, Best loss: -2.7226e+00
+2026-03-13 15:28:04,801 - INFO [rprop] - Epoch: 400, Loss: -2.7229e+00, Best loss: -2.7229e+00
+2026-03-13 15:28:06,202 - INFO [rprop] - Epoch: 405, Loss: -2.7229e+00, Best loss: -2.7229e+00
+2026-03-13 15:28:06,205 - INFO [rprop] - Early stopping triggered at epoch 404
+2026-03-13 15:28:06,628 - INFO - Step 12 training completed in 112.338169 seconds.
+2026-03-13 15:28:09,469 - INFO [memory after increment 11] -  Host: 3852.0 MB
+2026-03-13 15:28:09,474 - INFO - --------------------------------------------------
+2026-03-13 15:28:09,474 - INFO - Starting training step 13/100...
+2026-03-13 15:28:09,585 - INFO [rprop] - Starting training step
+2026-03-13 15:28:40,844 - INFO [rprop] - Epoch: 100, Loss: -2.6748e+00, Best loss: -2.6772e+00
+2026-03-13 15:29:03,954 - INFO [rprop] - Epoch: 200, Loss: -2.6775e+00, Best loss: -2.6775e+00
+2026-03-13 15:29:21,995 - INFO [rprop] - Epoch: 274, Loss: -2.6777e+00, Best loss: -2.6777e+00
+2026-03-13 15:29:21,997 - INFO [rprop] - Early stopping triggered at epoch 273
+2026-03-13 15:29:22,111 - INFO - Step 13 training completed in 72.636743 seconds.
+2026-03-13 15:29:24,903 - INFO [memory after increment 12] -  Host: 3870.9 MB
+2026-03-13 15:29:24,908 - INFO - --------------------------------------------------
+2026-03-13 15:29:24,909 - INFO - Starting training step 14/100...
+2026-03-13 15:29:25,020 - INFO [rprop] - Starting training step
+2026-03-13 15:29:55,256 - INFO [rprop] - Epoch: 100, Loss: -2.6355e+00, Best loss: -2.6355e+00
+2026-03-13 15:30:21,261 - INFO [rprop] - Epoch: 200, Loss: -2.6359e+00, Best loss: -2.6359e+00
+2026-03-13 15:30:40,004 - INFO [rprop] - Epoch: 269, Loss: -2.6360e+00, Best loss: -2.6360e+00
+2026-03-13 15:30:40,006 - INFO [rprop] - Early stopping triggered at epoch 268
+2026-03-13 15:30:40,115 - INFO - Step 14 training completed in 75.206932 seconds.
+2026-03-13 15:30:42,890 - INFO [memory after increment 13] -  Host: 3889.6 MB
+2026-03-13 15:30:42,892 - INFO - --------------------------------------------------
+2026-03-13 15:30:42,892 - INFO - Starting training step 15/100...
+2026-03-13 15:30:43,005 - INFO [rprop] - Starting training step
+2026-03-13 15:31:14,408 - INFO [rprop] - Epoch: 100, Loss: -2.5968e+00, Best loss: -2.5968e+00
+2026-03-13 15:31:40,354 - INFO [rprop] - Epoch: 200, Loss: -2.5970e+00, Best loss: -2.5970e+00
+2026-03-13 15:31:45,895 - INFO [rprop] - Epoch: 220, Loss: -2.5971e+00, Best loss: -2.5971e+00
+2026-03-13 15:31:45,899 - INFO [rprop] - Early stopping triggered at epoch 219
+2026-03-13 15:31:46,009 - INFO - Step 15 training completed in 63.116531 seconds.
+2026-03-13 15:31:48,786 - INFO [memory after increment 14] -  Host: 3909.4 MB
+2026-03-13 15:31:48,791 - INFO - --------------------------------------------------
+2026-03-13 15:31:48,793 - INFO - Starting training step 16/100...
+2026-03-13 15:31:48,899 - INFO [rprop] - Starting training step
+2026-03-13 15:32:25,681 - INFO [rprop] - Epoch: 100, Loss: -2.5604e+00, Best loss: -2.5604e+00
+2026-03-13 15:32:56,864 - INFO [rprop] - Epoch: 200, Loss: -2.5606e+00, Best loss: -2.5606e+00
+2026-03-13 15:33:01,174 - INFO [rprop] - Epoch: 213, Loss: -2.5607e+00, Best loss: -2.5607e+00
+2026-03-13 15:33:01,174 - INFO [rprop] - Early stopping triggered at epoch 212
+2026-03-13 15:33:01,297 - INFO - Step 16 training completed in 72.505911 seconds.
+2026-03-13 15:33:04,846 - INFO [memory after increment 15] -  Host: 3928.3 MB
+2026-03-13 15:33:04,848 - INFO - --------------------------------------------------
+2026-03-13 15:33:04,849 - INFO - Starting training step 17/100...
+2026-03-13 15:33:05,006 - INFO [rprop] - Starting training step
+2026-03-13 15:33:41,915 - INFO [rprop] - Epoch: 100, Loss: -2.5261e+00, Best loss: -2.5261e+00
+2026-03-13 15:34:00,125 - INFO [rprop] - Epoch: 161, Loss: -2.5263e+00, Best loss: -2.5263e+00
+2026-03-13 15:34:00,126 - INFO [rprop] - Early stopping triggered at epoch 160
+2026-03-13 15:34:00,790 - INFO - Step 17 training completed in 55.942110 seconds.
+2026-03-13 15:34:04,088 - INFO [memory after increment 16] -  Host: 3947.1 MB
+2026-03-13 15:34:04,092 - INFO - --------------------------------------------------
+2026-03-13 15:34:04,093 - INFO - Starting training step 18/100...
+2026-03-13 15:34:04,250 - INFO [rprop] - Starting training step
+2026-03-13 15:34:40,909 - INFO [rprop] - Epoch: 100, Loss: -2.4936e+00, Best loss: -2.4936e+00
+2026-03-13 15:35:07,694 - INFO [rprop] - Epoch: 185, Loss: -2.4938e+00, Best loss: -2.4938e+00
+2026-03-13 15:35:07,694 - INFO [rprop] - Early stopping triggered at epoch 184
+2026-03-13 15:35:07,812 - INFO - Step 18 training completed in 63.720790 seconds.
+2026-03-13 15:35:11,123 - INFO [memory after increment 17] -  Host: 3965.9 MB
+2026-03-13 15:35:11,125 - INFO - --------------------------------------------------
+2026-03-13 15:35:11,125 - INFO - Starting training step 19/100...
+2026-03-13 15:35:11,285 - INFO [rprop] - Starting training step
+2026-03-13 15:35:43,218 - INFO [rprop] - Epoch: 100, Loss: -2.4629e+00, Best loss: -2.4629e+00
+2026-03-13 15:35:59,588 - INFO [rprop] - Epoch: 167, Loss: -2.4630e+00, Best loss: -2.4630e+00
+2026-03-13 15:35:59,588 - INFO [rprop] - Early stopping triggered at epoch 166
+2026-03-13 15:36:00,031 - INFO - Step 19 training completed in 48.906262 seconds.
+2026-03-13 15:36:03,157 - INFO [memory after increment 18] -  Host: 3985.7 MB
+2026-03-13 15:36:03,161 - INFO - --------------------------------------------------
+2026-03-13 15:36:03,162 - INFO - Starting training step 20/100...
+2026-03-13 15:36:03,317 - INFO [rprop] - Starting training step
+2026-03-13 15:36:36,019 - INFO [rprop] - Epoch: 100, Loss: -2.4335e+00, Best loss: -2.4335e+00
+2026-03-13 15:37:04,230 - INFO [rprop] - Epoch: 200, Loss: -2.4338e+00, Best loss: -2.4338e+00
+2026-03-13 15:37:31,998 - INFO [rprop] - Epoch: 300, Loss: -2.4341e+00, Best loss: -2.4341e+00
+2026-03-13 15:37:40,638 - INFO [rprop] - Epoch: 330, Loss: -2.4342e+00, Best loss: -2.4342e+00
+2026-03-13 15:37:40,639 - INFO [rprop] - Early stopping triggered at epoch 329
+2026-03-13 15:37:40,745 - INFO - Step 20 training completed in 97.583715 seconds.
+2026-03-13 15:37:43,967 - INFO [memory after increment 19] -  Host: 4005.5 MB
+2026-03-13 15:37:43,971 - INFO - --------------------------------------------------
+2026-03-13 15:37:43,972 - INFO - Starting training step 21/100...
+2026-03-13 15:37:44,129 - INFO [rprop] - Starting training step
+2026-03-13 15:38:17,318 - INFO [rprop] - Epoch: 100, Loss: -2.4062e+00, Best loss: -2.4062e+00
+2026-03-13 15:38:42,610 - INFO [rprop] - Epoch: 191, Loss: -2.4064e+00, Best loss: -2.4064e+00
+2026-03-13 15:38:42,610 - INFO [rprop] - Early stopping triggered at epoch 190
+2026-03-13 15:38:42,721 - INFO - Step 21 training completed in 58.750250 seconds.
+2026-03-13 15:38:45,905 - INFO [memory after increment 20] -  Host: 4024.3 MB
+2026-03-13 15:38:45,909 - INFO - --------------------------------------------------
+2026-03-13 15:38:45,912 - INFO - Starting training step 22/100...
+2026-03-13 15:38:46,070 - INFO [rprop] - Starting training step
+2026-03-13 15:39:18,142 - INFO [rprop] - Epoch: 100, Loss: -2.3796e+00, Best loss: -2.3796e+00
+2026-03-13 15:39:33,403 - INFO [rprop] - Epoch: 155, Loss: -2.3797e+00, Best loss: -2.3797e+00
+2026-03-13 15:39:33,404 - INFO [rprop] - Early stopping triggered at epoch 154
+2026-03-13 15:39:33,511 - INFO - Step 22 training completed in 47.602311 seconds.
+2026-03-13 15:39:36,338 - INFO [memory after increment 21] -  Host: 4043.5 MB
+2026-03-13 15:39:36,341 - INFO - --------------------------------------------------
+2026-03-13 15:39:36,341 - INFO - Starting training step 23/100...
+2026-03-13 15:39:36,451 - INFO [rprop] - Starting training step
+2026-03-13 15:40:07,391 - INFO [rprop] - Epoch: 100, Loss: -2.3542e+00, Best loss: -2.3542e+00
+2026-03-13 15:40:23,351 - INFO [rprop] - Epoch: 165, Loss: -2.3543e+00, Best loss: -2.3543e+00
+2026-03-13 15:40:23,352 - INFO [rprop] - Early stopping triggered at epoch 164
+2026-03-13 15:40:23,805 - INFO - Step 23 training completed in 47.464513 seconds.
+2026-03-13 15:40:26,983 - INFO [memory after increment 22] -  Host: 4062.1 MB
+2026-03-13 15:40:26,986 - INFO - --------------------------------------------------
+2026-03-13 15:40:26,986 - INFO - Starting training step 24/100...
+2026-03-13 15:40:27,145 - INFO [rprop] - Starting training step
+2026-03-13 15:41:00,617 - INFO [rprop] - Epoch: 100, Loss: -2.3299e+00, Best loss: -2.3299e+00
+2026-03-13 15:41:15,294 - INFO [rprop] - Epoch: 161, Loss: -2.3300e+00, Best loss: -2.3300e+00
+2026-03-13 15:41:15,297 - INFO [rprop] - Early stopping triggered at epoch 160
+2026-03-13 15:41:15,404 - INFO - Step 24 training completed in 48.417883 seconds.
+2026-03-13 15:41:18,583 - INFO [memory after increment 23] -  Host: 4080.9 MB
+2026-03-13 15:41:18,589 - INFO - --------------------------------------------------
+2026-03-13 15:41:18,590 - INFO - Starting training step 25/100...
+2026-03-13 15:41:18,745 - INFO [rprop] - Starting training step
+2026-03-13 15:41:54,827 - INFO [rprop] - Epoch: 100, Loss: -2.3066e+00, Best loss: -2.3066e+00
+2026-03-13 15:42:22,773 - INFO [rprop] - Epoch: 191, Loss: -2.3068e+00, Best loss: -2.3068e+00
+2026-03-13 15:42:22,775 - INFO [rprop] - Early stopping triggered at epoch 190
+2026-03-13 15:42:22,891 - INFO - Step 25 training completed in 64.301917 seconds.
+2026-03-13 15:42:26,026 - INFO [memory after increment 24] -  Host: 4101.1 MB
+2026-03-13 15:42:26,030 - INFO - --------------------------------------------------
+2026-03-13 15:42:26,032 - INFO - Starting training step 26/100...
+2026-03-13 15:42:26,138 - INFO [rprop] - Starting training step
+2026-03-13 15:42:57,701 - INFO [rprop] - Epoch: 100, Loss: -2.2844e+00, Best loss: -2.2844e+00
+2026-03-13 15:43:24,462 - INFO [rprop] - Epoch: 200, Loss: -2.2846e+00, Best loss: -2.2846e+00
+2026-03-13 15:43:29,639 - INFO [rprop] - Epoch: 220, Loss: -2.2847e+00, Best loss: -2.2847e+00
+2026-03-13 15:43:29,642 - INFO [rprop] - Early stopping triggered at epoch 219
+2026-03-13 15:43:29,747 - INFO - Step 26 training completed in 63.716943 seconds.
+2026-03-13 15:43:32,950 - INFO [memory after increment 25] -  Host: 4120.9 MB
+2026-03-13 15:43:32,953 - INFO - --------------------------------------------------
+2026-03-13 15:43:32,953 - INFO - Starting training step 27/100...
+2026-03-13 15:43:33,114 - INFO [rprop] - Starting training step
+2026-03-13 15:44:08,005 - INFO [rprop] - Epoch: 100, Loss: -2.2632e+00, Best loss: -2.2632e+00
+2026-03-13 15:44:39,244 - INFO [rprop] - Epoch: 200, Loss: -2.2635e+00, Best loss: -2.2635e+00
+2026-03-13 15:45:10,521 - INFO [rprop] - Epoch: 294, Loss: -2.2637e+00, Best loss: -2.2637e+00
+2026-03-13 15:45:10,524 - INFO [rprop] - Early stopping triggered at epoch 293
+2026-03-13 15:45:10,645 - INFO - Step 27 training completed in 97.691216 seconds.
+2026-03-13 15:45:14,016 - INFO [memory after increment 26] -  Host: 4139.7 MB
+2026-03-13 15:45:14,022 - INFO - --------------------------------------------------
+2026-03-13 15:45:14,025 - INFO - Starting training step 28/100...
+2026-03-13 15:45:14,179 - INFO [rprop] - Starting training step
+2026-03-13 15:45:50,727 - INFO [rprop] - Epoch: 100, Loss: -2.2433e+00, Best loss: -2.2433e+00
+2026-03-13 15:46:21,509 - INFO [rprop] - Epoch: 200, Loss: -2.2436e+00, Best loss: -2.2436e+00
+2026-03-13 15:46:36,922 - INFO [rprop] - Epoch: 249, Loss: -2.2437e+00, Best loss: -2.2437e+00
+2026-03-13 15:46:36,925 - INFO [rprop] - Early stopping triggered at epoch 248
+2026-03-13 15:46:37,048 - INFO - Step 28 training completed in 83.025876 seconds.
+2026-03-13 15:46:40,306 - INFO [memory after increment 27] -  Host: 4158.5 MB
+2026-03-13 15:46:40,312 - INFO - --------------------------------------------------
+2026-03-13 15:46:40,312 - INFO - Starting training step 29/100...
+2026-03-13 15:46:40,468 - INFO [rprop] - Starting training step
+2026-03-13 15:47:18,761 - INFO [rprop] - Epoch: 100, Loss: -2.2243e+00, Best loss: -2.2243e+00
+2026-03-13 15:47:49,480 - INFO [rprop] - Epoch: 200, Loss: -2.2246e+00, Best loss: -2.2246e+00
+2026-03-13 15:48:22,205 - INFO [rprop] - Epoch: 300, Loss: -2.2249e+00, Best loss: -2.2249e+00
+2026-03-13 15:48:55,432 - INFO [rprop] - Epoch: 400, Loss: -2.2251e+00, Best loss: -2.2251e+00
+2026-03-13 15:49:16,871 - INFO [rprop] - Epoch: 464, Loss: -2.2253e+00, Best loss: -2.2253e+00
+2026-03-13 15:49:16,875 - INFO [rprop] - Early stopping triggered at epoch 463
+2026-03-13 15:49:16,995 - INFO - Step 29 training completed in 156.683218 seconds.
+2026-03-13 15:49:20,590 - INFO [memory after increment 28] -  Host: 4178.3 MB
+2026-03-13 15:49:20,595 - INFO - --------------------------------------------------
+2026-03-13 15:49:20,597 - INFO - Starting training step 30/100...
+2026-03-13 15:49:20,751 - INFO [rprop] - Starting training step
+2026-03-13 15:50:00,408 - INFO [rprop] - Epoch: 100, Loss: -2.2070e+00, Best loss: -2.2070e+00
+2026-03-13 15:50:30,578 - INFO [rprop] - Epoch: 200, Loss: -2.2074e+00, Best loss: -2.2074e+00
+2026-03-13 15:51:02,529 - INFO [rprop] - Epoch: 300, Loss: -2.2077e+00, Best loss: -2.2077e+00
+2026-03-13 15:51:33,046 - INFO [rprop] - Epoch: 392, Loss: -2.2079e+00, Best loss: -2.2079e+00
+2026-03-13 15:51:33,049 - INFO [rprop] - Early stopping triggered at epoch 391
+2026-03-13 15:51:33,779 - INFO - Step 30 training completed in 133.183820 seconds.
+2026-03-13 15:51:36,817 - INFO [memory after increment 29] -  Host: 4197.1 MB
+2026-03-13 15:51:36,820 - INFO - --------------------------------------------------
+2026-03-13 15:51:36,822 - INFO - Starting training step 31/100...
+2026-03-13 15:51:36,937 - INFO [rprop] - Starting training step
+2026-03-13 15:52:11,554 - INFO [rprop] - Epoch: 100, Loss: -2.1908e+00, Best loss: -2.1908e+00
+2026-03-13 15:52:40,666 - INFO [rprop] - Epoch: 200, Loss: -2.1912e+00, Best loss: -2.1912e+00
+2026-03-13 15:53:09,492 - INFO [rprop] - Epoch: 300, Loss: -2.1914e+00, Best loss: -2.1914e+00
+2026-03-13 15:53:38,692 - INFO [rprop] - Epoch: 400, Loss: -2.1917e+00, Best loss: -2.1917e+00
+2026-03-13 15:53:41,770 - INFO [rprop] - Epoch: 410, Loss: -2.1917e+00, Best loss: -2.1917e+00
+2026-03-13 15:53:41,773 - INFO [rprop] - Early stopping triggered at epoch 409
+2026-03-13 15:53:41,886 - INFO - Step 31 training completed in 125.065782 seconds.
+2026-03-13 15:53:44,803 - INFO [memory after increment 30] -  Host: 4216.9 MB
+2026-03-13 15:53:44,807 - INFO - --------------------------------------------------
+2026-03-13 15:53:44,809 - INFO - Starting training step 32/100...
+2026-03-13 15:53:44,919 - INFO [rprop] - Starting training step
+2026-03-13 15:54:20,578 - INFO [rprop] - Epoch: 100, Loss: -2.1754e+00, Best loss: -2.1754e+00
+2026-03-13 15:54:49,319 - INFO [rprop] - Epoch: 200, Loss: -2.1758e+00, Best loss: -2.1758e+00
+2026-03-13 15:55:17,577 - INFO [rprop] - Epoch: 300, Loss: -2.1761e+00, Best loss: -2.1761e+00
+2026-03-13 15:55:48,898 - INFO [rprop] - Epoch: 400, Loss: -2.1764e+00, Best loss: -2.1764e+00
+2026-03-13 15:56:01,736 - INFO [rprop] - Epoch: 437, Loss: -2.1764e+00, Best loss: -2.1764e+00
+2026-03-13 15:56:01,738 - INFO [rprop] - Early stopping triggered at epoch 436
+2026-03-13 15:56:01,872 - INFO - Step 32 training completed in 137.065032 seconds.
+2026-03-13 15:56:04,987 - INFO [memory after increment 31] -  Host: 4235.9 MB
+2026-03-13 15:56:04,991 - INFO - --------------------------------------------------
+2026-03-13 15:56:04,991 - INFO - Starting training step 33/100...
+2026-03-13 15:56:05,110 - INFO [rprop] - Starting training step
+2026-03-13 15:56:46,203 - INFO [rprop] - Epoch: 100, Loss: -2.1612e+00, Best loss: -2.1612e+00
+2026-03-13 15:57:20,571 - INFO [rprop] - Epoch: 200, Loss: -2.1616e+00, Best loss: -2.1616e+00
+2026-03-13 15:57:55,170 - INFO [rprop] - Epoch: 300, Loss: -2.1620e+00, Best loss: -2.1620e+00
+2026-03-13 15:58:29,679 - INFO [rprop] - Epoch: 400, Loss: -2.1623e+00, Best loss: -2.1623e+00
+2026-03-13 15:59:04,201 - INFO [rprop] - Epoch: 500, Loss: -2.1625e+00, Best loss: -2.1625e+00
+2026-03-13 15:59:19,668 - INFO [rprop] - Epoch: 545, Loss: -2.1626e+00, Best loss: -2.1626e+00
+2026-03-13 15:59:19,671 - INFO [rprop] - Early stopping triggered at epoch 544
+2026-03-13 15:59:20,441 - INFO - Step 33 training completed in 195.449977 seconds.
+2026-03-13 15:59:23,845 - INFO [memory after increment 32] -  Host: 3956.5 MB
+2026-03-13 15:59:23,851 - INFO - --------------------------------------------------
+2026-03-13 15:59:23,851 - INFO - Starting training step 34/100...
+2026-03-13 15:59:23,971 - INFO [rprop] - Starting training step
+2026-03-13 16:00:05,311 - INFO [rprop] - Epoch: 100, Loss: -2.1483e+00, Best loss: -2.1483e+00
+2026-03-13 16:00:39,816 - INFO [rprop] - Epoch: 200, Loss: -2.1487e+00, Best loss: -2.1487e+00
+2026-03-13 16:01:14,553 - INFO [rprop] - Epoch: 300, Loss: -2.1491e+00, Best loss: -2.1491e+00
+2026-03-13 16:01:49,401 - INFO [rprop] - Epoch: 400, Loss: -2.1493e+00, Best loss: -2.1493e+00
+2026-03-13 16:02:24,098 - INFO [rprop] - Epoch: 500, Loss: -2.1495e+00, Best loss: -2.1495e+00
+2026-03-13 16:02:24,349 - INFO [rprop] - Epoch: 501, Loss: -2.1495e+00, Best loss: -2.1495e+00
+2026-03-13 16:02:24,350 - INFO [rprop] - Early stopping triggered at epoch 500
+2026-03-13 16:02:24,494 - INFO - Step 34 training completed in 180.643660 seconds.
+2026-03-13 16:02:27,868 - INFO [memory after increment 33] -  Host: 3976.2 MB
+2026-03-13 16:02:27,872 - INFO - --------------------------------------------------
+2026-03-13 16:02:27,874 - INFO - Starting training step 35/100...
+2026-03-13 16:02:27,991 - INFO [rprop] - Starting training step
+2026-03-13 16:03:03,598 - INFO [rprop] - Epoch: 100, Loss: -2.1361e+00, Best loss: -2.1361e+00
+2026-03-13 16:03:32,684 - INFO [rprop] - Epoch: 200, Loss: -2.1365e+00, Best loss: -2.1365e+00
+2026-03-13 16:04:02,193 - INFO [rprop] - Epoch: 300, Loss: -2.1367e+00, Best loss: -2.1367e+00
+2026-03-13 16:04:31,680 - INFO [rprop] - Epoch: 400, Loss: -2.1370e+00, Best loss: -2.1370e+00
+2026-03-13 16:04:33,925 - INFO [rprop] - Epoch: 408, Loss: -2.1370e+00, Best loss: -2.1370e+00
+2026-03-13 16:04:33,928 - INFO [rprop] - Early stopping triggered at epoch 407
+2026-03-13 16:04:34,046 - INFO - Step 35 training completed in 126.173867 seconds.
+2026-03-13 16:04:37,093 - INFO [memory after increment 34] -  Host: 3994.9 MB
+2026-03-13 16:04:37,099 - INFO - --------------------------------------------------
+2026-03-13 16:04:37,101 - INFO - Starting training step 36/100...
+2026-03-13 16:04:37,214 - INFO [rprop] - Starting training step
+2026-03-13 16:05:14,049 - INFO [rprop] - Epoch: 100, Loss: -2.1244e+00, Best loss: -2.1244e+00
+2026-03-13 16:05:43,683 - INFO [rprop] - Epoch: 200, Loss: -2.1248e+00, Best loss: -2.1248e+00
+2026-03-13 16:06:12,720 - INFO [rprop] - Epoch: 300, Loss: -2.1251e+00, Best loss: -2.1251e+00
+2026-03-13 16:06:42,552 - INFO [rprop] - Epoch: 400, Loss: -2.1253e+00, Best loss: -2.1253e+00
+2026-03-13 16:07:05,073 - INFO [rprop] - Epoch: 477, Loss: -2.1255e+00, Best loss: -2.1255e+00
+2026-03-13 16:07:05,076 - INFO [rprop] - Early stopping triggered at epoch 476
+2026-03-13 16:07:05,187 - INFO - Step 36 training completed in 148.088072 seconds.
+2026-03-13 16:07:08,067 - INFO [memory after increment 35] -  Host: 4013.8 MB
+2026-03-13 16:07:08,071 - INFO - --------------------------------------------------
+2026-03-13 16:07:08,071 - INFO - Starting training step 37/100...
+2026-03-13 16:07:08,181 - INFO [rprop] - Starting training step
+2026-03-13 16:07:43,652 - INFO [rprop] - Epoch: 100, Loss: -2.1136e+00, Best loss: -2.1136e+00
+2026-03-13 16:08:12,589 - INFO [rprop] - Epoch: 200, Loss: -2.1139e+00, Best loss: -2.1139e+00
+2026-03-13 16:08:41,079 - INFO [rprop] - Epoch: 300, Loss: -2.1142e+00, Best loss: -2.1142e+00
+2026-03-13 16:09:10,472 - INFO [rprop] - Epoch: 400, Loss: -2.1144e+00, Best loss: -2.1144e+00
+2026-03-13 16:09:38,692 - INFO [rprop] - Epoch: 495, Loss: -2.1146e+00, Best loss: -2.1146e+00
+2026-03-13 16:09:38,695 - INFO [rprop] - Early stopping triggered at epoch 494
+2026-03-13 16:09:38,808 - INFO - Step 37 training completed in 150.736685 seconds.
+2026-03-13 16:09:41,739 - INFO [memory after increment 36] -  Host: 4032.9 MB
+2026-03-13 16:09:41,743 - INFO - --------------------------------------------------
+2026-03-13 16:09:41,743 - INFO - Starting training step 38/100...
+2026-03-13 16:09:41,858 - INFO [rprop] - Starting training step
+2026-03-13 16:10:17,779 - INFO [rprop] - Epoch: 100, Loss: -2.1033e+00, Best loss: -2.1033e+00
+2026-03-13 16:10:47,370 - INFO [rprop] - Epoch: 200, Loss: -2.1036e+00, Best loss: -2.1036e+00
+2026-03-13 16:11:15,300 - INFO [rprop] - Epoch: 295, Loss: -2.1038e+00, Best loss: -2.1038e+00
+2026-03-13 16:11:15,303 - INFO [rprop] - Early stopping triggered at epoch 294
+2026-03-13 16:11:15,417 - INFO - Step 38 training completed in 93.673465 seconds.
+2026-03-13 16:11:18,307 - INFO [memory after increment 37] -  Host: 4052.3 MB
+2026-03-13 16:11:18,311 - INFO - --------------------------------------------------
+2026-03-13 16:11:18,313 - INFO - Starting training step 39/100...
+2026-03-13 16:11:18,423 - INFO [rprop] - Starting training step
+2026-03-13 16:11:53,787 - INFO [rprop] - Epoch: 100, Loss: -2.0931e+00, Best loss: -2.0931e+00
+2026-03-13 16:12:23,361 - INFO [rprop] - Epoch: 200, Loss: -2.0935e+00, Best loss: -2.0935e+00
+2026-03-13 16:12:52,899 - INFO [rprop] - Epoch: 300, Loss: -2.0937e+00, Best loss: -2.0937e+00
+2026-03-13 16:13:22,436 - INFO [rprop] - Epoch: 400, Loss: -2.0940e+00, Best loss: -2.0940e+00
+2026-03-13 16:13:34,703 - INFO [rprop] - Epoch: 441, Loss: -2.0940e+00, Best loss: -2.0940e+00
+2026-03-13 16:13:34,706 - INFO [rprop] - Early stopping triggered at epoch 440
+2026-03-13 16:13:34,813 - INFO - Step 39 training completed in 136.501550 seconds.
+2026-03-13 16:13:37,707 - INFO [memory after increment 38] -  Host: 4071.1 MB
+2026-03-13 16:13:37,712 - INFO - --------------------------------------------------
+2026-03-13 16:13:37,712 - INFO - Starting training step 40/100...
+2026-03-13 16:13:37,820 - INFO [rprop] - Starting training step
+2026-03-13 16:14:13,700 - INFO [rprop] - Epoch: 100, Loss: -2.0838e+00, Best loss: -2.0838e+00
+2026-03-13 16:14:43,383 - INFO [rprop] - Epoch: 200, Loss: -2.0841e+00, Best loss: -2.0841e+00
+2026-03-13 16:15:13,015 - INFO [rprop] - Epoch: 300, Loss: -2.0844e+00, Best loss: -2.0844e+00
+2026-03-13 16:15:42,597 - INFO [rprop] - Epoch: 400, Loss: -2.0846e+00, Best loss: -2.0846e+00
+2026-03-13 16:15:45,970 - INFO [rprop] - Epoch: 411, Loss: -2.0846e+00, Best loss: -2.0846e+00
+2026-03-13 16:15:45,973 - INFO [rprop] - Early stopping triggered at epoch 410
+2026-03-13 16:15:46,087 - INFO - Step 40 training completed in 128.374320 seconds.
+2026-03-13 16:15:49,166 - INFO [memory after increment 39] -  Host: 4089.8 MB
+2026-03-13 16:15:49,171 - INFO - --------------------------------------------------
+2026-03-13 16:15:49,173 - INFO - Starting training step 41/100...
+2026-03-13 16:15:49,289 - INFO [rprop] - Starting training step
+2026-03-13 16:16:25,512 - INFO [rprop] - Epoch: 100, Loss: -2.0748e+00, Best loss: -2.0748e+00
+2026-03-13 16:16:55,213 - INFO [rprop] - Epoch: 200, Loss: -2.0752e+00, Best loss: -2.0752e+00
+2026-03-13 16:17:24,872 - INFO [rprop] - Epoch: 300, Loss: -2.0754e+00, Best loss: -2.0754e+00
+2026-03-13 16:17:54,404 - INFO [rprop] - Epoch: 400, Loss: -2.0757e+00, Best loss: -2.0757e+00
+2026-03-13 16:18:03,832 - INFO [rprop] - Epoch: 432, Loss: -2.0757e+00, Best loss: -2.0757e+00
+2026-03-13 16:18:03,834 - INFO [rprop] - Early stopping triggered at epoch 431
+2026-03-13 16:18:03,947 - INFO - Step 41 training completed in 134.775549 seconds.
+2026-03-13 16:18:06,835 - INFO [memory after increment 40] -  Host: 4109.0 MB
+2026-03-13 16:18:06,840 - INFO - --------------------------------------------------
+2026-03-13 16:18:06,840 - INFO - Starting training step 42/100...
+2026-03-13 16:18:06,951 - INFO [rprop] - Starting training step
+2026-03-13 16:18:42,552 - INFO [rprop] - Epoch: 100, Loss: -2.0664e+00, Best loss: -2.0664e+00
+2026-03-13 16:19:12,327 - INFO [rprop] - Epoch: 200, Loss: -2.0667e+00, Best loss: -2.0667e+00
+2026-03-13 16:19:42,003 - INFO [rprop] - Epoch: 300, Loss: -2.0669e+00, Best loss: -2.0669e+00
+2026-03-13 16:20:11,672 - INFO [rprop] - Epoch: 400, Loss: -2.0672e+00, Best loss: -2.0672e+00
+2026-03-13 16:20:26,953 - INFO [rprop] - Epoch: 452, Loss: -2.0673e+00, Best loss: -2.0673e+00
+2026-03-13 16:20:26,956 - INFO [rprop] - Early stopping triggered at epoch 451
+2026-03-13 16:20:27,068 - INFO - Step 42 training completed in 140.228143 seconds.
+2026-03-13 16:20:29,975 - INFO [memory after increment 41] -  Host: 4128.3 MB
+2026-03-13 16:20:29,979 - INFO - --------------------------------------------------
+2026-03-13 16:20:29,980 - INFO - Starting training step 43/100...
+2026-03-13 16:20:30,095 - INFO [rprop] - Starting training step
+2026-03-13 16:21:06,146 - INFO [rprop] - Epoch: 100, Loss: -2.0583e+00, Best loss: -2.0583e+00
+2026-03-13 16:21:35,899 - INFO [rprop] - Epoch: 200, Loss: -2.0586e+00, Best loss: -2.0586e+00
+2026-03-13 16:22:05,683 - INFO [rprop] - Epoch: 300, Loss: -2.0588e+00, Best loss: -2.0588e+00
+2026-03-13 16:22:15,161 - INFO [rprop] - Epoch: 332, Loss: -2.0589e+00, Best loss: -2.0589e+00
+2026-03-13 16:22:15,164 - INFO [rprop] - Early stopping triggered at epoch 331
+2026-03-13 16:22:15,711 - INFO - Step 43 training completed in 105.732084 seconds.
+2026-03-13 16:22:18,844 - INFO [memory after increment 42] -  Host: 4147.0 MB
+2026-03-13 16:22:18,850 - INFO - --------------------------------------------------
+2026-03-13 16:22:18,851 - INFO - Starting training step 44/100...
+2026-03-13 16:22:18,965 - INFO [rprop] - Starting training step
+2026-03-13 16:22:54,807 - INFO [rprop] - Epoch: 100, Loss: -2.0503e+00, Best loss: -2.0503e+00
+2026-03-13 16:23:24,774 - INFO [rprop] - Epoch: 200, Loss: -2.0507e+00, Best loss: -2.0507e+00
+2026-03-13 16:23:54,620 - INFO [rprop] - Epoch: 300, Loss: -2.0509e+00, Best loss: -2.0509e+00
+2026-03-13 16:24:03,200 - INFO [rprop] - Epoch: 328, Loss: -2.0509e+00, Best loss: -2.0509e+00
+2026-03-13 16:24:03,203 - INFO [rprop] - Early stopping triggered at epoch 327
+2026-03-13 16:24:03,313 - INFO - Step 44 training completed in 104.463783 seconds.
+2026-03-13 16:24:06,227 - INFO [memory after increment 43] -  Host: 4166.7 MB
+2026-03-13 16:24:06,230 - INFO - --------------------------------------------------
+2026-03-13 16:24:06,231 - INFO - Starting training step 45/100...
+2026-03-13 16:24:06,341 - INFO [rprop] - Starting training step
+2026-03-13 16:24:42,337 - INFO [rprop] - Epoch: 100, Loss: -2.0427e+00, Best loss: -2.0427e+00
+2026-03-13 16:25:12,266 - INFO [rprop] - Epoch: 200, Loss: -2.0430e+00, Best loss: -2.0430e+00
+2026-03-13 16:25:42,167 - INFO [rprop] - Epoch: 300, Loss: -2.0432e+00, Best loss: -2.0432e+00
+2026-03-13 16:26:12,084 - INFO [rprop] - Epoch: 400, Loss: -2.0434e+00, Best loss: -2.0434e+00
+2026-03-13 16:26:21,130 - INFO [rprop] - Epoch: 430, Loss: -2.0435e+00, Best loss: -2.0435e+00
+2026-03-13 16:26:21,133 - INFO [rprop] - Early stopping triggered at epoch 429
+2026-03-13 16:26:21,241 - INFO - Step 45 training completed in 135.010709 seconds.
+2026-03-13 16:26:24,168 - INFO [memory after increment 44] -  Host: 4184.0 MB
+2026-03-13 16:26:24,172 - INFO - --------------------------------------------------
+2026-03-13 16:26:24,174 - INFO - Starting training step 46/100...
+2026-03-13 16:26:24,282 - INFO [rprop] - Starting training step
+2026-03-13 16:27:00,228 - INFO [rprop] - Epoch: 100, Loss: -2.0356e+00, Best loss: -2.0356e+00
+2026-03-13 16:27:30,196 - INFO [rprop] - Epoch: 200, Loss: -2.0358e+00, Best loss: -2.0358e+00
+2026-03-13 16:28:00,065 - INFO [rprop] - Epoch: 300, Loss: -2.0361e+00, Best loss: -2.0361e+00
+2026-03-13 16:28:29,966 - INFO [rprop] - Epoch: 400, Loss: -2.0363e+00, Best loss: -2.0363e+00
+2026-03-13 16:28:39,685 - INFO [rprop] - Epoch: 433, Loss: -2.0363e+00, Best loss: -2.0363e+00
+2026-03-13 16:28:39,688 - INFO [rprop] - Early stopping triggered at epoch 432
+2026-03-13 16:28:39,799 - INFO - Step 46 training completed in 135.626715 seconds.
+2026-03-13 16:28:42,774 - INFO [memory after increment 45] -  Host: 4204.2 MB
+2026-03-13 16:28:42,780 - INFO - --------------------------------------------------
+2026-03-13 16:28:42,782 - INFO - Starting training step 47/100...
+2026-03-13 16:28:42,898 - INFO [rprop] - Starting training step
+2026-03-13 16:29:19,082 - INFO [rprop] - Epoch: 100, Loss: -2.0287e+00, Best loss: -2.0287e+00
+2026-03-13 16:29:49,075 - INFO [rprop] - Epoch: 200, Loss: -2.0289e+00, Best loss: -2.0289e+00
+2026-03-13 16:29:54,516 - INFO [rprop] - Epoch: 218, Loss: -2.0289e+00, Best loss: -2.0289e+00
+2026-03-13 16:29:54,519 - INFO [rprop] - Early stopping triggered at epoch 217
+2026-03-13 16:29:54,631 - INFO - Step 47 training completed in 71.851469 seconds.
+2026-03-13 16:29:57,588 - INFO [memory after increment 46] -  Host: 4222.9 MB
+2026-03-13 16:29:57,592 - INFO - --------------------------------------------------
+2026-03-13 16:29:57,593 - INFO - Starting training step 48/100...
+2026-03-13 16:29:57,710 - INFO [rprop] - Starting training step
+2026-03-13 16:30:33,798 - INFO [rprop] - Epoch: 100, Loss: -2.0215e+00, Best loss: -2.0215e+00
+2026-03-13 16:31:03,811 - INFO [rprop] - Epoch: 200, Loss: -2.0218e+00, Best loss: -2.0218e+00
+2026-03-13 16:31:33,562 - INFO [rprop] - Epoch: 300, Loss: -2.0221e+00, Best loss: -2.0221e+00
+2026-03-13 16:32:03,581 - INFO [rprop] - Epoch: 400, Loss: -2.0223e+00, Best loss: -2.0223e+00
+2026-03-13 16:32:33,637 - INFO [rprop] - Epoch: 500, Loss: -2.0226e+00, Best loss: -2.0226e+00
+2026-03-13 16:32:53,881 - INFO [rprop] - Epoch: 567, Loss: -2.0227e+00, Best loss: -2.0227e+00
+2026-03-13 16:32:53,884 - INFO [rprop] - Early stopping triggered at epoch 566
+2026-03-13 16:32:53,989 - INFO - Step 48 training completed in 176.397326 seconds.
+2026-03-13 16:32:56,960 - INFO [memory after increment 47] -  Host: 4242.7 MB
+2026-03-13 16:32:56,963 - INFO - --------------------------------------------------
+2026-03-13 16:32:56,963 - INFO - Starting training step 49/100...
+2026-03-13 16:32:57,078 - INFO [rprop] - Starting training step
+2026-03-13 16:33:31,720 - INFO [rprop] - Epoch: 94, Loss: -2.0155e+00, Best loss: -2.0155e+00
+2026-03-13 16:33:31,723 - INFO [rprop] - Early stopping triggered at epoch 93
+2026-03-13 16:33:31,845 - INFO - Step 49 training completed in 34.881731 seconds.
+2026-03-13 16:33:34,784 - INFO [memory after increment 48] -  Host: 4261.4 MB
+2026-03-13 16:33:34,788 - INFO - --------------------------------------------------
+2026-03-13 16:33:34,790 - INFO - Starting training step 50/100...
+2026-03-13 16:33:34,902 - INFO [rprop] - Starting training step
+2026-03-13 16:34:11,189 - INFO [rprop] - Epoch: 100, Loss: -2.0086e+00, Best loss: -2.0086e+00
+2026-03-13 16:34:41,254 - INFO [rprop] - Epoch: 200, Loss: -2.0090e+00, Best loss: -2.0090e+00
+2026-03-13 16:35:11,270 - INFO [rprop] - Epoch: 300, Loss: -2.0093e+00, Best loss: -2.0093e+00
+2026-03-13 16:35:41,284 - INFO [rprop] - Epoch: 400, Loss: -2.0095e+00, Best loss: -2.0095e+00
+2026-03-13 16:36:11,272 - INFO [rprop] - Epoch: 500, Loss: -2.0097e+00, Best loss: -2.0097e+00
+2026-03-13 16:36:41,228 - INFO [rprop] - Epoch: 600, Loss: -2.0099e+00, Best loss: -2.0099e+00
+2026-03-13 16:36:45,318 - INFO [rprop] - Epoch: 614, Loss: -2.0100e+00, Best loss: -2.0100e+00
+2026-03-13 16:36:45,321 - INFO [rprop] - Early stopping triggered at epoch 613
+2026-03-13 16:36:45,873 - INFO - Step 50 training completed in 191.085123 seconds.
+2026-03-13 16:36:48,815 - INFO [memory after increment 49] -  Host: 4280.0 MB
+2026-03-13 16:36:48,820 - INFO - --------------------------------------------------
+2026-03-13 16:36:48,822 - INFO - Starting training step 51/100...
+2026-03-13 16:36:48,928 - INFO [rprop] - Starting training step
+2026-03-13 16:37:18,569 - INFO [rprop] - Epoch: 79, Loss: -2.0032e+00, Best loss: -2.0032e+00
+2026-03-13 16:37:18,573 - INFO [rprop] - Early stopping triggered at epoch 78
+2026-03-13 16:37:18,697 - INFO - Step 51 training completed in 29.876662 seconds.
+2026-03-13 16:37:21,605 - INFO [memory after increment 50] -  Host: 4299.9 MB
+2026-03-13 16:37:21,610 - INFO - --------------------------------------------------
+2026-03-13 16:37:21,611 - INFO - Starting training step 52/100...
+2026-03-13 16:37:21,719 - INFO [rprop] - Starting training step
+2026-03-13 16:37:58,219 - INFO [rprop] - Epoch: 100, Loss: -1.9968e+00, Best loss: -1.9968e+00
+2026-03-13 16:38:28,416 - INFO [rprop] - Epoch: 200, Loss: -1.9972e+00, Best loss: -1.9972e+00
+2026-03-13 16:38:58,610 - INFO [rprop] - Epoch: 300, Loss: -1.9975e+00, Best loss: -1.9975e+00
+2026-03-13 16:39:28,815 - INFO [rprop] - Epoch: 400, Loss: -1.9978e+00, Best loss: -1.9978e+00
+2026-03-13 16:39:58,989 - INFO [rprop] - Epoch: 500, Loss: -1.9980e+00, Best loss: -1.9980e+00
+2026-03-13 16:40:10,193 - INFO [rprop] - Epoch: 537, Loss: -1.9981e+00, Best loss: -1.9981e+00
+2026-03-13 16:40:10,196 - INFO [rprop] - Early stopping triggered at epoch 536
+2026-03-13 16:40:10,297 - INFO - Step 52 training completed in 168.687211 seconds.
+2026-03-13 16:40:13,726 - INFO [memory after increment 51] -  Host: 4318.7 MB
+2026-03-13 16:40:13,731 - INFO - --------------------------------------------------
+2026-03-13 16:40:13,732 - INFO - Starting training step 53/100...
+2026-03-13 16:40:13,850 - INFO [rprop] - Starting training step
+2026-03-13 16:40:50,443 - INFO [rprop] - Epoch: 84, Loss: -1.9918e+00, Best loss: -1.9918e+00
+2026-03-13 16:40:50,446 - INFO [rprop] - Early stopping triggered at epoch 83
+2026-03-13 16:40:50,588 - INFO - Step 53 training completed in 36.856160 seconds.
+2026-03-13 16:40:53,670 - INFO [memory after increment 52] -  Host: 4337.4 MB
+2026-03-13 16:40:53,675 - INFO - --------------------------------------------------
+2026-03-13 16:40:53,677 - INFO - Starting training step 54/100...
+2026-03-13 16:40:53,790 - INFO [rprop] - Starting training step
+2026-03-13 16:41:30,221 - INFO [rprop] - Epoch: 100, Loss: -1.9858e+00, Best loss: -1.9858e+00
+2026-03-13 16:42:00,526 - INFO [rprop] - Epoch: 200, Loss: -1.9862e+00, Best loss: -1.9862e+00
+2026-03-13 16:42:30,823 - INFO [rprop] - Epoch: 300, Loss: -1.9864e+00, Best loss: -1.9864e+00
+2026-03-13 16:43:01,174 - INFO [rprop] - Epoch: 400, Loss: -1.9867e+00, Best loss: -1.9867e+00
+2026-03-13 16:43:31,486 - INFO [rprop] - Epoch: 500, Loss: -1.9869e+00, Best loss: -1.9869e+00
+2026-03-13 16:44:01,762 - INFO [rprop] - Epoch: 600, Loss: -1.9871e+00, Best loss: -1.9871e+00
+2026-03-13 16:44:15,075 - INFO [rprop] - Epoch: 644, Loss: -1.9872e+00, Best loss: -1.9872e+00
+2026-03-13 16:44:15,078 - INFO [rprop] - Early stopping triggered at epoch 643
+2026-03-13 16:44:15,179 - INFO - Step 54 training completed in 201.503266 seconds.
+2026-03-13 16:44:18,225 - INFO [memory after increment 53] -  Host: 4356.1 MB
+2026-03-13 16:44:18,230 - INFO - --------------------------------------------------
+2026-03-13 16:44:18,232 - INFO - Starting training step 55/100...
+2026-03-13 16:44:18,344 - INFO [rprop] - Starting training step
+2026-03-13 16:44:39,951 - INFO [rprop] - Epoch: 53, Loss: -1.9813e+00, Best loss: -1.9813e+00
+2026-03-13 16:44:39,954 - INFO [rprop] - Early stopping triggered at epoch 52
+2026-03-13 16:44:40,079 - INFO - Step 55 training completed in 21.848834 seconds.
+2026-03-13 16:44:43,044 - INFO [memory after increment 54] -  Host: 4375.9 MB
+2026-03-13 16:44:43,049 - INFO - --------------------------------------------------
+2026-03-13 16:44:43,051 - INFO - Starting training step 56/100...
+2026-03-13 16:44:43,162 - INFO [rprop] - Starting training step
+2026-03-13 16:45:19,860 - INFO [rprop] - Epoch: 100, Loss: -1.9756e+00, Best loss: -1.9756e+00
+2026-03-13 16:45:50,202 - INFO [rprop] - Epoch: 200, Loss: -1.9760e+00, Best loss: -1.9760e+00
+2026-03-13 16:46:20,471 - INFO [rprop] - Epoch: 300, Loss: -1.9763e+00, Best loss: -1.9763e+00
+2026-03-13 16:46:50,713 - INFO [rprop] - Epoch: 400, Loss: -1.9765e+00, Best loss: -1.9765e+00
+2026-03-13 16:47:20,955 - INFO [rprop] - Epoch: 500, Loss: -1.9767e+00, Best loss: -1.9767e+00
+2026-03-13 16:47:51,201 - INFO [rprop] - Epoch: 600, Loss: -1.9770e+00, Best loss: -1.9770e+00
+2026-03-13 16:48:21,454 - INFO [rprop] - Epoch: 700, Loss: -1.9772e+00, Best loss: -1.9772e+00
+2026-03-13 16:48:38,434 - INFO [rprop] - Epoch: 756, Loss: -1.9773e+00, Best loss: -1.9773e+00
+2026-03-13 16:48:38,437 - INFO [rprop] - Early stopping triggered at epoch 755
+2026-03-13 16:48:38,535 - INFO - Step 56 training completed in 235.486640 seconds.
+2026-03-13 16:48:41,532 - INFO [memory after increment 55] -  Host: 4394.6 MB
+2026-03-13 16:48:41,535 - INFO - --------------------------------------------------
+2026-03-13 16:48:41,537 - INFO - Starting training step 57/100...
+2026-03-13 16:48:41,646 - INFO [rprop] - Starting training step
+2026-03-13 16:49:02,891 - INFO [rprop] - Epoch: 53, Loss: -1.9717e+00, Best loss: -1.9717e+00
+2026-03-13 16:49:02,894 - INFO [rprop] - Early stopping triggered at epoch 52
+2026-03-13 16:49:03,022 - INFO - Step 57 training completed in 21.486804 seconds.
+2026-03-13 16:49:06,295 - INFO [memory after increment 56] -  Host: 4414.3 MB
+2026-03-13 16:49:06,300 - INFO - --------------------------------------------------
+2026-03-13 16:49:06,302 - INFO - Starting training step 58/100...
+2026-03-13 16:49:06,415 - INFO [rprop] - Starting training step
+2026-03-13 16:49:43,176 - INFO [rprop] - Epoch: 100, Loss: -1.9663e+00, Best loss: -1.9663e+00
+2026-03-13 16:50:13,651 - INFO [rprop] - Epoch: 200, Loss: -1.9666e+00, Best loss: -1.9666e+00
+2026-03-13 16:50:44,105 - INFO [rprop] - Epoch: 300, Loss: -1.9669e+00, Best loss: -1.9669e+00
+2026-03-13 16:51:14,474 - INFO [rprop] - Epoch: 400, Loss: -1.9671e+00, Best loss: -1.9671e+00
+2026-03-13 16:51:44,904 - INFO [rprop] - Epoch: 500, Loss: -1.9673e+00, Best loss: -1.9673e+00
+2026-03-13 16:52:09,342 - INFO [rprop] - Epoch: 580, Loss: -1.9675e+00, Best loss: -1.9675e+00
+2026-03-13 16:52:09,345 - INFO [rprop] - Early stopping triggered at epoch 579
+2026-03-13 16:52:09,444 - INFO - Step 58 training completed in 183.143535 seconds.
+2026-03-13 16:52:12,500 - INFO [memory after increment 57] -  Host: 4433.1 MB
+2026-03-13 16:52:12,505 - INFO - --------------------------------------------------
+2026-03-13 16:52:12,506 - INFO - Starting training step 59/100...
+2026-03-13 16:52:12,614 - INFO [rprop] - Starting training step
+2026-03-13 16:52:35,366 - INFO [rprop] - Epoch: 54, Loss: -1.9623e+00, Best loss: -1.9623e+00
+2026-03-13 16:52:35,369 - INFO [rprop] - Early stopping triggered at epoch 53
+2026-03-13 16:52:35,490 - INFO - Step 59 training completed in 22.985188 seconds.
+2026-03-13 16:52:39,256 - INFO [memory after increment 58] -  Host: 4451.8 MB
+2026-03-13 16:52:39,261 - INFO - --------------------------------------------------
+2026-03-13 16:52:39,261 - INFO - Starting training step 60/100...
+2026-03-13 16:52:39,422 - INFO [rprop] - Starting training step
+2026-03-13 16:53:16,741 - INFO [rprop] - Epoch: 100, Loss: -1.9572e+00, Best loss: -1.9572e+00
+2026-03-13 16:53:47,291 - INFO [rprop] - Epoch: 200, Loss: -1.9575e+00, Best loss: -1.9575e+00
+2026-03-13 16:54:17,910 - INFO [rprop] - Epoch: 300, Loss: -1.9578e+00, Best loss: -1.9578e+00
+2026-03-13 16:54:48,479 - INFO [rprop] - Epoch: 400, Loss: -1.9580e+00, Best loss: -1.9580e+00
+2026-03-13 16:54:57,972 - INFO [rprop] - Epoch: 431, Loss: -1.9580e+00, Best loss: -1.9580e+00
+2026-03-13 16:54:57,975 - INFO [rprop] - Early stopping triggered at epoch 430
+2026-03-13 16:54:58,074 - INFO - Step 60 training completed in 138.813531 seconds.
+2026-03-13 16:55:01,060 - INFO [memory after increment 59] -  Host: 4470.2 MB
+2026-03-13 16:55:01,065 - INFO - --------------------------------------------------
+2026-03-13 16:55:01,065 - INFO - Starting training step 61/100...
+2026-03-13 16:55:01,173 - INFO [rprop] - Starting training step
+2026-03-13 16:55:24,319 - INFO [rprop] - Epoch: 55, Loss: -1.9531e+00, Best loss: -1.9531e+00
+2026-03-13 16:55:24,322 - INFO [rprop] - Early stopping triggered at epoch 54
+2026-03-13 16:55:24,434 - INFO - Step 61 training completed in 23.369631 seconds.
+2026-03-13 16:55:27,371 - INFO [memory after increment 60] -  Host: 4489.2 MB
+2026-03-13 16:55:27,375 - INFO - --------------------------------------------------
+2026-03-13 16:55:27,375 - INFO - Starting training step 62/100...
+2026-03-13 16:55:27,486 - INFO [rprop] - Starting training step
+2026-03-13 16:56:05,143 - INFO [rprop] - Epoch: 100, Loss: -1.9483e+00, Best loss: -1.9483e+00
+2026-03-13 16:56:36,017 - INFO [rprop] - Epoch: 200, Loss: -1.9486e+00, Best loss: -1.9486e+00
+2026-03-13 16:57:06,797 - INFO [rprop] - Epoch: 300, Loss: -1.9489e+00, Best loss: -1.9489e+00
+2026-03-13 16:57:37,570 - INFO [rprop] - Epoch: 400, Loss: -1.9492e+00, Best loss: -1.9492e+00
+2026-03-13 16:58:08,344 - INFO [rprop] - Epoch: 500, Loss: -1.9494e+00, Best loss: -1.9494e+00
+2026-03-13 16:58:32,587 - INFO [rprop] - Epoch: 578, Loss: -1.9496e+00, Best loss: -1.9496e+00
+2026-03-13 16:58:32,590 - INFO [rprop] - Early stopping triggered at epoch 577
+2026-03-13 16:58:32,689 - INFO - Step 62 training completed in 185.314319 seconds.
+2026-03-13 16:58:35,700 - INFO [memory after increment 61] -  Host: 4509.0 MB
+2026-03-13 16:58:35,704 - INFO - --------------------------------------------------
+2026-03-13 16:58:35,705 - INFO - Starting training step 63/100...
+2026-03-13 16:58:35,813 - INFO [rprop] - Starting training step
+2026-03-13 16:59:07,393 - INFO [rprop] - Epoch: 85, Loss: -1.9449e+00, Best loss: -1.9449e+00
+2026-03-13 16:59:07,396 - INFO [rprop] - Early stopping triggered at epoch 84
+2026-03-13 16:59:07,518 - INFO - Step 63 training completed in 31.813935 seconds.
+2026-03-13 16:59:10,462 - INFO [memory after increment 62] -  Host: 4527.8 MB
+2026-03-13 16:59:10,466 - INFO - --------------------------------------------------
+2026-03-13 16:59:10,468 - INFO - Starting training step 64/100...
+2026-03-13 16:59:10,578 - INFO [rprop] - Starting training step
+2026-03-13 16:59:47,700 - INFO [rprop] - Epoch: 100, Loss: -1.9404e+00, Best loss: -1.9404e+00
+2026-03-13 17:00:18,568 - INFO [rprop] - Epoch: 200, Loss: -1.9407e+00, Best loss: -1.9407e+00
+2026-03-13 17:00:49,349 - INFO [rprop] - Epoch: 300, Loss: -1.9409e+00, Best loss: -1.9409e+00
+2026-03-13 17:01:20,151 - INFO [rprop] - Epoch: 400, Loss: -1.9411e+00, Best loss: -1.9411e+00
+2026-03-13 17:01:50,929 - INFO [rprop] - Epoch: 500, Loss: -1.9413e+00, Best loss: -1.9413e+00
+2026-03-13 17:01:52,351 - INFO [rprop] - Epoch: 504, Loss: -1.9413e+00, Best loss: -1.9413e+00
+2026-03-13 17:01:52,353 - INFO [rprop] - Early stopping triggered at epoch 503
+2026-03-13 17:01:52,453 - INFO - Step 64 training completed in 161.986820 seconds.
+2026-03-13 17:01:55,446 - INFO [memory after increment 63] -  Host: 4547.5 MB
+2026-03-13 17:01:55,451 - INFO - --------------------------------------------------
+2026-03-13 17:01:55,451 - INFO - Starting training step 65/100...
+2026-03-13 17:01:55,561 - INFO [rprop] - Starting training step
+2026-03-13 17:02:32,698 - INFO [rprop] - Epoch: 84, Loss: -1.9369e+00, Best loss: -1.9369e+00
+2026-03-13 17:02:32,701 - INFO [rprop] - Early stopping triggered at epoch 83
+2026-03-13 17:02:32,842 - INFO - Step 65 training completed in 37.390982 seconds.
+2026-03-13 17:02:35,995 - INFO [memory after increment 64] -  Host: 4566.2 MB
+2026-03-13 17:02:36,000 - INFO - --------------------------------------------------
+2026-03-13 17:02:36,001 - INFO - Starting training step 66/100...
+2026-03-13 17:02:36,119 - INFO [rprop] - Starting training step
+2026-03-13 17:03:13,562 - INFO [rprop] - Epoch: 100, Loss: -1.9326e+00, Best loss: -1.9326e+00
+2026-03-13 17:03:44,581 - INFO [rprop] - Epoch: 200, Loss: -1.9329e+00, Best loss: -1.9329e+00
+2026-03-13 17:04:15,492 - INFO [rprop] - Epoch: 300, Loss: -1.9331e+00, Best loss: -1.9331e+00
+2026-03-13 17:04:46,433 - INFO [rprop] - Epoch: 400, Loss: -1.9333e+00, Best loss: -1.9333e+00
+2026-03-13 17:04:59,778 - INFO [rprop] - Epoch: 443, Loss: -1.9334e+00, Best loss: -1.9334e+00
+2026-03-13 17:04:59,781 - INFO [rprop] - Early stopping triggered at epoch 442
+2026-03-13 17:04:59,881 - INFO - Step 66 training completed in 143.881511 seconds.
+2026-03-13 17:05:02,897 - INFO [memory after increment 65] -  Host: 4585.1 MB
+2026-03-13 17:05:02,900 - INFO - --------------------------------------------------
+2026-03-13 17:05:02,902 - INFO - Starting training step 67/100...
+2026-03-13 17:05:03,014 - INFO [rprop] - Starting training step
+2026-03-13 17:05:26,276 - INFO [rprop] - Epoch: 55, Loss: -1.9292e+00, Best loss: -1.9292e+00
+2026-03-13 17:05:26,280 - INFO [rprop] - Early stopping triggered at epoch 54
+2026-03-13 17:05:26,396 - INFO - Step 67 training completed in 23.496187 seconds.
+2026-03-13 17:05:29,373 - INFO [memory after increment 66] -  Host: 4603.9 MB
+2026-03-13 17:05:29,378 - INFO - --------------------------------------------------
+2026-03-13 17:05:29,378 - INFO - Starting training step 68/100...
+2026-03-13 17:05:29,486 - INFO [rprop] - Starting training step
+2026-03-13 17:06:07,928 - INFO [rprop] - Epoch: 100, Loss: -1.9251e+00, Best loss: -1.9251e+00
+2026-03-13 17:06:39,163 - INFO [rprop] - Epoch: 200, Loss: -1.9254e+00, Best loss: -1.9254e+00
+2026-03-13 17:07:10,184 - INFO [rprop] - Epoch: 300, Loss: -1.9257e+00, Best loss: -1.9257e+00
+2026-03-13 17:07:41,255 - INFO [rprop] - Epoch: 400, Loss: -1.9259e+00, Best loss: -1.9259e+00
+2026-03-13 17:07:58,387 - INFO [rprop] - Epoch: 455, Loss: -1.9260e+00, Best loss: -1.9260e+00
+2026-03-13 17:07:58,390 - INFO [rprop] - Early stopping triggered at epoch 454
+2026-03-13 17:07:58,489 - INFO - Step 68 training completed in 149.110676 seconds.
+2026-03-13 17:08:01,476 - INFO [memory after increment 67] -  Host: 4622.6 MB
+2026-03-13 17:08:01,481 - INFO - --------------------------------------------------
+2026-03-13 17:08:01,482 - INFO - Starting training step 69/100...
+2026-03-13 17:08:01,588 - INFO [rprop] - Starting training step
+2026-03-13 17:08:33,056 - INFO [rprop] - Epoch: 82, Loss: -1.9220e+00, Best loss: -1.9220e+00
+2026-03-13 17:08:33,059 - INFO [rprop] - Early stopping triggered at epoch 81
+2026-03-13 17:08:33,175 - INFO - Step 69 training completed in 31.694097 seconds.
+2026-03-13 17:08:36,153 - INFO [memory after increment 68] -  Host: 4642.4 MB
+2026-03-13 17:08:36,159 - INFO - --------------------------------------------------
+2026-03-13 17:08:36,159 - INFO - Starting training step 70/100...
+2026-03-13 17:08:36,270 - INFO [rprop] - Starting training step
+2026-03-13 17:09:13,805 - INFO [rprop] - Epoch: 100, Loss: -1.9181e+00, Best loss: -1.9181e+00
+2026-03-13 17:09:45,011 - INFO [rprop] - Epoch: 200, Loss: -1.9184e+00, Best loss: -1.9184e+00
+2026-03-13 17:10:16,211 - INFO [rprop] - Epoch: 300, Loss: -1.9186e+00, Best loss: -1.9186e+00
+2026-03-13 17:10:47,490 - INFO [rprop] - Epoch: 400, Loss: -1.9188e+00, Best loss: -1.9188e+00
+2026-03-13 17:11:18,662 - INFO [rprop] - Epoch: 500, Loss: -1.9190e+00, Best loss: -1.9190e+00
+2026-03-13 17:11:35,466 - INFO [rprop] - Epoch: 553, Loss: -1.9191e+00, Best loss: -1.9191e+00
+2026-03-13 17:11:35,469 - INFO [rprop] - Early stopping triggered at epoch 552
+2026-03-13 17:11:35,569 - INFO - Step 70 training completed in 179.410263 seconds.
+2026-03-13 17:11:38,611 - INFO [memory after increment 69] -  Host: 4660.7 MB
+2026-03-13 17:11:38,616 - INFO - --------------------------------------------------
+2026-03-13 17:11:38,616 - INFO - Starting training step 71/100...
+2026-03-13 17:11:38,725 - INFO [rprop] - Starting training step
+2026-03-13 17:12:00,278 - INFO [rprop] - Epoch: 52, Loss: -1.9153e+00, Best loss: -1.9153e+00
+2026-03-13 17:12:00,281 - INFO [rprop] - Early stopping triggered at epoch 51
+2026-03-13 17:12:00,399 - INFO - Step 71 training completed in 21.783250 seconds.
+2026-03-13 17:12:03,388 - INFO [memory after increment 70] -  Host: 4679.9 MB
+2026-03-13 17:12:03,391 - INFO - --------------------------------------------------
+2026-03-13 17:12:03,393 - INFO - Starting training step 72/100...
+2026-03-13 17:12:03,504 - INFO [rprop] - Starting training step
+2026-03-13 17:12:41,191 - INFO [rprop] - Epoch: 100, Loss: -1.9116e+00, Best loss: -1.9116e+00
+2026-03-13 17:13:12,502 - INFO [rprop] - Epoch: 200, Loss: -1.9118e+00, Best loss: -1.9118e+00
+2026-03-13 17:13:43,727 - INFO [rprop] - Epoch: 300, Loss: -1.9121e+00, Best loss: -1.9121e+00
+2026-03-13 17:14:15,027 - INFO [rprop] - Epoch: 400, Loss: -1.9123e+00, Best loss: -1.9123e+00
+2026-03-13 17:14:46,174 - INFO [rprop] - Epoch: 500, Loss: -1.9125e+00, Best loss: -1.9125e+00
+2026-03-13 17:14:55,410 - INFO [rprop] - Epoch: 529, Loss: -1.9125e+00, Best loss: -1.9125e+00
+2026-03-13 17:14:55,413 - INFO [rprop] - Early stopping triggered at epoch 528
+2026-03-13 17:14:55,512 - INFO - Step 72 training completed in 172.120658 seconds.
+2026-03-13 17:14:58,644 - INFO [memory after increment 71] -  Host: 4699.6 MB
+2026-03-13 17:14:58,647 - INFO - --------------------------------------------------
+2026-03-13 17:14:58,647 - INFO - Starting training step 73/100...
+2026-03-13 17:14:58,764 - INFO [rprop] - Starting training step
+2026-03-13 17:15:20,918 - INFO [rprop] - Epoch: 52, Loss: -1.9089e+00, Best loss: -1.9089e+00
+2026-03-13 17:15:20,921 - INFO [rprop] - Early stopping triggered at epoch 51
+2026-03-13 17:15:21,040 - INFO - Step 73 training completed in 22.393790 seconds.
+2026-03-13 17:15:24,047 - INFO [memory after increment 72] -  Host: 4718.4 MB
+2026-03-13 17:15:24,050 - INFO - --------------------------------------------------
+2026-03-13 17:15:24,052 - INFO - Starting training step 74/100...
+2026-03-13 17:15:24,162 - INFO [rprop] - Starting training step
+2026-03-13 17:16:01,823 - INFO [rprop] - Epoch: 100, Loss: -1.9053e+00, Best loss: -1.9053e+00
+2026-03-13 17:16:33,191 - INFO [rprop] - Epoch: 200, Loss: -1.9056e+00, Best loss: -1.9056e+00
+2026-03-13 17:17:04,452 - INFO [rprop] - Epoch: 300, Loss: -1.9058e+00, Best loss: -1.9058e+00
+2026-03-13 17:17:35,748 - INFO [rprop] - Epoch: 400, Loss: -1.9060e+00, Best loss: -1.9060e+00
+2026-03-13 17:18:01,900 - INFO [rprop] - Epoch: 484, Loss: -1.9061e+00, Best loss: -1.9061e+00
+2026-03-13 17:18:01,903 - INFO [rprop] - Early stopping triggered at epoch 483
+2026-03-13 17:18:02,002 - INFO - Step 74 training completed in 157.951828 seconds.
+2026-03-13 17:18:05,957 - INFO [memory after increment 73] -  Host: 4737.0 MB
+2026-03-13 17:18:05,962 - INFO - --------------------------------------------------
+2026-03-13 17:18:05,963 - INFO - Starting training step 75/100...
+2026-03-13 17:18:06,080 - INFO [rprop] - Starting training step
+2026-03-13 17:18:29,899 - INFO [rprop] - Epoch: 55, Loss: -1.9026e+00, Best loss: -1.9026e+00
+2026-03-13 17:18:29,902 - INFO [rprop] - Early stopping triggered at epoch 54
+2026-03-13 17:18:30,018 - INFO - Step 75 training completed in 24.055929 seconds.
+2026-03-13 17:18:33,033 - INFO [memory after increment 74] -  Host: 4755.7 MB
+2026-03-13 17:18:33,037 - INFO - --------------------------------------------------
+2026-03-13 17:18:33,038 - INFO - Starting training step 76/100...
+2026-03-13 17:18:33,151 - INFO [rprop] - Starting training step
+2026-03-13 17:19:11,878 - INFO [rprop] - Epoch: 100, Loss: -1.8993e+00, Best loss: -1.8993e+00
+2026-03-13 17:19:43,294 - INFO [rprop] - Epoch: 200, Loss: -1.8995e+00, Best loss: -1.8995e+00
+2026-03-13 17:20:14,761 - INFO [rprop] - Epoch: 300, Loss: -1.8997e+00, Best loss: -1.8997e+00
+2026-03-13 17:20:44,349 - INFO [rprop] - Epoch: 394, Loss: -1.8999e+00, Best loss: -1.8999e+00
+2026-03-13 17:20:44,352 - INFO [rprop] - Early stopping triggered at epoch 393
+2026-03-13 17:20:44,451 - INFO - Step 76 training completed in 131.414007 seconds.
+2026-03-13 17:20:47,466 - INFO [memory after increment 75] -  Host: 4775.4 MB
+2026-03-13 17:20:47,470 - INFO - --------------------------------------------------
+2026-03-13 17:20:47,470 - INFO - Starting training step 77/100...
+2026-03-13 17:20:47,580 - INFO [rprop] - Starting training step
+2026-03-13 17:21:10,036 - INFO [rprop] - Epoch: 54, Loss: -1.8965e+00, Best loss: -1.8965e+00
+2026-03-13 17:21:10,038 - INFO [rprop] - Early stopping triggered at epoch 53
+2026-03-13 17:21:10,152 - INFO - Step 77 training completed in 22.681416 seconds.
+2026-03-13 17:21:13,159 - INFO [memory after increment 76] -  Host: 4794.2 MB
+2026-03-13 17:21:13,163 - INFO - --------------------------------------------------
+2026-03-13 17:21:13,163 - INFO - Starting training step 78/100...
+2026-03-13 17:21:13,272 - INFO [rprop] - Starting training step
+2026-03-13 17:21:58,260 - INFO [rprop] - Epoch: 100, Loss: -1.8933e+00, Best loss: -1.8933e+00
+2026-03-13 17:22:36,680 - INFO [rprop] - Epoch: 200, Loss: -1.8936e+00, Best loss: -1.8936e+00
+2026-03-13 17:23:15,022 - INFO [rprop] - Epoch: 300, Loss: -1.8938e+00, Best loss: -1.8938e+00
+2026-03-13 17:23:53,303 - INFO [rprop] - Epoch: 400, Loss: -1.8940e+00, Best loss: -1.8940e+00
+2026-03-13 17:24:29,336 - INFO [rprop] - Epoch: 499, Loss: -1.8942e+00, Best loss: -1.8942e+00
+2026-03-13 17:24:29,340 - INFO [rprop] - Early stopping triggered at epoch 498
+2026-03-13 17:24:30,014 - INFO - Step 78 training completed in 196.851243 seconds.
+2026-03-13 17:24:33,642 - INFO [memory after increment 77] -  Host: 4813.0 MB
+2026-03-13 17:24:33,645 - INFO - --------------------------------------------------
+2026-03-13 17:24:33,647 - INFO - Starting training step 79/100...
+2026-03-13 17:24:33,801 - INFO [rprop] - Starting training step
+2026-03-13 17:25:15,373 - INFO [rprop] - Epoch: 94, Loss: -1.8910e+00, Best loss: -1.8910e+00
+2026-03-13 17:25:15,376 - INFO [rprop] - Early stopping triggered at epoch 93
+2026-03-13 17:25:15,517 - INFO - Step 79 training completed in 41.871825 seconds.
+2026-03-13 17:25:19,155 - INFO [memory after increment 78] -  Host: 4832.6 MB
+2026-03-13 17:25:19,161 - INFO - --------------------------------------------------
+2026-03-13 17:25:19,161 - INFO - Starting training step 80/100...
+2026-03-13 17:25:19,318 - INFO [rprop] - Starting training step
+2026-03-13 17:26:04,248 - INFO [rprop] - Epoch: 100, Loss: -1.8880e+00, Best loss: -1.8880e+00
+2026-03-13 17:26:42,309 - INFO [rprop] - Epoch: 200, Loss: -1.8882e+00, Best loss: -1.8882e+00
+2026-03-13 17:27:20,359 - INFO [rprop] - Epoch: 300, Loss: -1.8884e+00, Best loss: -1.8884e+00
+2026-03-13 17:27:58,276 - INFO [rprop] - Epoch: 400, Loss: -1.8886e+00, Best loss: -1.8886e+00
+2026-03-13 17:28:35,439 - INFO [rprop] - Epoch: 500, Loss: -1.8888e+00, Best loss: -1.8888e+00
+2026-03-13 17:28:37,500 - INFO [rprop] - Epoch: 505, Loss: -1.8888e+00, Best loss: -1.8888e+00
+2026-03-13 17:28:37,503 - INFO [rprop] - Early stopping triggered at epoch 504
+2026-03-13 17:28:37,616 - INFO - Step 80 training completed in 198.455385 seconds.
+2026-03-13 17:28:41,369 - INFO [memory after increment 79] -  Host: 4850.9 MB
+2026-03-13 17:28:41,374 - INFO - --------------------------------------------------
+2026-03-13 17:28:41,375 - INFO - Starting training step 81/100...
+2026-03-13 17:28:41,529 - INFO [rprop] - Starting training step
+2026-03-13 17:29:05,737 - INFO [rprop] - Epoch: 54, Loss: -1.8857e+00, Best loss: -1.8857e+00
+2026-03-13 17:29:05,739 - INFO [rprop] - Early stopping triggered at epoch 53
+2026-03-13 17:29:05,861 - INFO - Step 81 training completed in 24.487423 seconds.
+2026-03-13 17:29:09,676 - INFO [memory after increment 80] -  Host: 4870.1 MB
+2026-03-13 17:29:09,681 - INFO - --------------------------------------------------
+2026-03-13 17:29:09,684 - INFO - Starting training step 82/100...
+2026-03-13 17:29:09,838 - INFO [rprop] - Starting training step
+2026-03-13 17:29:55,273 - INFO [rprop] - Epoch: 100, Loss: -1.8828e+00, Best loss: -1.8828e+00
+2026-03-13 17:30:33,857 - INFO [rprop] - Epoch: 200, Loss: -1.8830e+00, Best loss: -1.8830e+00
+2026-03-13 17:31:11,514 - INFO [rprop] - Epoch: 300, Loss: -1.8832e+00, Best loss: -1.8832e+00
+2026-03-13 17:31:49,872 - INFO [rprop] - Epoch: 400, Loss: -1.8834e+00, Best loss: -1.8834e+00
+2026-03-13 17:32:13,539 - INFO [rprop] - Epoch: 461, Loss: -1.8835e+00, Best loss: -1.8835e+00
+2026-03-13 17:32:13,542 - INFO [rprop] - Early stopping triggered at epoch 460
+2026-03-13 17:32:13,654 - INFO - Step 82 training completed in 183.972655 seconds.
+2026-03-13 17:32:17,336 - INFO [memory after increment 81] -  Host: 4889.8 MB
+2026-03-13 17:32:17,342 - INFO - --------------------------------------------------
+2026-03-13 17:32:17,345 - INFO - Starting training step 83/100...
+2026-03-13 17:32:17,497 - INFO [rprop] - Starting training step
+2026-03-13 17:32:46,316 - INFO [rprop] - Epoch: 59, Loss: -1.8806e+00, Best loss: -1.8806e+00
+2026-03-13 17:32:46,319 - INFO [rprop] - Early stopping triggered at epoch 58
+2026-03-13 17:32:46,453 - INFO - Step 83 training completed in 29.111029 seconds.
+2026-03-13 17:32:50,311 - INFO [memory after increment 82] -  Host: 4908.6 MB
+2026-03-13 17:32:50,317 - INFO - --------------------------------------------------
+2026-03-13 17:32:50,320 - INFO - Starting training step 84/100...
+2026-03-13 17:32:50,472 - INFO [rprop] - Starting training step
+2026-03-13 17:33:29,499 - INFO [rprop] - Epoch: 100, Loss: -1.8777e+00, Best loss: -1.8777e+00
+2026-03-13 17:34:02,012 - INFO [rprop] - Epoch: 200, Loss: -1.8780e+00, Best loss: -1.8780e+00
+2026-03-13 17:34:35,590 - INFO [rprop] - Epoch: 300, Loss: -1.8781e+00, Best loss: -1.8781e+00
+2026-03-13 17:35:14,127 - INFO [rprop] - Epoch: 400, Loss: -1.8784e+00, Best loss: -1.8784e+00
+2026-03-13 17:35:52,628 - INFO [rprop] - Epoch: 500, Loss: -1.8785e+00, Best loss: -1.8785e+00
+2026-03-13 17:36:02,060 - INFO [rprop] - Epoch: 524, Loss: -1.8786e+00, Best loss: -1.8786e+00
+2026-03-13 17:36:02,063 - INFO [rprop] - Early stopping triggered at epoch 523
+2026-03-13 17:36:02,174 - INFO - Step 84 training completed in 191.857168 seconds.
+2026-03-13 17:36:06,051 - INFO [memory after increment 83] -  Host: 4927.0 MB
+2026-03-13 17:36:06,054 - INFO - --------------------------------------------------
+2026-03-13 17:36:06,054 - INFO - Starting training step 85/100...
+2026-03-13 17:36:06,207 - INFO [rprop] - Starting training step
+2026-03-13 17:36:30,336 - INFO [rprop] - Epoch: 54, Loss: -1.8758e+00, Best loss: -1.8758e+00
+2026-03-13 17:36:30,339 - INFO [rprop] - Early stopping triggered at epoch 53
+2026-03-13 17:36:30,464 - INFO - Step 85 training completed in 24.409711 seconds.
+2026-03-13 17:36:34,036 - INFO [memory after increment 84] -  Host: 4946.1 MB
+2026-03-13 17:36:34,042 - INFO - --------------------------------------------------
+2026-03-13 17:36:34,043 - INFO - Starting training step 86/100...
+2026-03-13 17:36:34,203 - INFO [rprop] - Starting training step
+2026-03-13 17:37:00,330 - INFO [rprop] - Epoch: 52, Loss: -1.8729e+00, Best loss: -1.8729e+00
+2026-03-13 17:37:00,333 - INFO [rprop] - Early stopping triggered at epoch 51
+2026-03-13 17:37:00,442 - INFO - Step 86 training completed in 26.400464 seconds.
+2026-03-13 17:37:04,103 - INFO [memory after increment 85] -  Host: 4965.8 MB
+2026-03-13 17:37:04,108 - INFO - --------------------------------------------------
+2026-03-13 17:37:04,108 - INFO - Starting training step 87/100...
+2026-03-13 17:37:04,259 - INFO [rprop] - Starting training step
+2026-03-13 17:37:49,789 - INFO [rprop] - Epoch: 100, Loss: -1.8703e+00, Best loss: -1.8703e+00
+2026-03-13 17:38:28,240 - INFO [rprop] - Epoch: 200, Loss: -1.8706e+00, Best loss: -1.8706e+00
+2026-03-13 17:39:06,682 - INFO [rprop] - Epoch: 300, Loss: -1.8708e+00, Best loss: -1.8708e+00
+2026-03-13 17:39:41,706 - INFO [rprop] - Epoch: 400, Loss: -1.8711e+00, Best loss: -1.8711e+00
+2026-03-13 17:40:13,988 - INFO [rprop] - Epoch: 500, Loss: -1.8713e+00, Best loss: -1.8713e+00
+2026-03-13 17:40:46,714 - INFO [rprop] - Epoch: 600, Loss: -1.8715e+00, Best loss: -1.8715e+00
+2026-03-13 17:41:01,295 - INFO [rprop] - Epoch: 645, Loss: -1.8715e+00, Best loss: -1.8715e+00
+2026-03-13 17:41:01,298 - INFO [rprop] - Early stopping triggered at epoch 644
+2026-03-13 17:41:02,002 - INFO - Step 87 training completed in 237.894067 seconds.
+2026-03-13 17:41:05,692 - INFO [memory after increment 86] -  Host: 4984.5 MB
+2026-03-13 17:41:05,694 - INFO - --------------------------------------------------
+2026-03-13 17:41:05,695 - INFO - Starting training step 88/100...
+2026-03-13 17:41:05,852 - INFO [rprop] - Starting training step
+2026-03-13 17:41:44,782 - INFO [rprop] - Epoch: 85, Loss: -1.8689e+00, Best loss: -1.8689e+00
+2026-03-13 17:41:44,785 - INFO [rprop] - Early stopping triggered at epoch 84
+2026-03-13 17:41:44,928 - INFO - Step 88 training completed in 39.233907 seconds.
+2026-03-13 17:41:48,828 - INFO [memory after increment 87] -  Host: 5004.2 MB
+2026-03-13 17:41:48,835 - INFO - --------------------------------------------------
+2026-03-13 17:41:48,835 - INFO - Starting training step 89/100...
+2026-03-13 17:41:48,989 - INFO [rprop] - Starting training step
+2026-03-13 17:42:15,174 - INFO [rprop] - Epoch: 52, Loss: -1.8663e+00, Best loss: -1.8663e+00
+2026-03-13 17:42:15,177 - INFO [rprop] - Early stopping triggered at epoch 51
+2026-03-13 17:42:15,289 - INFO - Step 89 training completed in 26.454374 seconds.
+2026-03-13 17:42:18,955 - INFO [memory after increment 88] -  Host: 5023.0 MB
+2026-03-13 17:42:18,962 - INFO - --------------------------------------------------
+2026-03-13 17:42:18,965 - INFO - Starting training step 90/100...
+2026-03-13 17:42:19,113 - INFO [rprop] - Starting training step
+2026-03-13 17:42:58,831 - INFO [rprop] - Epoch: 100, Loss: -1.8638e+00, Best loss: -1.8638e+00
+2026-03-13 17:43:31,910 - INFO [rprop] - Epoch: 200, Loss: -1.8640e+00, Best loss: -1.8640e+00
+2026-03-13 17:44:04,355 - INFO [rprop] - Epoch: 300, Loss: -1.8643e+00, Best loss: -1.8643e+00
+2026-03-13 17:44:39,505 - INFO [rprop] - Epoch: 400, Loss: -1.8645e+00, Best loss: -1.8645e+00
+2026-03-13 17:45:18,228 - INFO [rprop] - Epoch: 500, Loss: -1.8647e+00, Best loss: -1.8647e+00
+2026-03-13 17:45:19,867 - INFO [rprop] - Epoch: 503, Loss: -1.8647e+00, Best loss: -1.8647e+00
+2026-03-13 17:45:19,867 - INFO [rprop] - Early stopping triggered at epoch 502
+2026-03-13 17:45:19,976 - INFO - Step 90 training completed in 181.014664 seconds.
+2026-03-13 17:45:23,535 - INFO [memory after increment 89] -  Host: 5041.2 MB
+2026-03-13 17:45:23,535 - INFO - --------------------------------------------------
+2026-03-13 17:45:23,535 - INFO - Starting training step 91/100...
+2026-03-13 17:45:23,656 - INFO [rprop] - Starting training step
+2026-03-13 17:45:47,214 - INFO [rprop] - Epoch: 52, Loss: -1.8621e+00, Best loss: -1.8621e+00
+2026-03-13 17:45:47,215 - INFO [rprop] - Early stopping triggered at epoch 51
+2026-03-13 17:45:48,317 - INFO - Step 91 training completed in 24.781542 seconds.
+2026-03-13 17:45:52,070 - INFO [memory after increment 90] -  Host: 5060.5 MB
+2026-03-13 17:45:52,071 - INFO - --------------------------------------------------
+2026-03-13 17:45:52,075 - INFO - Starting training step 92/100...
+2026-03-13 17:45:52,233 - INFO [rprop] - Starting training step
+2026-03-13 17:46:18,719 - INFO [rprop] - Epoch: 52, Loss: -1.8596e+00, Best loss: -1.8596e+00
+2026-03-13 17:46:18,719 - INFO [rprop] - Early stopping triggered at epoch 51
+2026-03-13 17:46:19,750 - INFO - Step 92 training completed in 27.678540 seconds.
+2026-03-13 17:46:22,884 - INFO [memory after increment 91] -  Host: 5080.2 MB
+2026-03-13 17:46:22,885 - INFO - --------------------------------------------------
+2026-03-13 17:46:22,885 - INFO - Starting training step 93/100...
+2026-03-13 17:46:22,997 - INFO [rprop] - Starting training step
+2026-03-13 17:47:02,332 - INFO [rprop] - Epoch: 100, Loss: -1.8573e+00, Best loss: -1.8573e+00
+2026-03-13 17:47:35,192 - INFO [rprop] - Epoch: 200, Loss: -1.8575e+00, Best loss: -1.8575e+00
+2026-03-13 17:48:07,960 - INFO [rprop] - Epoch: 300, Loss: -1.8578e+00, Best loss: -1.8578e+00
+2026-03-13 17:48:40,139 - INFO [rprop] - Epoch: 400, Loss: -1.8580e+00, Best loss: -1.8580e+00
+2026-03-13 17:49:12,920 - INFO [rprop] - Epoch: 500, Loss: -1.8582e+00, Best loss: -1.8582e+00
+2026-03-13 17:49:31,507 - INFO [rprop] - Epoch: 557, Loss: -1.8583e+00, Best loss: -1.8583e+00
+2026-03-13 17:49:31,507 - INFO [rprop] - Early stopping triggered at epoch 556
+2026-03-13 17:49:31,608 - INFO - Step 93 training completed in 188.723190 seconds.
+2026-03-13 17:49:35,316 - INFO [memory after increment 92] -  Host: 5098.9 MB
+2026-03-13 17:49:35,318 - INFO - --------------------------------------------------
+2026-03-13 17:49:35,318 - INFO - Starting training step 94/100...
+2026-03-13 17:49:35,424 - INFO [rprop] - Starting training step
+2026-03-13 17:50:03,620 - INFO [rprop] - Epoch: 73, Loss: -1.8560e+00, Best loss: -1.8560e+00
+2026-03-13 17:50:03,621 - INFO [rprop] - Early stopping triggered at epoch 72
+2026-03-13 17:50:03,738 - INFO - Step 94 training completed in 28.420769 seconds.
+2026-03-13 17:50:06,920 - INFO [memory after increment 93] -  Host: 5117.7 MB
+2026-03-13 17:50:06,923 - INFO - --------------------------------------------------
+2026-03-13 17:50:06,924 - INFO - Starting training step 95/100...
+2026-03-13 17:50:07,034 - INFO [rprop] - Starting training step
+2026-03-13 17:50:30,238 - INFO [rprop] - Epoch: 52, Loss: -1.8536e+00, Best loss: -1.8536e+00
+2026-03-13 17:50:30,239 - INFO [rprop] - Early stopping triggered at epoch 51
+2026-03-13 17:50:30,340 - INFO - Step 95 training completed in 23.417024 seconds.
+2026-03-13 17:50:33,880 - INFO [memory after increment 94] -  Host: 5137.4 MB
+2026-03-13 17:50:33,880 - INFO - --------------------------------------------------
+2026-03-13 17:50:33,883 - INFO - Starting training step 96/100...
+2026-03-13 17:50:34,039 - INFO [rprop] - Starting training step
+2026-03-13 17:50:58,562 - INFO [rprop] - Epoch: 52, Loss: -1.8513e+00, Best loss: -1.8513e+00
+2026-03-13 17:50:58,563 - INFO [rprop] - Early stopping triggered at epoch 51
+2026-03-13 17:50:58,663 - INFO - Step 96 training completed in 24.782926 seconds.
+2026-03-13 17:51:01,746 - INFO [memory after increment 95] -  Host: 5156.1 MB
+2026-03-13 17:51:01,746 - INFO - --------------------------------------------------
+2026-03-13 17:51:01,746 - INFO - Starting training step 97/100...
+2026-03-13 17:51:01,858 - INFO [rprop] - Starting training step
+2026-03-13 17:51:41,400 - INFO [rprop] - Epoch: 100, Loss: -1.8492e+00, Best loss: -1.8492e+00
+2026-03-13 17:52:14,532 - INFO [rprop] - Epoch: 200, Loss: -1.8495e+00, Best loss: -1.8495e+00
+2026-03-13 17:52:46,928 - INFO [rprop] - Epoch: 300, Loss: -1.8498e+00, Best loss: -1.8498e+00
+2026-03-13 17:53:19,943 - INFO [rprop] - Epoch: 400, Loss: -1.8500e+00, Best loss: -1.8500e+00
+2026-03-13 17:53:53,030 - INFO [rprop] - Epoch: 500, Loss: -1.8502e+00, Best loss: -1.8502e+00
+2026-03-13 17:54:26,069 - INFO [rprop] - Epoch: 600, Loss: -1.8504e+00, Best loss: -1.8504e+00
+2026-03-13 17:54:45,811 - INFO [rprop] - Epoch: 661, Loss: -1.8505e+00, Best loss: -1.8505e+00
+2026-03-13 17:54:45,811 - INFO [rprop] - Early stopping triggered at epoch 660
+2026-03-13 17:54:45,911 - INFO - Step 97 training completed in 224.164706 seconds.
+2026-03-13 17:54:49,098 - INFO [memory after increment 96] -  Host: 5174.9 MB
+2026-03-13 17:54:49,099 - INFO - --------------------------------------------------
+2026-03-13 17:54:49,100 - INFO - Starting training step 98/100...
+2026-03-13 17:54:49,211 - INFO [rprop] - Starting training step
+2026-03-13 17:55:26,012 - INFO [rprop] - Epoch: 96, Loss: -1.8484e+00, Best loss: -1.8484e+00
+2026-03-13 17:55:26,012 - INFO [rprop] - Early stopping triggered at epoch 95
+2026-03-13 17:55:26,135 - INFO - Step 98 training completed in 37.035795 seconds.
+2026-03-13 17:55:29,876 - INFO [memory after increment 97] -  Host: 5194.6 MB
+2026-03-13 17:55:29,877 - INFO - --------------------------------------------------
+2026-03-13 17:55:29,877 - INFO - Starting training step 99/100...
+2026-03-13 17:55:29,986 - INFO [rprop] - Starting training step
+2026-03-13 17:55:52,959 - INFO [rprop] - Epoch: 52, Loss: -1.8462e+00, Best loss: -1.8462e+00
+2026-03-13 17:55:52,959 - INFO [rprop] - Early stopping triggered at epoch 51
+2026-03-13 17:55:53,061 - INFO - Step 99 training completed in 23.184188 seconds.
+2026-03-13 17:55:56,259 - INFO [memory after increment 98] -  Host: 5213.3 MB
+2026-03-13 17:55:56,260 - INFO - --------------------------------------------------
+2026-03-13 17:55:56,262 - INFO - Starting training step 100/100...
+2026-03-13 17:55:56,397 - INFO [rprop] - Starting training step
+2026-03-13 17:56:19,284 - INFO [rprop] - Epoch: 52, Loss: -1.8462e+00, Best loss: -1.8462e+00
+2026-03-13 17:56:19,284 - INFO [rprop] - Early stopping triggered at epoch 51
+2026-03-13 17:56:19,385 - INFO - Step 100 training completed in 23.125158 seconds.
+2026-03-13 17:56:22,727 - INFO [memory after increment 99] -  Host: 5231.6 MB
+2026-03-13 17:56:22,730 - INFO - --------------------------------------------------
+2026-03-13 17:56:22,730 - INFO - Total training time: 11819.866217 seconds.
+2026-03-13 17:56:22,730 - INFO - --------------------------------------------------
+2026-03-13 17:56:22,850 - INFO - Activation coefficients:
+{
+    "step_-1": [2.0014],
+    "step_0": [2.296],
+    "step_1": [2.296],
+    "step_2": [2.296],
+    "step_3": [2.296],
+    "step_4": [2.296],
+    "step_5": [2.296],
+    "step_6": [2.296],
+    "step_7": [2.296],
+    "step_8": [2.296],
+    "step_9": [2.296],
+    "step_10": [2.296],
+    "step_11": [2.296],
+    "step_12": [2.296],
+    "step_13": [2.296],
+    "step_14": [2.296],
+    "step_15": [2.296],
+    "step_16": [2.296],
+    "step_17": [2.296],
+    "step_18": [2.296],
+    "step_19": [2.296],
+    "step_20": [2.296],
+    "step_21": [2.296],
+    "step_22": [2.296],
+    "step_23": [2.296],
+    "step_24": [2.296],
+    "step_25": [2.296],
+    "step_26": [2.296],
+    "step_27": [2.296],
+    "step_28": [2.296],
+    "step_29": [2.296],
+    "step_30": [2.296],
+    "step_31": [2.296],
+    "step_32": [2.296],
+    "step_33": [2.296],
+    "step_34": [2.296],
+    "step_35": [2.296],
+    "step_36": [2.296],
+    "step_37": [2.296],
+    "step_38": [2.296],
+    "step_39": [2.296],
+    "step_40": [2.296],
+    "step_41": [2.296],
+    "step_42": [2.296],
+    "step_43": [2.296],
+    "step_44": [2.296],
+    "step_45": [2.296],
+    "step_46": [2.296],
+    "step_47": [2.296],
+    "step_48": [2.296],
+    "step_49": [2.296],
+    "step_50": [2.296],
+    "step_51": [2.296],
+    "step_52": [2.296],
+    "step_53": [2.296],
+    "step_54": [2.296],
+    "step_55": [2.296],
+    "step_56": [2.296],
+    "step_57": [2.296],
+    "step_58": [2.296],
+    "step_59": [2.296],
+    "step_60": [2.296],
+    "step_61": [2.296],
+    "step_62": [2.296],
+    "step_63": [2.296],
+    "step_64": [2.296],
+    "step_65": [2.296],
+    "step_66": [2.296],
+    "step_67": [2.296],
+    "step_68": [2.296],
+    "step_69": [2.296],
+    "step_70": [2.296],
+    "step_71": [2.296],
+    "step_72": [2.296],
+    "step_73": [2.296],
+    "step_74": [2.296],
+    "step_75": [2.296],
+    "step_76": [2.296],
+    "step_77": [2.296],
+    "step_78": [2.296],
+    "step_79": [2.296],
+    "step_80": [2.296],
+    "step_81": [2.296],
+    "step_82": [2.296],
+    "step_83": [2.296],
+    "step_84": [2.296],
+    "step_85": [2.296],
+    "step_86": [2.296],
+    "step_87": [2.296],
+    "step_88": [2.296],
+    "step_89": [2.296],
+    "step_90": [2.296],
+    "step_91": [2.296],
+    "step_92": [2.296],
+    "step_93": [2.296],
+    "step_94": [2.296],
+    "step_95": [2.296],
+    "step_96": [2.296],
+    "step_97": [2.296],
+    "step_98": [2.296],
+    "step_99": [2.296]
+}
+2026-03-13 17:56:22,858 - INFO - Extra attributes:
+{
+    "step_-1": {
+        "alpha": {
+            "values": [-0.0381, -0.0434, 0.093, 0.0173, -0.0166, -0.044],
+            "mean": -5.3076e-3,
+            "std": 0.0489,
+            "min": -0.044,
+            "max": 0.093
+        }
+    },
+    "step_0": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.1923],
+            "mean": -0.0315,
+            "std": 0.0857,
+            "min": -0.1923,
+            "max": 0.0931
+        }
+    },
+    "step_1": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.2469],
+            "mean": -0.0406,
+            "std": 0.1034,
+            "min": -0.2469,
+            "max": 0.0931
+        }
+    },
+    "step_2": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.3548],
+            "mean": -0.0586,
+            "std": 0.1404,
+            "min": -0.3548,
+            "max": 0.0931
+        }
+    },
+    "step_3": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.4915],
+            "mean": -0.0814,
+            "std": 0.1892,
+            "min": -0.4915,
+            "max": 0.0931
+        }
+    },
+    "step_4": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.6238],
+            "mean": -0.1034,
+            "std": 0.2373,
+            "min": -0.6238,
+            "max": 0.0931
+        }
+    },
+    "step_5": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7],
+            "mean": -0.1161,
+            "std": 0.2652,
+            "min": -0.7,
+            "max": 0.0931
+        }
+    },
+    "step_6": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_7": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_8": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_9": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_10": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_11": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_12": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_13": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_14": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_15": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_16": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_17": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_18": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_19": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_20": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_21": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_22": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_23": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_24": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_25": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_26": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_27": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_28": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_29": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_30": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_31": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_32": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_33": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_34": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_35": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_36": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_37": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_38": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_39": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_40": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_41": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_42": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_43": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_44": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_45": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_46": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_47": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_48": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_49": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_50": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_51": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_52": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_53": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_54": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_55": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_56": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_57": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_58": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_59": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_60": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0236, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_61": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0237, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_62": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0237, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_63": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0238, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_64": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0174, -0.0238, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_65": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0175, -0.0238, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_66": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0175, -0.0238, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2727,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_67": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0175, -0.0239, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_68": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0175, -0.0239, -0.7203],
+            "mean": -0.1195,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_69": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0176, -0.0241, -0.7203],
+            "mean": -0.1196,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_70": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0176, -0.0241, -0.7203],
+            "mean": -0.1196,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_71": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0176, -0.0242, -0.7203],
+            "mean": -0.1196,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_72": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0176, -0.0242, -0.7203],
+            "mean": -0.1196,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_73": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0177, -0.0243, -0.7203],
+            "mean": -0.1196,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_74": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0177, -0.0243, -0.7203],
+            "mean": -0.1196,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_75": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0178, -0.0244, -0.7203],
+            "mean": -0.1196,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_76": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0178, -0.0244, -0.7203],
+            "mean": -0.1196,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_77": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0178, -0.0246, -0.7203],
+            "mean": -0.1196,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_78": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0178, -0.0246, -0.7203],
+            "mean": -0.1196,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_79": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0179, -0.0247, -0.7203],
+            "mean": -0.1196,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_80": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0179, -0.0247, -0.7203],
+            "mean": -0.1196,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_81": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0179, -0.0248, -0.7203],
+            "mean": -0.1196,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_82": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0179, -0.0248, -0.7203],
+            "mean": -0.1196,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_83": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.018, -0.025, -0.7203],
+            "mean": -0.1196,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_84": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.018, -0.025, -0.7203],
+            "mean": -0.1196,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_85": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.018, -0.025, -0.7203],
+            "mean": -0.1196,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_86": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0182, -0.0252, -0.7203],
+            "mean": -0.1196,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_87": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0182, -0.0252, -0.7203],
+            "mean": -0.1196,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_88": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0182, -0.0252, -0.7203],
+            "mean": -0.1196,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_89": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0182, -0.0253, -0.7203],
+            "mean": -0.1197,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_90": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0182, -0.0254, -0.7203],
+            "mean": -0.1197,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_91": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0182, -0.0254, -0.7203],
+            "mean": -0.1197,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_92": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0183, -0.0256, -0.7203],
+            "mean": -0.1197,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_93": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0183, -0.0256, -0.7203],
+            "mean": -0.1197,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_94": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0183, -0.0256, -0.7203],
+            "mean": -0.1197,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_95": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0183, -0.0256, -0.7203],
+            "mean": -0.1197,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_96": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0184, -0.0258, -0.7203],
+            "mean": -0.1197,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_97": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0184, -0.0258, -0.7203],
+            "mean": -0.1197,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_98": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0184, -0.0258, -0.7203],
+            "mean": -0.1197,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    },
+    "step_99": {
+        "alpha": {
+            "values": [-0.0382, -0.0456, 0.0931, 0.0184, -0.0258, -0.7203],
+            "mean": -0.1197,
+            "std": 0.2726,
+            "min": -0.7203,
+            "max": 0.0931
+        }
+    }
+}
+2026-03-13 17:56:22,858 - INFO - Cleaning up the output...
+2026-03-13 17:56:23,050 - INFO - Output cleaned up.
+2026-03-13 17:56:43,424 - INFO - Saving loss evolution plot...
+2026-03-13 17:57:28,709 - INFO - Loss evolution plot saved.
+2026-03-13 17:57:29,025 - INFO - Generating postprocessed quantities of interest (QoIs)...
+2026-03-13 17:57:29,027 - INFO - Loading mesh from square_201 of type nurbs...
+2026-03-13 17:57:32,229 - INFO - Mesh parsed successfully.
+2026-03-13 17:58:00,929 - INFO - Postprocessed quantities of interest (QoIs) generated.
+2026-03-13 17:58:01,143 - INFO - Outputting pickle file...
+2026-03-13 17:58:01,478 - INFO - Pickle file output complete.
+2026-03-13 17:58:01,479 - INFO - Generating plots...
+2026-03-13 17:58:01,479 - INFO - Running plot job: plot_energy...
+2026-03-13 17:58:02,274 - INFO - Saved plot for plot_energy
+2026-03-13 17:58:02,274 - INFO - Dumping plotting data...
+2026-03-13 17:58:02,281 - INFO - Data plotted and plotting data dumped successfully.
+2026-03-13 17:58:02,281 - INFO - Saving the results to PVD...
+2026-03-13 17:58:04,358 - INFO - QoI dictionary prepared for paraview output.
+2026-03-13 17:59:51,274 - INFO - PVD saved.
+2026-03-13 17:59:51,274 - INFO - Rendering Paraview GIF...
+2026-03-13 17:59:52,909 - ERROR - Exception in Simulation._output_paraview_gif: Command '['bash', '-lc', '\n        module purge\n        module load GCCcore/11.3.0 GCC/11.3.0 OpenMPI/4.1.4 Xvfb ParaView/5.10.1-mpi\n        xvfb-run -a -s "-screen 0 1920x1080x24 -nolisten tcp -ac" pvpython /gpfs/home/n/njsplng/research/src/paraview_fig.py /gpfs/home/n/njsplng/research/output/paraview/nn_ortho_an_square_201_IGA2x2_9IP_PE_OA_AN+30_ND_RN4_24x300_RFF192x0_1_tanh2-0TG_TLO_rprop_DF100E0_015_S1_2026_03_13T14_38 phasefield all 0 1.0 \'[0, 1]\' 0\n        ']' returned non-zero exit status 127.
+2026-03-13 17:59:52,912 - INFO - Aggregating and printing function timings...
+2026-03-13 18:00:00,174 - INFO - Aggregated function timings: 
+Function name                       Total time    Median time    Number of calls
+--------------------------------  ------------  -------------  -----------------
+greville_abscissae                   3.428e-01      4.477e-02                  6
+<lambda>                             5.497e+00      1.929e-02                205
+elemental_to_global                  3.304e+00      3.245e-02                104
+pointwise_qoi_to_global_pf_force     1.503e-01      7.517e-02                  2
+solve_sparse_jax                     3.083e+00      1.541e+00                  2
+_degradation_in_ip                   1.338e+00      3.932e-03                205
+__call__                             3.714e+02      1.183e-02               1827
+nodal_displacement_to_strain         1.673e+00      4.403e-03                203
+voigt_strain_to_tensor               1.998e+00      7.869e-03                203
+energy_parts_point                   1.265e+00      1.247e-02                102
+loss_energy                          2.834e+01      2.771e-01                102
+compute_loss                         9.809e+01      9.294e-01                109
+update_step                          5.315e+03      1.296e-01              36011
+parts_point                          2.489e+00      2.287e-02                101
+_hydro_tensor                        2.458e-01      1.135e-03                101
+matrix_to_voigt_single               1.292e-02      1.292e-02                  1
+matrix_to_voigt                      1.342e+00      1.234e-02                101
+_grad_in_ip                          9.081e-01      8.806e-03                101
+_hess_in_ip                          6.610e-01      6.018e-03                101
+pointwise_to_nodes                   1.386e+00      6.374e-03                202
+2026-03-13 18:00:00,176 - ERROR - Error displaying notification: [Errno 2] No such file or directory: 'osascript'
+2026-03-13 18:00:00,176 - INFO - Simulation complete.

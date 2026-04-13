@@ -1,0 +1,5 @@
+{
+    "learning_rate": 1.0,
+    "number_of_epochs": 100,
+    "optimiser": "lbfgs"
+}

@@ -1,0 +1,103 @@
+{
+    "aggregate_timings": true,
+    "boundary_conditions": {
+        "fixed_window_directions": ["y", "xy"],
+        "fixed_window_parameters": [
+            {
+                "L": 0.6,
+                "d0": 0.05,
+                "order": 2,
+                "smooth_end": false,
+                "theta": -90,
+                "x_init": -0.5,
+                "y_init": 0.0
+            },
+            {
+                "L": 0.1,
+                "d0": 0.05,
+                "order": 2,
+                "smooth_end": true,
+                "theta": 0,
+                "x_init": 0.498,
+                "y_init": 0.0
+            }
+        ],
+        "load_window_parameters": [
+            {
+                "L": 0.6,
+                "d0": 0.05,
+                "order": 2,
+                "smooth_end": false,
+                "theta": 90,
+                "x_init": -0.5,
+                "y_init": 0.0
+            }
+        ]
+    },
+    "debug": false,
+    "gamma_parameters": {
+        "gamma11": 20,
+        "gamma12": 0.0,
+        "gamma22": 1.0,
+        "gamma44": 18.5
+    },
+    "generate_plots": [
+        {
+            "plot_energy": {
+                "title": "Energy over displacement increments"
+            }
+        }
+    ],
+    "material_parameters": {
+        "cubic_anisotropy": {
+            "shear_modulus": 1.92307692e+5
+        },
+        "orthotropic_anisotropy": {
+            "E_11": 2.0e+7,
+            "E_22": 1.0e+6,
+            "E_33": 1.0e+6,
+            "G_12": 3.84615385e+5,
+            "G_23": 3.7037037e+5,
+            "G_31": 3.84615385e+5,
+            "nu_12": 0.3,
+            "nu_23": 0.35,
+            "nu_31": 0.3
+        },
+        "poissons_ratio": 0.3,
+        "thickness": 1,
+        "youngs_modulus": 1.0e+6
+    },
+    "material_rotation": {
+        "angle": 30,
+        "number_of_slices": 1,
+        "slicing_direction": "x"
+    },
+    "mesh": {
+        "filename": "square_101",
+        "number_of_integration_points": -1,
+        "type": "nurbs"
+    },
+    "nondimensionalise": true,
+    "phasefield_parameters": {
+        "G_c": 0.5,
+        "initial_crack_parameters": [],
+        "l_0": 0.01
+    },
+    "plane": "strain",
+    "postprocessing_stress_type": "hydrostatic",
+    "problem_domain": {
+        "x": [-0.5, 0.5],
+        "y": [-0.5, 0.5]
+    },
+    "problem_type": "anisotropic",
+    "profile_memory": true,
+    "recorded_values": ["displacement", "phasefield", "ip_strain_energy", "ip_fracture_energy"],
+    "split_output_keys": ["displacement"],
+    "strain_split": "none",
+    "target_dof": {
+        "coordinates": [-0.5, 0.5],
+        "direction": "y"
+    },
+    "time_functions": true,
+    "title_prefix": ""
+}

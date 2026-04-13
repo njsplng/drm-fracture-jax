@@ -1,0 +1,14 @@
+{
+    "extends": "square_101_IGA2x2_9IP_PE_NO_AN+30_ND_T100",
+    "overrides": {
+        "loop_parameters": {
+            "timesteps": 500
+        },
+        "parent_input_file": "square_201_IGA2x2_9IP_PE_NO_AN+30_ND",
+        "solution_parameters": {
+            "displacement_control_parameters": {
+                "maximum_controlled_displacement": 6.0e-3
+            }
+        }
+    }
+}

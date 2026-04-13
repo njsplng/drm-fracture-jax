@@ -1,0 +1,17 @@
+{
+    "mappings": {
+        "activation": "$.network.activation",
+        "adaptive_upsampling": "$.adaptive_upsampling",
+        "displacement_parameters": "$.displacement_parameters",
+        "hidden_count": "$.network.hidden_count",
+        "hidden_size": "$.network.hidden_size",
+        "irreversibility_enforcement": "$.phasefield.irreversibility_enforcement",
+        "network_type": "$.network.type",
+        "optimiser": "$.training_parameters.optimiser",
+        "parent_input_file": "$.parent_input_file",
+        "rff_params": "$.network.rff",
+        "seed": "$.seed",
+        "transfer_learning": "$.transfer_learning"
+    },
+    "template_file": "nn.j2"
+}

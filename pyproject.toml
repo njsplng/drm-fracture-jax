@@ -1,0 +1,48 @@
+[tool.pytest.ini_options]
+norecursedirs=[".local"]
+filterwarnings = [
+    "ignore::UserWarning"
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py310', 'py311', 'py312']
+
+[tool.isort]
+profile = "black"
+
+[tool.autoflake]
+in-place = true
+recursive = true
+remove-all-unused-imports = true
+remove-unused-variables = true
+
+[tool.pydocstyle]
+convention = "google"
+add-ignore = [
+  "D200",
+  "D107",
+  "D212",
+  "D102",
+  "D205",
+  "D202"
+]
+
+[tool.flake8]
+max-line-length = 88
+extend-select = ["ANN"]
+ignore = [
+  "E",
+  "W", 
+  "F",  
+]
+
+[tool.skylos]
+confidence = 60
+
+[tool.skylos.whitelist]
+names = [
+    "*Model",
+    "build_*",
+]
+

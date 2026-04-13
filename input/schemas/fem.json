@@ -1,0 +1,386 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "additionalProperties": false,
+    "description": "Schema for the FEM simulation input file",
+    "properties": {
+        "boundary_conditions_parameters": {
+            "additionalProperties": false,
+            "description": "Defines how the domain is restrained — which nodes are fixed, in which directions, and how those nodes are identified.",
+            "properties": {
+                "constrain_directions": {
+                    "description": "Which displacement components to lock at the constrained nodes. Use 'x' or 'y' to fix a single axis, or 'xy' to fully pin the node. When provided as a list, each entry maps to the corresponding group of constrained DOFs.",
+                    "oneOf": [
+                        {
+                            "enum": ["x", "y", "xy"],
+                            "type": "string"
+                        },
+                        {
+                            "items": {
+                                "enum": ["x", "y", "xy"],
+                                "type": "string"
+                            },
+                            "minItems": 1,
+                            "type": "array",
+                            "uniqueItems": true
+                        }
+                    ]
+                },
+                "constrained_degrees_of_freedom": {
+                    "description": "Global DOF indices to be fixed (zero-displacement Dirichlet conditions). Only used when dof_selection_mode is 'explicit' or 'hybrid'.",
+                    "items": {
+                        "description": "A global degree-of-freedom index.",
+                        "type": "integer"
+                    },
+                    "type": "array"
+                },
+                "dof_selection_mode": {
+                    "description": "How constrained DOFs are identified. 'explicit' uses the manually listed indices in constrained_degrees_of_freedom. 'window' selects DOFs automatically based on the window_value_threshold. 'hybrid' combines both — manual indices plus any DOFs that pass the window filter.",
+                    "enum": ["explicit", "window", "hybrid"],
+                    "type": "string"
+                },
+                "window_value_threshold": {
+                    "description": "Normalised coordinate threshold (0–1) used in 'window' or 'hybrid' mode to automatically select boundary DOFs. Nodes whose normalised position falls below this value are constrained.",
+                    "maximum": 1,
+                    "minimum": 0,
+                    "type": "number"
+                }
+            },
+            "required": ["constrain_directions", "constrained_degrees_of_freedom", "dof_selection_mode", "window_value_threshold"],
+            "type": "object"
+        },
+        "forcing_parameters": {
+            "additionalProperties": false,
+            "description": "Specifies the external loading applied to the system. Exactly one mode is active per run; the sub-objects for the other modes are still required but ignored.",
+            "properties": {
+                "body_parameters": {
+                    "additionalProperties": false,
+                    "description": "Uniform volumetric load applied to every element (e.g. gravity or self-weight). Active when mode is 'body'.",
+                    "properties": {
+                        "magnitude_x": {
+                            "description": "Body-force intensity in the x-direction (force per unit volume).",
+                            "type": "number"
+                        },
+                        "magnitude_y": {
+                            "description": "Body-force intensity in the y-direction (force per unit volume).",
+                            "type": "number"
+                        }
+                    },
+                    "required": ["magnitude_x", "magnitude_y"],
+                    "type": "object"
+                },
+                "concentrated_parameters": {
+                    "additionalProperties": false,
+                    "description": "Point loads applied directly to specific DOFs. Active when mode is 'concentrated'.",
+                    "properties": {
+                        "forced_degrees_of_freedom": {
+                            "description": "Global DOF indices where the point load is applied. Each listed DOF receives the same magnitude. If left empty, defaults to target_dof.",
+                            "items": {
+                                "minimum": 0,
+                                "type": "integer"
+                            },
+                            "minItems": 0,
+                            "type": "array"
+                        },
+                        "magnitude": {
+                            "description": "Force value applied at each listed DOF. The sign determines direction (positive follows the positive axis).",
+                            "type": "number"
+                        }
+                    },
+                    "required": ["forced_degrees_of_freedom", "magnitude"],
+                    "type": "object"
+                },
+                "mode": {
+                    "description": "Selects which forcing strategy is active for the run. 'concentrated' applies point loads at specific DOFs, 'window' distributes a load across DOFs selected by a spatial filter, and 'body' applies a uniform volumetric force everywhere. 'concentrated' with an empty forced_degrees_of_freedom list defaults to applying the load at target_dof.",
+                    "enum": ["concentrated", "window", "body"],
+                    "type": "string"
+                },
+                "window_parameters": {
+                    "additionalProperties": false,
+                    "description": "Spatially filtered distributed load — force is applied to every DOF whose normalised position exceeds the filter threshold. Active when mode is 'window'.",
+                    "properties": {
+                        "filter_threshold": {
+                            "description": "Normalised coordinate cutoff (0–1). DOFs with a normalised position above this value receive the load; those below are unloaded.",
+                            "maximum": 1,
+                            "minimum": 0,
+                            "type": "number"
+                        },
+                        "magnitude": {
+                            "description": "Force value applied at each DOF that passes the window filter.",
+                            "type": "number"
+                        }
+                    },
+                    "required": ["filter_threshold", "magnitude"],
+                    "type": "object"
+                }
+            },
+            "required": ["body_parameters", "concentrated_parameters", "mode", "window_parameters"],
+            "type": "object"
+        },
+        "lagrange_multiplier_parameters": {
+            "additionalProperties": false,
+            "description": "Controls an optional set of constraints enforced via Lagrange multipliers. This adds extra rows/columns to the system matrix to enforce exact constraint satisfaction.",
+            "properties": {
+                "bound_degrees_of_freedom": {
+                    "description": "Global DOF indices to constrain via Lagrange multipliers. Only used when dof_selection_mode is 'explicit' or 'hybrid'.",
+                    "items": {
+                        "type": "integer"
+                    },
+                    "type": "array"
+                },
+                "constrain_directions": {
+                    "description": "Which displacement components the Lagrange multiplier constraints act on ('x', 'y', or 'xy' for both).",
+                    "enum": ["x", "y", "xy"],
+                    "type": "string"
+                },
+                "dof_selection_mode": {
+                    "description": "How constrained DOFs are chosen. 'explicit' uses bound_degrees_of_freedom directly, 'window' selects by spatial threshold, 'hybrid' combines both.",
+                    "enum": ["explicit", "window", "hybrid"],
+                    "type": "string"
+                },
+                "enabled": {
+                    "description": "If true, the Lagrange multiplier constraints are assembled and enforced. Set to false to disable without removing the configuration.",
+                    "type": "boolean"
+                },
+                "window_value_threshold": {
+                    "description": "Normalised coordinate threshold (0–1) for automatic DOF selection in 'window' or 'hybrid' mode.",
+                    "maximum": 1,
+                    "minimum": 0,
+                    "type": "number"
+                }
+            },
+            "required": [
+                "bound_degrees_of_freedom",
+                "constrain_directions",
+                "dof_selection_mode",
+                "enabled",
+                "window_value_threshold"
+            ],
+            "type": "object"
+        },
+        "loop_parameters": {
+            "additionalProperties": false,
+            "description": "Controls the quasi-static loading loop and the Newton-Raphson nonlinear solver used at each increment.",
+            "properties": {
+                "newton_raphson_maximum_steps": {
+                    "description": "Upper limit on Newton-Raphson iterations per timestep. If convergence is not reached within this many iterations, the step is considered failed.",
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "newton_raphson_tolerance": {
+                    "description": "Residual norm threshold below which the Newton-Raphson solver is considered converged. Smaller values give tighter equilibrium but cost more iterations.",
+                    "type": "number"
+                },
+                "timesteps": {
+                    "description": "Total number of quasi-static load increments. The full load or displacement is divided evenly across this many steps.",
+                    "minimum": 0,
+                    "type": "integer"
+                }
+            },
+            "required": ["newton_raphson_maximum_steps", "newton_raphson_tolerance", "timesteps"],
+            "type": "object"
+        },
+        "n_threads_petsc": {
+            "description": "Number of MPI/OpenMP processes to launch when the PETSc solver is selected. MPI/OpenMP count is determined automatically based on the CPU architecture. Ignored if sparse_solver is 'scipy'.",
+            "minimum": 1,
+            "type": "integer"
+        },
+        "optimise_sparsity": {
+            "description": "If true, the assembler pre-computes and caches the sparsity pattern of the global stiffness matrix, avoiding repeated memory allocations. Recommended for large meshes; the up-front cost is repaid over many timesteps.",
+            "type": "boolean"
+        },
+        "output_parameters": {
+            "additionalProperties": false,
+            "description": "Controls which result files are written during and after the simulation.",
+            "properties": {
+                "pvd_gif_parameters": {
+                    "additionalProperties": false,
+                    "description": "Post-processing step that renders the saved PVD files into an animated GIF for quick visual inspection.",
+                    "properties": {
+                        "axis_limits": {
+                            "description": "Fixed axis bounds for every frame ([x/y_min, x/y_max]).",
+                            "type": "array"
+                        },
+                        "distortion_scaling": {
+                            "description": "Multiplier applied to the displacement field before rendering. Values greater than 1 exaggerate deformations for visibility; 1.0 shows true scale.",
+                            "type": "number"
+                        },
+                        "enabled": {
+                            "description": "If true, a GIF is generated from the PVD time series after the simulation finishes.",
+                            "type": "boolean"
+                        },
+                        "fps": {
+                            "description": "Playback speed of the output GIF in frames per second.",
+                            "minimum": 1,
+                            "type": "integer"
+                        },
+                        "include_every_n": {
+                            "description": "Frame-skipping factor. A value of 1 includes every timestep; 2 includes every second timestep, etc. Useful for keeping file size down on long runs.",
+                            "minimum": 1,
+                            "type": "integer"
+                        },
+                        "mesh_outline": {
+                            "description": "If true, element edges are drawn over the contour plot so the mesh topology is visible.",
+                            "type": "boolean"
+                        },
+                        "target_fields": {
+                            "description": "Names of the nodal/elemental fields to visualise (e.g. 'displacement', 'phasefield'). One GIF is produced per field.",
+                            "type": "array"
+                        }
+                    },
+                    "required": [
+                        "enabled",
+                        "target_fields",
+                        "axis_limits",
+                        "distortion_scaling",
+                        "fps",
+                        "include_every_n",
+                        "mesh_outline"
+                    ],
+                    "type": "object"
+                },
+                "save_logs": {
+                    "description": "If true, stream the output into a log file. Otherwise, output is printed to the consoled and not saved.",
+                    "type": "boolean"
+                },
+                "save_pickle": {
+                    "description": "If true, all of the computed fields are saved to a pickle file.",
+                    "type": "boolean"
+                },
+                "save_pvd": {
+                    "description": "If true, ParaView-compatible PVD/VTU files are written at each timestep for visualisation and post-processing.",
+                    "type": "boolean"
+                },
+                "stream_outputs": {
+                    "description": "If true, post-processed quantities of interest are flushed to files incrementally during the run, rather than only at the end. Useful for long simulations or when memory is limited.",
+                    "type": "boolean"
+                },
+                "timestamp": {
+                    "description": "If true, output directories and filenames include a timestamp to avoid overwriting results from previous runs.",
+                    "type": "boolean"
+                }
+            },
+            "required": ["save_logs", "save_pickle", "save_pvd", "timestamp", "pvd_gif_parameters", "stream_outputs"],
+            "type": "object"
+        },
+        "parent_input_file": {
+            "description": "Path to another input JSON that this file inherits from.",
+            "type": "string"
+        },
+        "penalty_method_parameters": {
+            "additionalProperties": false,
+            "description": "Controls an optional set of constraints enforced via the penalty method. A large stiffness is added to penalised DOFs, approximately (not exactly) enforcing the constraint. Simpler than Lagrange multipliers but introduces a tuneable penalty_value.",
+            "properties": {
+                "bound_degrees_of_freedom": {
+                    "description": "Global DOF indices to penalise. Only used when dof_selection_mode is 'explicit' or 'hybrid'.",
+                    "items": {
+                        "type": "integer"
+                    },
+                    "type": "array"
+                },
+                "constrain_directions": {
+                    "description": "Which displacement components the penalty acts on ('x', 'y', or 'xy' for both).",
+                    "enum": ["x", "y", "xy"],
+                    "type": "string"
+                },
+                "dof_selection_mode": {
+                    "description": "How penalised DOFs are chosen. 'explicit' uses bound_degrees_of_freedom directly, 'window' selects by spatial threshold, 'hybrid' combines both.",
+                    "enum": ["explicit", "window", "hybrid"],
+                    "type": "string"
+                },
+                "enabled": {
+                    "description": "If true, penalty terms are added to the global stiffness matrix. Set to false to disable without removing the configuration.",
+                    "type": "boolean"
+                },
+                "penalty_value": {
+                    "description": "Stiffness multiplier added to penalised DOFs. Must be large enough relative to the physical stiffness to suppress motion, but excessively large values cause ill-conditioning.",
+                    "minimum": 0,
+                    "type": "number"
+                },
+                "window_value_threshold": {
+                    "description": "Normalised coordinate threshold (0–1) for automatic DOF selection in 'window' or 'hybrid' mode.",
+                    "maximum": 1,
+                    "minimum": 0,
+                    "type": "number"
+                }
+            },
+            "required": [
+                "bound_degrees_of_freedom",
+                "constrain_directions",
+                "dof_selection_mode",
+                "enabled",
+                "penalty_value",
+                "window_value_threshold"
+            ],
+            "type": "object"
+        },
+        "solution_parameters": {
+            "additionalProperties": false,
+            "description": "Chooses between load-controlled and displacement-controlled solution strategies and configures each.",
+            "properties": {
+                "displacement_control_parameters": {
+                    "additionalProperties": false,
+                    "description": "Settings for displacement control, where a prescribed displacement is ramped up over the load steps. Useful for capturing post-peak softening behaviour that load control cannot follow.",
+                    "properties": {
+                        "loading_directions": {
+                            "description": "The direction(s) in which the displacement is applied. I.e. if the final value is set to 5e-3, [1, -0.5] will load to 5e-3 and then to -2.5e-3. Useful for cyclic loading.",
+                            "items": {
+                                "type": "number"
+                            },
+                            "minItems": 1,
+                            "type": "array"
+                        },
+                        "maximum_controlled_displacement": {
+                            "description": "Maximum prescribed displacement to reach by the final timestep. The increment per step is this value divided by the number of timesteps, unless more tricky loading directions are specified.",
+                            "minimum": 0,
+                            "type": "number"
+                        }
+                    },
+                    "required": ["loading_directions", "maximum_controlled_displacement"],
+                    "type": "object"
+                },
+                "load_control_parameters": {
+                    "additionalProperties": false,
+                    "description": "Settings for load control, where the external force is ramped linearly from zero to its full value over the load steps.",
+                    "properties": {
+                        "loading_directions": {
+                            "description": "Analogous to the loading_directions in displacement control, but for forces.",
+                            "items": {
+                                "type": "number"
+                            },
+                            "minItems": 1,
+                            "type": "array"
+                        }
+                    },
+                    "required": ["loading_directions"],
+                    "type": "object"
+                },
+                "mode": {
+                    "description": "Active solution strategy. 'load control' ramps external forces and solves for displacements; 'displacement control' prescribes displacements and solves for the required reaction forces.",
+                    "enum": ["displacement control", "load control"],
+                    "type": "string"
+                }
+            },
+            "required": ["displacement_control_parameters", "load_control_parameters", "mode"],
+            "type": "object"
+        },
+        "sparse_solver": {
+            "description": "Which linear algebra backend solves the global system. 'scipy' uses SciPy's built-in sparse direct solver (single-threaded, no extra dependencies). 'petsc' uses PETSc, which supports parallel solves via n_threads_petsc.",
+            "enum": ["scipy", "petsc"],
+            "type": "string"
+        }
+    },
+    "required": [
+        "boundary_conditions_parameters",
+        "forcing_parameters",
+        "lagrange_multiplier_parameters",
+        "loop_parameters",
+        "n_threads_petsc",
+        "optimise_sparsity",
+        "output_parameters",
+        "parent_input_file",
+        "penalty_method_parameters",
+        "solution_parameters",
+        "sparse_solver"
+    ],
+    "type": "object"
+}

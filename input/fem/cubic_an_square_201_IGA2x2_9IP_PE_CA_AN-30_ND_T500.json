@@ -1,0 +1,6 @@
+{
+    "extends": "square_201_IGA2x2_9IP_PE_NO_AN+30_ND_T500",
+    "overrides": {
+        "parent_input_file": "cubic_an_square_201_IGA2x2_9IP_PE_CA_AN-30_ND"
+    }
+}

@@ -1,0 +1,14 @@
+.DS_Store
+output/
+.venv/
+*/__pycache__/*
+__pycache__/
+__pycache__/*
+*/.DS_Store
+mesh/visualisations
+*.ipynb
+.local/
+input/slurm
+reference_data/*
+*/notebooks/*.dat
+.pytest_cache

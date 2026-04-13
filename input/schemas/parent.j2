@@ -1,0 +1,1 @@
+{% set title_prefix = '' if prefix=='' else prefix~'_' %}{% set core = elem_abbr_str ~ ('' if elem_type=='nurbs' else '_'~nip~'IP') %}{{ title_prefix }}{{ mesh_filename }}_{{ core }}_{{ plane|plane_abbr }}_{{ strain_split|strain_abbr }}_{{ problem_type|problem_abbr }}{{ material_rotation_str }}_{{ dimensionalisation_str }}.json

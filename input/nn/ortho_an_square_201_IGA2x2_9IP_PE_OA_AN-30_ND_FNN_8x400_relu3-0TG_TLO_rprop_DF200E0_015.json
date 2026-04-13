@@ -1,0 +1,27 @@
+{
+    "extends": "square_101_IGA2x2_9IP_PE_NO_AN+30_ND_RN4_24x300_RFF192x0_1_tanh3-0TG_TLO_rprop_DF100E6_0e-3",
+    "overrides": {
+        "displacement_parameters": {
+            "end": 0.015,
+            "increments_fine": 200
+        },
+        "network": {
+            "activation": {
+                "function": "relu",
+                "initial_coefficient": 3.0
+            },
+            "hidden_count": 8,
+            "hidden_size": 400,
+            "rff": {
+                "enabled": false
+            },
+            "type": "fnn"
+        },
+        "parent_input_file": "ortho_an_square_201_IGA2x2_9IP_PE_OA_AN-30_ND",
+        "training_parameters": {
+            "early_stopping": {
+                "relative_threshold": 5.0e-6
+            }
+        }
+    }
+}

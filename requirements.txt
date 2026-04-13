@@ -1,0 +1,43 @@
+# Core
+gmsh
+pyvista
+tabulate
+tqdm
+pytest
+geomdl
+blosc
+pre-commit
+ipykernel
+imageio
+addict
+jsonschema
+jinja2
+jsonpath_ng
+jaxtyping
+seaborn
+equinox
+flax
+optax
+git+https://github.com/haydn-jones/SOAP_JAX
+chex
+mpi4py
+optimistix
+fast-json-repair
+
+# Use CUDA12 JAX wheels only where they exist (Linux x86_64/aarch64).
+jax[cuda12] ; platform_system == "Linux"
+# Otherwise install CPU-only JAX.
+jax ; platform_system != "Linux"
+
+# For MLflow tracking and model management
+mlflow
+nvidia-ml-py
+# Documentation dependencies
+mkdocs<2.0
+mkdocstrings[python]
+mkdocs-material
+mkdocs-gen-files
+mkdocs-literate-nav
+black
+# Linting
+skylos

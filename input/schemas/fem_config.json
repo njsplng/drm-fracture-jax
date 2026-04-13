@@ -1,0 +1,7 @@
+{
+    "mappings": {
+        "parent_input_file": "$.parent_input_file",
+        "timesteps": "$.loop_parameters.timesteps"
+    },
+    "template_file": "fem.j2"
+}

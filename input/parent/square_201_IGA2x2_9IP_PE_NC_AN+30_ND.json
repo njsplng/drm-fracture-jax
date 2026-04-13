@@ -1,0 +1,6 @@
+{
+    "extends": "square_201_IGA2x2_9IP_PE_NO_AN+30_ND",
+    "overrides": {
+        "strain_split": "none_constitutive"
+    }
+}

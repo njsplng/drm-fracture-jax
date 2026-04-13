@@ -1,0 +1,11 @@
+{
+    "extends": "square_101_IGA2x2_9IP_PE_NO_AN+30_ND",
+    "overrides": {
+        "mesh": {
+            "filename": "square_201"
+        },
+        "problem_type": "anisotropic",
+        "strain_split": "orthotropic_anisotropy_none",
+        "title_prefix": "ortho_an"
+    }
+}

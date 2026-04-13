@@ -1,0 +1,14 @@
+{
+    "extends": "square_101_IGA2x2_9IP_PE_NO_AN+30_ND_RN4_24x300_RFF192x0_1_tanh3-0TG_TLO_rprop_DF100E6_0e-3",
+    "overrides": {
+        "displacement_parameters": {
+            "increments_fine": 200
+        },
+        "network": {
+            "activation": {
+                "initial_coefficient": 2.0
+            }
+        },
+        "parent_input_file": "square_201_IGA2x2_9IP_PE_NO_PF4_ND"
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "extends": "square_101_IGA2x2_9IP_PE_NO_AN+30_ND",
+    "overrides": {
+        "nondimensionalise": true,
+        "problem_type": "at2",
+        "strain_split": "orthotropic_anisotropy_none"
+    }
+}

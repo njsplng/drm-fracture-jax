@@ -1,0 +1,11 @@
+{
+    "elements_x": 21,
+    "elements_y": 21,
+    "gauss_integration_order": 3,
+    "order_x": 2,
+    "order_y": 2,
+    "problem_domain": {
+        "x": [-0.5, 0.5],
+        "y": [-0.5, 0.5]
+    }
+}

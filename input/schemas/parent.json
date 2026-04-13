@@ -1,0 +1,389 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "additionalProperties": false,
+    "definitions": {
+        "distanceFunctionParameters": {
+            "additionalProperties": false,
+            "description": "Defines a line segment in 2D used as a spatial filter (for fixed-window BCs, load-window BCs, or initial crack geometry). The segment starts at (x_init, y_init), extends a length L at angle theta, and the influence decays over a distance d0 from the segment.",
+            "properties": {
+                "L": {
+                    "description": "Physical length of the line segment. Together with x_init, y_init, and theta this fully defines the segment's extent.",
+                    "type": "number"
+                },
+                "d0": {
+                    "description": "Decay (or influence) distance perpendicular to the segment. Points farther than d0 from the segment receive zero weight. Controls how sharply the window or crack profile tapers off.",
+                    "type": "number"
+                },
+                "order": {
+                    "description": "Polynomial order of the decay profile away from the segment. 1 gives a linear taper; 2 gives a quadratic (smoother) taper.",
+                    "enum": [1, 2],
+                    "type": "integer"
+                },
+                "smooth_end": {
+                    "description": "If true, the influence is smoothly tapered to zero at the tip of the segment rather than cut off abruptly.",
+                    "type": "boolean"
+                },
+                "theta": {
+                    "description": "Orientation of the segment measured counter-clockwise from the positive x-axis (degrees).",
+                    "type": "number"
+                },
+                "x_init": {
+                    "description": "x-coordinate of the segment's starting point, in the same coordinate system as the mesh.",
+                    "type": "number"
+                },
+                "y_init": {
+                    "description": "y-coordinate of the segment's starting point, in the same coordinate system as the mesh.",
+                    "type": "number"
+                }
+            },
+            "required": ["x_init", "y_init", "theta", "L", "d0", "order", "smooth_end"],
+            "type": "object"
+        }
+    },
+    "description": "Schema for the parent input file. This file defines the physical problem — geometry, material, mesh, boundary-condition windows, phase-field settings, and post-processing options — and is referenced by both FEM and NN child input files via their parent_input_file field.",
+    "properties": {
+        "aggregate_timings": {
+            "description": "If true, per-element and per-step timing breakdowns are accumulated into summary statistics at the end of the run. Useful for profiling without flooding the log with per-step data.",
+            "type": "boolean"
+        },
+        "boundary_conditions": {
+            "additionalProperties": false,
+            "description": "Spatial window definitions that locate where fixed (Dirichlet) supports and applied loads act on the domain. Each window is a distanceFunctionParameters segment; the child input file then uses these windows to select DOFs.",
+            "properties": {
+                "fixed_window_directions": {
+                    "description": "Constrained displacement component(s) for each corresponding entry in fixed_window_parameters. For example, ['xy', 'y'] means the first window pins both axes and the second pins only the y-axis.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "minItems": 1,
+                    "type": "array"
+                },
+                "fixed_window_parameters": {
+                    "description": "List of spatial windows that define where the domain is fixed (zero-displacement supports). Each entry is a line segment with a decay profile; nodes within the influence zone are candidates for Dirichlet BCs.",
+                    "items": {
+                        "$ref": "#/definitions/distanceFunctionParameters"
+                    },
+                    "type": "array"
+                },
+                "load_window_parameters": {
+                    "description": "List of spatial windows that define where external loads are applied. Nodes within each window's influence zone are candidates for load application. The actual force magnitude is set in the child input file's forcing_parameters.",
+                    "items": {
+                        "$ref": "#/definitions/distanceFunctionParameters"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": ["fixed_window_parameters", "load_window_parameters"],
+            "type": "object"
+        },
+        "debug": {
+            "description": "If true, additional diagnostic information is printed during assembly and solving (matrix norms, intermediate field values, etc.). Significantly increases output volume.",
+            "type": "boolean"
+        },
+        "gamma_parameters": {
+            "additionalProperties": false,
+            "description": "Components of the second-order structural tensor (Gamma) that introduces directional dependence into the phase-field crack-surface energy. Only relevant when problem_type is anisotropic.",
+            "properties": {
+                "gamma11": {
+                    "description": "Gamma component in the 1-1 (x-x) direction. Increasing this penalises crack-surface gradients along x, making cracks prefer to propagate perpendicular to x.",
+                    "type": "number"
+                },
+                "gamma12": {
+                    "description": "Gamma component in the 1-2 (x-y) coupling direction. Non-zero values rotate the preferred crack orientation away from the principal axes.",
+                    "type": "number"
+                },
+                "gamma22": {
+                    "description": "Gamma component in the 2-2 (y-y) direction. Increasing this penalises crack-surface gradients along y, making cracks prefer to propagate perpendicular to y.",
+                    "type": "number"
+                },
+                "gamma44": {
+                    "description": "Gamma component in the 4-4 (shear) direction. Controls the anisotropic penalty on mixed-mode crack gradients.",
+                    "type": "number"
+                }
+            },
+            "required": ["gamma11", "gamma12", "gamma22", "gamma44"],
+            "type": "object"
+        },
+        "generate_plots": {
+            "description": "List of plot specifications to produce automatically after the simulation finishes. Each entry is an object whose keys depend on the plot type.",
+            "items": {
+                "description": "A single plot specification object. Structure varies by plot type.",
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "material_parameters": {
+            "additionalProperties": false,
+            "description": "Mechanical properties of the bulk material. The isotropic properties (youngs_modulus, poissons_ratio) are always required; the anisotropic sub-objects are additionally needed when strain_split uses cubic or orthotropic anisotropy.",
+            "properties": {
+                "cubic_anisotropy": {
+                    "description": "Extra parameter needed for cubic anisotropy. Combined with the isotropic Young's modulus and Poisson's ratio, the shear modulus fully defines the cubic stiffness tensor.",
+                    "properties": {
+                        "shear_modulus": {
+                            "description": "Independent shear modulus (G) for the cubic crystal. In an isotropic material G = E / 2(1+nu); departing from that value introduces cubic anisotropy.",
+                            "type": "number"
+                        }
+                    },
+                    "required": ["shear_modulus"],
+                    "type": "object"
+                },
+                "orthotropic_anisotropy": {
+                    "description": "Full set of nine independent constants defining an orthotropic stiffness tensor. Required when strain_split is set to use orthotropic anisotropy.",
+                    "properties": {
+                        "E_11": {
+                            "description": "Young's modulus in the material 1-direction (fibre direction in composites).",
+                            "type": "number"
+                        },
+                        "E_22": {
+                            "description": "Young's modulus in the material 2-direction (transverse in-plane direction).",
+                            "type": "number"
+                        },
+                        "E_33": {
+                            "description": "Young's modulus in the material 3-direction (out-of-plane / thickness direction).",
+                            "type": "number"
+                        },
+                        "G_12": {
+                            "description": "In-plane shear modulus in the 1-2 plane.",
+                            "type": "number"
+                        },
+                        "G_23": {
+                            "description": "Transverse shear modulus in the 2-3 plane.",
+                            "type": "number"
+                        },
+                        "G_31": {
+                            "description": "Transverse shear modulus in the 3-1 plane.",
+                            "type": "number"
+                        },
+                        "nu_12": {
+                            "description": "Major Poisson's ratio: contraction in the 2-direction per unit extension in the 1-direction.",
+                            "type": "number"
+                        },
+                        "nu_23": {
+                            "description": "Poisson's ratio: contraction in the 3-direction per unit extension in the 2-direction.",
+                            "type": "number"
+                        },
+                        "nu_31": {
+                            "description": "Poisson's ratio: contraction in the 1-direction per unit extension in the 3-direction.",
+                            "type": "number"
+                        }
+                    },
+                    "required": ["E_11", "E_22", "E_33", "nu_12", "nu_23", "nu_31", "G_12", "G_23", "G_31"],
+                    "type": "object"
+                },
+                "poissons_ratio": {
+                    "description": "Isotropic Poisson's ratio (nu). Used as the baseline for isotropic and cubic problems, and ignored when full orthotropic constants are provided.",
+                    "type": "number"
+                },
+                "thickness": {
+                    "description": "Out-of-plane thickness of the 2D domain. Scales the element stiffness and body forces. Set to 1.0 for unit-thickness or plane-strain problems.",
+                    "type": "number"
+                },
+                "youngs_modulus": {
+                    "description": "Isotropic Young's modulus (E). Used as the baseline for isotropic and cubic problems, and ignored when full orthotropic constants are provided.",
+                    "type": "number"
+                }
+            },
+            "required": ["poissons_ratio", "thickness", "youngs_modulus", "cubic_anisotropy", "orthotropic_anisotropy"],
+            "type": "object"
+        },
+        "material_rotation": {
+            "additionalProperties": false,
+            "description": "Rotates the material principal axes relative to the global frame, optionally in a layered (sliced) pattern. Useful for modelling laminated composites or studying orientation effects on crack paths.",
+            "properties": {
+                "angle": {
+                    "description": "Counter-clockwise rotation of the material axes relative to the global x-axis (degrees). Applied uniformly within each slice.",
+                    "type": "number"
+                },
+                "number_of_slices": {
+                    "description": "How many equal-width strips the domain is divided into along slicing_direction. The material orientation alternates or varies across slices depending on the problem setup.",
+                    "minItems": 1,
+                    "type": "integer"
+                },
+                "slicing_direction": {
+                    "description": "Axis along which the domain is divided into slices. 'x' creates vertical strips (varying in x); 'y' creates horizontal strips (varying in y).",
+                    "enum": ["x", "y"],
+                    "type": "string"
+                }
+            },
+            "required": ["angle", "number_of_slices", "slicing_direction"],
+            "type": "object"
+        },
+        "mesh": {
+            "additionalProperties": false,
+            "description": "Defines the finite-element discretisation: which mesh file to load, what element topology to use, and the quadrature order.",
+            "properties": {
+                "filename": {
+                    "description": "Path to the mesh file (relative to the working directory). The file format must match the chosen element type.",
+                    "type": "string"
+                },
+                "number_of_integration_points": {
+                    "description": "Number of Gauss quadrature points per element. Higher values improve integration accuracy for high-order elements or nonlinear material models at the cost of assembly time.",
+                    "type": "integer"
+                },
+                "type": {
+                    "description": "Element topology. 'tri3'/'tri6' are linear/quadratic triangles; 'quad4'/'quad8'/'quad9' are bilinear/serendipity/biquadratic quadrilaterals; 'nurbs' uses NURBS-based isogeometric elements.",
+                    "enum": ["nurbs", "quad4", "quad8", "quad9", "tri3", "tri6"],
+                    "type": "string"
+                }
+            },
+            "required": ["filename", "number_of_integration_points", "type"],
+            "type": "object"
+        },
+        "nondimensionalise": {
+            "description": "If true, all quantities are scaled to a non-dimensional form before solving and rescaled on output. Can improve numerical conditioning when physical values span many orders of magnitude.",
+            "type": "boolean"
+        },
+        "phasefield_parameters": {
+            "additionalProperties": false,
+            "description": "Core phase-field fracture model parameters: the regularisation length, the critical energy release rate, and any pre-existing cracks to seed into the initial phase-field.",
+            "properties": {
+                "G_c": {
+                    "description": "Critical fracture energy release rate (energy per unit crack area). Controls how much elastic energy must accumulate before a crack propagates. Lower values make the material more brittle.",
+                    "type": "number"
+                },
+                "initial_crack_parameters": {
+                    "description": "List of line segments that define pre-existing cracks in the domain. Each segment seeds a damage band into the initial phase-field using the same distanceFunctionParameters geometry.",
+                    "items": {
+                        "$ref": "#/definitions/distanceFunctionParameters"
+                    },
+                    "type": "array"
+                },
+                "l_0": {
+                    "description": "Phase-field regularisation length. Controls the width of the diffuse crack band — smaller values give sharper cracks but require a finer mesh (typically h < l_0 / 2).",
+                    "type": "number"
+                }
+            },
+            "required": ["G_c", "l_0", "initial_crack_parameters"],
+            "type": "object"
+        },
+        "plane": {
+            "description": "2D simplification assumption. 'stress' for thin structures loaded in-plane (zero out-of-plane stress), 'strain' for thick/long structures (zero out-of-plane strain), or 'none' to skip the plane reduction (e.g. for full 3D or special formulations [NOT IMPLEMENTED YET]).",
+            "enum": ["strain", "stress", "none"],
+            "type": "string"
+        },
+        "postprocessing_stress_type": {
+            "description": "Scalar stress measure computed for post-processing visualisation. 'von_mises' for equivalent deviatoric stress, 'hydrostatic' for mean/volumetric stress, or empty string to skip scalar stress output. Must include 'stress_pp' in recorded_values to output this field.",
+            "enum": ["hydrostatic", "von_mises", ""],
+            "type": "string"
+        },
+        "problem_domain": {
+            "additionalProperties": false,
+            "description": "Axis-aligned bounding box of the physical domain. Used for normalising coordinates (e.g. window thresholds) and for setting up non-dimensionalisation.",
+            "properties": {
+                "x": {
+                    "description": "Domain extent in x as [x_min, x_max].",
+                    "items": {
+                        "type": "number"
+                    },
+                    "maxItems": 2,
+                    "minItems": 2,
+                    "type": "array"
+                },
+                "y": {
+                    "description": "Domain extent in y as [y_min, y_max].",
+                    "items": {
+                        "type": "number"
+                    },
+                    "maxItems": 2,
+                    "minItems": 2,
+                    "type": "array"
+                }
+            },
+            "required": ["x", "y"],
+            "type": "object"
+        },
+        "problem_type": {
+            "description": "Governs the constitutive model and phase-field formulation. 'linear_elasticity' is a purely elastic solve (no fracture). 'at1'/'at2' are the standard AT1/AT2 isotropic phase-field models. 'isotropic-4' is a four-field isotropic variant. 'anisotropic' activates directional dependence via gamma_parameters.",
+            "enum": ["linear_elasticity", "at1", "at2", "isotropic-4", "anisotropic"],
+            "type": "string"
+        },
+        "profile_memory": {
+            "description": "If true, tracks the memory state after each loading step in-log. Adds some overhead; intended for debugging memory-intensive problems.",
+            "type": "boolean"
+        },
+        "recorded_values": {
+            "description": "List of quantity-of-interest keys to record at every timestep. These are written to the output.",
+            "items": {
+                "description": "A quantity-of-interest key recognised by the post-processor.",
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "split_output_keys": {
+            "description": "Field names that have multiple components per node (e.g. 'displacement' has x and y). Listed fields are split into separate scalar arrays in the PVD output so ParaView can colour by individual components.",
+            "items": {
+                "description": "A multi-component field name to split in the output.",
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "strain_split": {
+            "description": "Strain decomposition used in the phase-field energy split to distinguish tension from compression. 'spectral' decomposes by principal strains, 'volumetric' splits into volumetric and deviatoric parts, 'none' applies no split (all strain drives damage). The anisotropic variants use the corresponding constitutive model without splitting.",
+            "enum": [
+                "spectral",
+                "volumetric",
+                "none",
+                "none_constitutive",
+                "cubic_anisotropy_none",
+                "orthotropic_anisotropy_none"
+            ],
+            "type": "string"
+        },
+        "target_dof": {
+            "coordinates": {
+                "items": {
+                    "description": "Spatial coordinates [x, y] of the node to monitor.",
+                    "type": "number"
+                },
+                "type": "array"
+            },
+            "description": "A single node/DOF to monitor throughout the simulation (e.g. for extracting a load-displacement curve). Identified by its spatial coordinates and the displacement direction of interest.",
+            "direction": {
+                "description": "Which displacement component to record at the target node: 'x' for horizontal, 'y' for vertical.",
+                "enum": ["x", "y"],
+                "type": "string"
+            },
+            "required": ["coordinates", "direction"]
+        },
+        "target_dof_coordinates": {
+            "description": "Convenience alias: spatial coordinates [x, y] of the target DOF, used when only the position (not direction) needs to be specified separately.",
+            "items": {
+                "description": "A coordinate value (x or y).",
+                "type": "number"
+            },
+            "type": "array"
+        },
+        "time_functions": {
+            "description": "Whether to track the time taken for each of the decorated functions to execute. Negligible overhead, recommended to use with aggregate_timings for profiling.",
+            "type": "boolean"
+        },
+        "title_prefix": {
+            "description": "Short label prepended to all output directory and file names for this simulation. Helps distinguish runs in batch studies (e.g. 'at2_tension_fine').",
+            "type": "string"
+        }
+    },
+    "required": [
+        "title_prefix",
+        "aggregate_timings",
+        "boundary_conditions",
+        "debug",
+        "gamma_parameters",
+        "generate_plots",
+        "material_parameters",
+        "material_rotation",
+        "mesh",
+        "nondimensionalise",
+        "phasefield_parameters",
+        "plane",
+        "postprocessing_stress_type",
+        "problem_domain",
+        "problem_type",
+        "recorded_values",
+        "split_output_keys",
+        "strain_split",
+        "time_functions",
+        "target_dof",
+        "profile_memory"
+    ],
+    "type": "object"
+}

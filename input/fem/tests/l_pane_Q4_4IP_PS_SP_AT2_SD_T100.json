@@ -1,0 +1,73 @@
+{
+    "boundary_conditions_parameters": {
+        "constrain_directions": "xy",
+        "constrained_degrees_of_freedom": [],
+        "dof_selection_mode": "window",
+        "window_value_threshold": 0.95
+    },
+    "forcing_parameters": {
+        "body_parameters": {
+            "magnitude_x": 1.0,
+            "magnitude_y": 2.0
+        },
+        "concentrated_parameters": {
+            "forced_degrees_of_freedom": [101],
+            "magnitude": 1.0
+        },
+        "mode": "concentrated",
+        "window_parameters": {
+            "filter_threshold": 0.1,
+            "magnitude": 1.0
+        }
+    },
+    "lagrange_multiplier_parameters": {
+        "bound_degrees_of_freedom": [],
+        "constrain_directions": "y",
+        "dof_selection_mode": "window",
+        "enabled": false,
+        "window_value_threshold": 0.95
+    },
+    "loop_parameters": {
+        "newton_raphson_maximum_steps": 50,
+        "newton_raphson_tolerance": 1.0e-6,
+        "timesteps": 100
+    },
+    "n_threads_petsc": 1,
+    "optimise_sparsity": true,
+    "output_parameters": {
+        "pvd_gif_parameters": {
+            "axis_limits": [],
+            "distortion_scaling": 0.0,
+            "enabled": false,
+            "fps": 20,
+            "include_every_n": 1,
+            "mesh_outline": false,
+            "target_fields": []
+        },
+        "save_logs": false,
+        "save_pickle": true,
+        "save_pvd": false,
+        "stream_outputs": false,
+        "timestamp": false
+    },
+    "parent_input_file": "tests/l_pane_Q4_4IP_PS_SP_AT2_SD",
+    "penalty_method_parameters": {
+        "bound_degrees_of_freedom": [],
+        "constrain_directions": "xy",
+        "dof_selection_mode": "window",
+        "enabled": false,
+        "penalty_value": 1.0e+6,
+        "window_value_threshold": 0.95
+    },
+    "solution_parameters": {
+        "displacement_control_parameters": {
+            "loading_directions": [1],
+            "maximum_controlled_displacement": 0.012
+        },
+        "load_control_parameters": {
+            "loading_directions": [1]
+        },
+        "mode": "displacement control"
+    },
+    "sparse_solver": "petsc"
+}

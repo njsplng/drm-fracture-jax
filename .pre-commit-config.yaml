@@ -1,0 +1,84 @@
+repos:
+  - repo: https://github.com/psf/black
+    rev: 24.1.0
+    hooks:
+      - id: black
+        args: [--line-length=88]
+
+  - repo: https://github.com/PyCQA/isort
+    rev: 6.0.1
+    hooks:
+      - id: isort
+
+  - repo: https://github.com/pycqa/autoflake
+    rev: v2.3.1
+    hooks:
+      - id: autoflake
+        args:
+          - --in-place
+          - --remove-all-unused-imports
+          - --remove-unused-variables
+          - --exclude=initialisation.py
+
+  - repo: https://github.com/PyCQA/pydocstyle
+    rev: 6.2.0
+    hooks:
+      - id: pydocstyle
+        args: [--config=pyproject.toml]
+        additional_dependencies: ["toml"]
+
+  - repo: https://github.com/pycqa/flake8
+    rev: 6.1.0
+    hooks:
+      - id: flake8
+        exclude: ^tests/
+        additional_dependencies:
+          - flake8-annotations==3.1.1
+        args:
+          - --max-line-length=88
+          - --extend-select=ANN
+          - --ignore=E,W,F,ANN101,ANN102,ANN002,ANN003
+
+  - repo: local
+    hooks:
+      - id: update-json-format
+        name: Update JSON Format
+        entry: python3 commit/update_json_format.py
+        language: system
+        pass_filenames: false
+        always_run: true
+
+  - repo: local
+    hooks:
+    - id: verify-json-format
+      name: Verify Input JSON Format
+      entry:  bash -c 'source commit/reference_files.sh && python3 commit/json_validator.py parent "$PARENT_REF" --y --q && python3 commit/json_validator.py nn "$NN_REF" --y --q && python3 commit/json_validator.py fem "$FEM_REF" --y --q'
+      language: system
+      pass_filenames: false
+      always_run: true
+
+  - repo: local
+    hooks:
+      - id: verify-json-naming
+        name: Verify Input JSON Naming
+        entry: python3 commit/name_validator.py all --y --q
+        language: system
+        pass_filenames: false
+        always_run: true
+
+  - repo: local
+    hooks:
+      - id: update-optimiser-naming
+        name: Update Optimiser Naming
+        entry: python3 commit/optimiser_validator.py --y -q
+        language: system
+        pass_filenames: false
+        always_run: true
+
+  - repo: local
+    hooks:
+      - id: truncate-separator-comments
+        name: Truncate Separator Comments
+        entry: python3 commit/normalise_separators.py
+        language: system
+        types: [python]

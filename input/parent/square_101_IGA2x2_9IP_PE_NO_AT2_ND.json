@@ -1,0 +1,6 @@
+{
+    "extends": "square_101_IGA2x2_9IP_PE_NO_AN+30_ND",
+    "overrides": {
+        "problem_type": "at2"
+    }
+}

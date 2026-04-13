@@ -1,0 +1,9 @@
+{
+    "extends": "square_101_IGA2x2_9IP_PE_NO_AT2_ND",
+    "overrides": {
+        "mesh": {
+            "filename": "square_201"
+        },
+        "problem_type": "isotropic-4"
+    }
+}

@@ -1,0 +1,5 @@
+{
+    "learning_rate": 1.0e-3,
+    "number_of_epochs": 100,
+    "optimiser": "soap"
+}

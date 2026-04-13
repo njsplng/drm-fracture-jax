@@ -1,0 +1,447 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "Schema for the NN simulation input file. Configures a neural-network-based solver for phase-field fracture: the network architecture, training loop, displacement loading schedule, and output options. References a parent input file for the physical problem definition (material, mesh, BCs, etc.).",
+    "properties": {
+        "displacement_parameters": {
+            "description": "Two-stage displacement loading schedule. The simulation first ramps through a 'coarse' phase (large increments, pre-crack regime) then switches to a 'fine' phase (small increments, around crack initiation and propagation) to balance speed with resolution.",
+            "properties": {
+                "coarse_end": {
+                    "description": "Displacement value at which the coarse phase ends and the fine phase begins. Should be chosen just before the expected onset of damage.",
+                    "type": "number"
+                },
+                "end": {
+                    "description": "Final displacement value at the end of the fine phase — the last load step of the simulation.",
+                    "type": "number"
+                },
+                "increments_coarse": {
+                    "description": "Number of equal displacement increments in the coarse phase (from start to coarse_end). Fewer increments means larger jumps and faster traversal of the elastic regime.",
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "increments_fine": {
+                    "description": "Number of equal displacement increments in the fine phase (from coarse_end to end). More increments give better resolution of crack initiation and propagation.",
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "loading_angle": {
+                    "description": "Angle (in degrees, 0–90) at which the displacement is applied relative to the horizontal axis. 0 is pure horizontal (mode-II shear), 90 is pure vertical (mode-I tension).",
+                    "maximum": 90,
+                    "minimum": 0,
+                    "type": "number"
+                },
+                "start": {
+                    "description": "Displacement value at the first load step. Typically 0 for loading from an undeformed state.",
+                    "type": "number"
+                }
+            },
+            "required": ["coarse_end", "end", "increments_coarse", "increments_fine", "start", "loading_angle"],
+            "type": "object",
+            "unevaluatedProperties": false
+        },
+        "model_energy_scale": {
+            "description": "How the network's energy output is scaled. 'linear' uses the raw output directly. 'log' transforms the output to the log scale.",
+            "enum": ["linear", "log"],
+            "type": "string"
+        },
+        "network": {
+            "description": "Architecture and initialisation settings for the neural network.",
+            "properties": {
+                "activation": {
+                    "description": "Configuration of the activation function applied after each hidden layer.",
+                    "properties": {
+                        "function": {
+                            "description": "Which nonlinearity to use.",
+                            "enum": ["tanh", "relu"],
+                            "type": "string"
+                        },
+                        "initial_coefficient": {
+                            "description": "Starting value of the learnable scaling coefficient applied to the activation. Only meaningful when trainable is true; otherwise this fixed value is used throughout.",
+                            "type": "number"
+                        },
+                        "trainable": {
+                            "description": "If true, the activation scaling coefficient is treated as a learnable parameter and updated during training.",
+                            "type": "boolean"
+                        },
+                        "trainable_global": {
+                            "description": "Controls whether the trainable coefficient is shared across all layers (true) or each layer gets its own independent coefficient (false). Only relevant when trainable is true.",
+                            "type": "boolean"
+                        }
+                    },
+                    "required": ["function", "initial_coefficient", "trainable", "trainable_global"],
+                    "type": "object",
+                    "unevaluatedProperties": false
+                },
+                "hidden_count": {
+                    "description": "Number of total hidden layers between the input and output layers.",
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "hidden_size": {
+                    "description": "Number of neurons in each hidden layer (all hidden layers use the same width).",
+                    "minimum": 10,
+                    "type": "integer"
+                },
+                "input_size": {
+                    "description": "Dimension of the network input. 2 for 2D problems.",
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "output_size": {
+                    "description": "Dimension of the network output. 3 for 2D problems.",
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "rff": {
+                    "description": "Random Fourier Features — a fixed nonlinear input embedding that helps the network learn high-frequency content (fine spatial detail) without spectral bias.",
+                    "properties": {
+                        "enabled": {
+                            "description": "If true, the raw input coordinates are mapped through a random Fourier feature layer before entering the first hidden layer.",
+                            "type": "boolean"
+                        },
+                        "features": {
+                            "description": "Number of random Fourier basis functions. More features capture higher frequencies but increase the effective input dimension.",
+                            "minimum": 1,
+                            "type": "integer"
+                        },
+                        "scale": {
+                            "description": "Standard deviation of the random frequency matrix.",
+                            "type": "number"
+                        }
+                    },
+                    "required": ["enabled", "features", "scale"],
+                    "type": "object"
+                },
+                "type": {
+                    "description": "Network architecture variant. Determines the forward-pass structure beyond the basic layer stack.",
+                    "type": "string"
+                },
+                "weight_initialisation_type": {
+                    "description": "Scheme for initialising weight matrices. Affects early training dynamics; should be matched to the chosen activation function.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "activation",
+                "hidden_count",
+                "hidden_size",
+                "input_size",
+                "output_size",
+                "type",
+                "rff",
+                "weight_initialisation_type"
+            ],
+            "type": "object",
+            "unevaluatedProperties": false
+        },
+        "output_parameters": {
+            "description": "Controls which result files and diagnostics are produced during and after training.",
+            "properties": {
+                "log_parameters": {
+                    "description": "Fine-grained control over what gets recorded in the training log file.",
+                    "properties": {
+                        "calculate_sparsity": {
+                            "description": "If true, the fraction of near-zero activations is computed and logged at each reporting step. Useful for diagnosing dead neurons or overly sparse representations.",
+                            "type": "boolean"
+                        },
+                        "output_activation_coefficients": {
+                            "description": "If true, the current values of the learnable activation scaling coefficients are included in the log at each reporting step. Only meaningful when activation.trainable is true.",
+                            "type": "boolean"
+                        }
+                    },
+                    "required": ["calculate_sparsity", "output_activation_coefficients"],
+                    "type": "object",
+                    "unevaluatedProperties": false
+                },
+                "pvd_gif_parameters": {
+                    "additionalProperties": false,
+                    "description": "Post-processing step that renders the saved PVD files into an animated GIF for quick visual inspection.",
+                    "properties": {
+                        "axis_limits": {
+                            "description": "Fixed axis bounds for every frame ([x/y_min, x/y_max]).",
+                            "type": "array"
+                        },
+                        "distortion_scaling": {
+                            "description": "Multiplier applied to the displacement field before rendering. Values greater than 1 exaggerate deformations for visibility; 1.0 shows true scale.",
+                            "type": "number"
+                        },
+                        "enabled": {
+                            "description": "If true, a GIF is generated from the PVD time series after the simulation finishes.",
+                            "type": "boolean"
+                        },
+                        "fps": {
+                            "description": "Playback speed of the output GIF in frames per second.",
+                            "minimum": 1,
+                            "type": "integer"
+                        },
+                        "include_every_n": {
+                            "description": "Frame-skipping factor. A value of 1 includes every timestep; 2 includes every second timestep, etc. Useful for keeping file size down on long runs.",
+                            "minimum": 1,
+                            "type": "integer"
+                        },
+                        "mesh_outline": {
+                            "description": "If true, element edges are drawn over the contour plot so the mesh topology is visible.",
+                            "type": "boolean"
+                        },
+                        "target_fields": {
+                            "description": "Names of the nodal/elemental fields to visualise (e.g. 'displacement', 'phasefield'). One GIF is produced per field.",
+                            "type": "array"
+                        }
+                    },
+                    "required": [
+                        "enabled",
+                        "target_fields",
+                        "axis_limits",
+                        "distortion_scaling",
+                        "fps",
+                        "include_every_n",
+                        "mesh_outline"
+                    ],
+                    "type": "object"
+                },
+                "save_logs": {
+                    "description": "If true, training diagnostics (loss history, timing) are written to a log file.",
+                    "type": "boolean"
+                },
+                "save_pvd": {
+                    "description": "If true, ParaView-compatible PVD/VTU files are written for field visualisation. The frequency is controlled by training_snapshots.",
+                    "type": "boolean"
+                },
+                "stream_outputs": {
+                    "description": "If true, post-processed quantities of interest are flushed to files incrementally during the run, rather than only at the end. Useful for long simulations or when memory is limited.",
+                    "type": "boolean"
+                },
+                "timestamp": {
+                    "description": "If true, output directories and filenames include a timestamp to avoid overwriting results from previous runs.",
+                    "type": "boolean"
+                },
+                "training_snapshots": {
+                    "description": "Controls periodic PVD snapshots of the predicted fields during training, so you can watch the solution evolve as the network learns.",
+                    "properties": {
+                        "enabled": {
+                            "description": "If true, PVD snapshots are saved periodically during training at the interval set by frequency.",
+                            "type": "boolean"
+                        },
+                        "frequency": {
+                            "description": "Save a PVD snapshot every N training epochs. Lower values give finer-grained progress tracking but produce more files.",
+                            "minimum": 1,
+                            "type": "integer"
+                        }
+                    },
+                    "required": ["enabled", "frequency"],
+                    "type": "object",
+                    "unevaluatedProperties": false
+                }
+            },
+            "required": [
+                "log_parameters",
+                "training_snapshots",
+                "timestamp",
+                "pvd_gif_parameters",
+                "save_logs",
+                "save_pvd",
+                "stream_outputs"
+            ],
+            "type": "object",
+            "unevaluatedProperties": false
+        },
+        "parent_input_file": {
+            "description": "Path to another input JSON that this file inherits from.",
+            "type": "string"
+        },
+        "phasefield": {
+            "description": "NN-specific overrides and additions for the phase-field model, beyond what the parent file defines. Controls the irreversibility constraint and how it is enforced numerically.",
+            "properties": {
+                "constraint": {
+                    "description": "How the phase-field irreversibility condition (damage can only increase) is enforced within the neural network formulation.",
+                    "properties": {
+                        "numerical_coefficient": {
+                            "description": "Scaling coefficient for the numerical penalty/barrier that enforces irreversibility. Larger values enforce the constraint more strictly but can destabilise training.",
+                            "type": "number"
+                        },
+                        "numerical_offset": {
+                            "description": "Offset added to the constraint to avoid exact-zero divisions or log(0) in the barrier function.",
+                            "type": "number"
+                        },
+                        "numerical_support": {
+                            "description": "Width of the phase-field contraint function's support.",
+                            "type": "number"
+                        },
+                        "type": {
+                            "description": "Enforcement strategy. 'numerical' uses a piecewise sigmoid. 'analytical' uses a pure sigmoid.",
+                            "enum": ["numerical", "analytical"],
+                            "type": "string"
+                        }
+                    },
+                    "required": ["numerical_coefficient", "numerical_support", "numerical_offset", "type"],
+                    "type": "object",
+                    "unevaluatedProperties": false
+                },
+                "irreversibility_tolerance": {
+                    "description": "Factor for the phase field irreversibility energy term.",
+                    "minimum": 0,
+                    "type": "number"
+                }
+            },
+            "required": ["constraint", "irreversibility_tolerance"],
+            "type": "object",
+            "unevaluatedProperties": false
+        },
+        "pretraining_parameters": {
+            "description": "Optional pretraining phase that trains the network on a simpler objective (i.e. on a smaller mesh) before the main phase-field training begins. Provides a better starting point for the main optimisation.",
+            "properties": {
+                "enabled": {
+                    "description": "If true, the pretraining phase runs before the main training loop. If false, pretraining is skipped entirely.",
+                    "type": "boolean"
+                },
+                "mesh": {
+                    "description": "Mesh used for evaluating the pretraining loss. Can differ from the main simulation mesh (e.g. a coarser mesh to speed up pretraining).",
+                    "properties": {
+                        "filename": {
+                            "description": "Path to the pretraining mesh file.",
+                            "type": "string"
+                        },
+                        "number_of_integration_points": {
+                            "description": "Number of Gauss quadrature points per element for the pretraining mesh.",
+                            "type": "integer"
+                        },
+                        "type": {
+                            "description": "Element topology for the pretraining mesh. Must be one of the supported types.",
+                            "enum": ["nurbs", "quad4", "quad8", "quad9", "tri3", "tri6"],
+                            "type": "string"
+                        }
+                    },
+                    "required": ["filename", "number_of_integration_points", "type"],
+                    "type": "object",
+                    "unevaluatedProperties": false
+                },
+                "optimiser": {
+                    "description": "Ordered list of optimiser configurations to use during pretraining. Multiple entries allow chaining (e.g. Adam then L-BFGS).",
+                    "type": "array"
+                },
+                "reset_activation_coefficient": {
+                    "description": "If true, any trainable activation coefficients learned during pretraining are reset to their initial values before the main training begins. Prevents the pretraining solution from biasing the activation shape.",
+                    "type": "boolean"
+                }
+            },
+            "required": ["enabled", "mesh", "optimiser", "reset_activation_coefficient"],
+            "type": "object",
+            "unevaluatedProperties": false
+        },
+        "seed": {
+            "description": "Global random seed for reproducibility. Controls weight initialisation, random Fourier features, and any other stochastic operations. Use different seeds to run independent replicates.",
+            "type": "integer"
+        },
+        "training_parameters": {
+            "description": "Configuration of the main training loop: optimiser(s), loss composition, early stopping, and logging frequency.",
+            "properties": {
+                "early_stopping": {
+                    "description": "Terminates training when the loss stops improving, preventing wasted compute and potential overfitting.",
+                    "properties": {
+                        "absolute_threshold": {
+                            "description": "Minimum absolute improvement in loss required to count as progress. Used when mode is 'absolute'.",
+                            "type": "number"
+                        },
+                        "enabled": {
+                            "description": "If true, training may terminate before all epochs are exhausted if the loss stagnates.",
+                            "type": "boolean"
+                        },
+                        "mode": {
+                            "description": "How improvement is measured. 'absolute' compares the raw loss decrease against absolute_threshold. 'relative' compares the fractional decrease against relative_threshold.",
+                            "enum": ["absolute", "relative"],
+                            "type": "string"
+                        },
+                        "patience": {
+                            "description": "Number of consecutive epochs without qualifying improvement before training is stopped. Higher patience tolerates longer plateaus.",
+                            "type": "integer"
+                        },
+                        "pretraining_stop": {
+                            "description": "If true, the same early stopping logic also applies during the pretraining phase. If false, pretraining always runs to completion.",
+                            "type": "boolean"
+                        },
+                        "relative_threshold": {
+                            "description": "Minimum fractional improvement (e.g. 0.001 = 0.1%) required to count as progress. Used when mode is 'relative'.",
+                            "type": "number"
+                        }
+                    },
+                    "required": ["enabled", "patience", "pretraining_stop", "relative_threshold"],
+                    "type": "object",
+                    "unevaluatedProperties": false
+                },
+                "loss_reporting_frequency": {
+                    "description": "Print/log the current loss value every N epochs. Lower values give more dense loss reporting in the log.",
+                    "type": "integer"
+                },
+                "loss_terms": {
+                    "description": "Toggles for the individual components of the total loss function. At least the elastic energy should normally be enabled.",
+                    "properties": {
+                        "energy_elastic": {
+                            "description": "If true, the elastic strain energy contribution is included in the loss. This is the core mechanical driving term.",
+                            "type": "boolean"
+                        },
+                        "energy_irreversibility": {
+                            "description": "If true, a penalty term enforcing crack irreversibility (damage cannot heal) is added to the loss. Works alongside the phasefield.constraint settings.",
+                            "type": "boolean"
+                        },
+                        "energy_phasefield": {
+                            "description": "If true, the phase-field crack surface energy (regularised Griffith energy) is included. Required for crack propagation simulations.",
+                            "type": "boolean"
+                        },
+                        "weight_decay": {
+                            "description": "If true, an L2 penalty on network weights is added to the loss. Strength is controlled by training_parameters.weight_decay.",
+                            "type": "boolean"
+                        }
+                    },
+                    "required": ["energy_elastic", "energy_irreversibility", "energy_phasefield", "weight_decay"],
+                    "type": "object",
+                    "unevaluatedProperties": false
+                },
+                "optimiser": {
+                    "description": "Ordered list of optimiser configurations for the main training loop. Multiple entries allow chaining (e.g. Adam for initial convergence then L-BFGS for fine polishing).",
+                    "type": "array"
+                },
+                "weight_decay": {
+                    "description": "L2 regularisation coefficient. Penalises large weights to improve generalisation and conditioning. Only active when loss_terms.weight_decay is true. Typical value 1e-5.",
+                    "type": "number"
+                }
+            },
+            "required": ["early_stopping", "loss_terms", "optimiser", "loss_reporting_frequency", "weight_decay"],
+            "type": "object",
+            "unevaluatedProperties": false
+        },
+        "transfer_learning": {
+            "description": "Warm-starts the network from a previously trained model (e.g. from a nearby load step or a coarser mesh). Speeds up convergence by reusing learned features rather than training from scratch.",
+            "properties": {
+                "enabled": {
+                    "description": "If true, the network weights (and optionally the optimiser state) are loaded from a previous checkpoint before training begins.",
+                    "type": "boolean"
+                },
+                "n_transferable_states": {
+                    "description": "Number of previous optimiser state snapshots to carry over (e.g. momentum buffers in Adam). Only relevant when transfer_optimiser is true.",
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "transfer_optimiser": {
+                    "description": "If true, the optimiser's internal state (momentum, variance estimates, etc.) is also loaded from the checkpoint, not just the network weights. Preserves training dynamics across transfers.",
+                    "type": "boolean"
+                }
+            },
+            "required": ["enabled", "transfer_optimiser", "n_transferable_states"],
+            "type": "object",
+            "unevaluatedProperties": false
+        }
+    },
+    "required": [
+        "displacement_parameters",
+        "model_energy_scale",
+        "network",
+        "output_parameters",
+        "parent_input_file",
+        "phasefield",
+        "pretraining_parameters",
+        "seed",
+        "training_parameters",
+        "transfer_learning"
+    ],
+    "type": "object",
+    "unevaluatedProperties": false
+}

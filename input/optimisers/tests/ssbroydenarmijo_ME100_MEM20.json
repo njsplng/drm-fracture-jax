@@ -1,0 +1,9 @@
+{
+    "bt_alpha_init": 1.0,
+    "bt_beta": 0.5,
+    "bt_c1": 1.0e-4,
+    "bt_max_steps": 50,
+    "memory_size": 20,
+    "number_of_epochs": 100,
+    "optimiser": "ssbroydenarmijo"
+}

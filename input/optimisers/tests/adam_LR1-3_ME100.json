@@ -1,0 +1,6 @@
+{
+    "learning_rate_start": 1.0e-3,
+    "learning_rate_type": "constant",
+    "number_of_epochs": 100,
+    "optimiser": "adam"
+}

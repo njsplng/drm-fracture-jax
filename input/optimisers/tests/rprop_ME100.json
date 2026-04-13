@@ -1,0 +1,5 @@
+{
+    "learning_rate": 0.01,
+    "number_of_epochs": 100,
+    "optimiser": "rprop"
+}

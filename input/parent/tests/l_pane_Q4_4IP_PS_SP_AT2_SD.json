@@ -1,0 +1,98 @@
+{
+    "aggregate_timings": false,
+    "boundary_conditions": {
+        "fixed_window_directions": ["xy"],
+        "fixed_window_parameters": [
+            {
+                "L": 0.7,
+                "d0": 0.01,
+                "order": 2,
+                "smooth_end": true,
+                "theta": 0,
+                "x_init": -0.6,
+                "y_init": -0.5
+            }
+        ],
+        "load_window_parameters": [
+            {
+                "L": 0.07,
+                "d0": 0.1,
+                "order": 2,
+                "smooth_end": true,
+                "theta": 0,
+                "x_init": 0.431,
+                "y_init": 0
+            }
+        ]
+    },
+    "debug": false,
+    "gamma_parameters": {
+        "gamma11": 0.0,
+        "gamma12": 0.0,
+        "gamma22": 0.0,
+        "gamma44": 0.0
+    },
+    "generate_plots": [],
+    "material_parameters": {
+        "cubic_anisotropy": {
+            "shear_modulus": 1.0e+5
+        },
+        "orthotropic_anisotropy": {
+            "E_11": 1.0e+6,
+            "E_22": 1.0e+6,
+            "E_33": 1.0e+6,
+            "G_12": 5.0e+5,
+            "G_23": 5.0e+5,
+            "G_31": 5.0e+5,
+            "nu_12": 0.3,
+            "nu_23": 0.3,
+            "nu_31": 0.3
+        },
+        "poissons_ratio": 0.18,
+        "thickness": 1,
+        "youngs_modulus": 85.85
+    },
+    "material_rotation": {
+        "angle": 0,
+        "number_of_slices": 1,
+        "slicing_direction": "x"
+    },
+    "mesh": {
+        "filename": "tests/l_pane",
+        "number_of_integration_points": 4,
+        "type": "quad4"
+    },
+    "nondimensionalise": false,
+    "phasefield_parameters": {
+        "G_c": 8.9e-5,
+        "initial_crack_parameters": [
+            {
+                "L": 0,
+                "d0": 0.1,
+                "order": 2,
+                "smooth_end": false,
+                "theta": 0,
+                "x_init": 0,
+                "y_init": 0
+            }
+        ],
+        "l_0": 0.02
+    },
+    "plane": "stress",
+    "postprocessing_stress_type": "",
+    "problem_domain": {
+        "x": [-0.5, 0.5],
+        "y": [-0.5, 0.5]
+    },
+    "problem_type": "at2",
+    "profile_memory": true,
+    "recorded_values": ["displacement", "phasefield"],
+    "split_output_keys": ["displacement"],
+    "strain_split": "spectral",
+    "target_dof": {
+        "coordinates": [0.43, 0.0],
+        "direction": "y"
+    },
+    "time_functions": false,
+    "title_prefix": ""
+}

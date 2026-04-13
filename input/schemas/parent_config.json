@@ -1,0 +1,19 @@
+{
+    "mappings": {
+        "elem_type": "$.mesh.type",
+        "gauss_integration_order": "$.gauss_integration_order",
+        "material_rotation_angle": "$.material_rotation.angle",
+        "mesh_filename": "$.mesh.filename",
+        "nip": "$.mesh.number_of_integration_points",
+        "nondimensionalisation": "$.nondimensionalise",
+        "number_of_slices": "$.material_rotation.number_of_slices",
+        "order_x": "$.order_x",
+        "order_y": "$.order_y",
+        "plane": "$.plane",
+        "prefix": "$.title_prefix",
+        "problem_type": "$.problem_type",
+        "slicing_direction": "$.material_rotation.slicing_direction",
+        "strain_split": "$.strain_split"
+    },
+    "template_file": "parent.j2"
+}

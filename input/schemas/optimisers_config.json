@@ -1,0 +1,12 @@
+{
+    "mappings": {
+        "learning_rate_end": "$.learning_rate_end",
+        "learning_rate_start": "$.learning_rate_start",
+        "learning_rate_transition": "$.learning_rate_transition",
+        "learning_rate_type": "$.learning_rate_type",
+        "memory": "$.memory_size",
+        "number_of_epochs": "$.number_of_epochs",
+        "optimiser": "$.optimiser"
+    },
+    "template_file": "optimisers.j2"
+}

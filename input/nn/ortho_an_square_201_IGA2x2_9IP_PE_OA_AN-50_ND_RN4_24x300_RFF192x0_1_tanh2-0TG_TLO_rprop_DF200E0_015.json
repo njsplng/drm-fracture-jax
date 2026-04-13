@@ -1,0 +1,6 @@
+{
+    "extends": "ortho_an_square_201_IGA2x2_9IP_PE_OA_AN+30_ND_RN4_24x300_RFF192x0_1_tanh2-0TG_TLO_rprop_DF200E0_015",
+    "overrides": {
+        "parent_input_file": "ortho_an_square_201_IGA2x2_9IP_PE_OA_AN-50_ND"
+    }
+}

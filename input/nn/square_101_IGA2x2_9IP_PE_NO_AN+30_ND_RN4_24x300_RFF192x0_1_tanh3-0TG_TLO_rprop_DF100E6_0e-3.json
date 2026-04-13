@@ -1,0 +1,100 @@
+{
+    "displacement_parameters": {
+        "coarse_end": 0.0,
+        "end": 6.0e-3,
+        "increments_coarse": 0,
+        "increments_fine": 100,
+        "loading_angle": 90,
+        "start": 0
+    },
+    "model_energy_scale": "log",
+    "network": {
+        "activation": {
+            "function": "tanh",
+            "initial_coefficient": 3.0,
+            "trainable": true,
+            "trainable_global": true
+        },
+        "hidden_count": 24,
+        "hidden_size": 300,
+        "input_size": 2,
+        "output_size": 3,
+        "rff": {
+            "enabled": true,
+            "features": 192,
+            "scale": 0.1
+        },
+        "type": "resnet4",
+        "weight_initialisation_type": "xavier_normal"
+    },
+    "output_parameters": {
+        "log_parameters": {
+            "calculate_sparsity": false,
+            "output_activation_coefficients": true
+        },
+        "pvd_gif_parameters": {
+            "axis_limits": [
+                [0, 1]
+            ],
+            "distortion_scaling": 1.0,
+            "enabled": true,
+            "fps": 20,
+            "include_every_n": 1,
+            "mesh_outline": false,
+            "target_fields": ["phasefield"]
+        },
+        "save_logs": true,
+        "save_pvd": true,
+        "stream_outputs": true,
+        "timestamp": false,
+        "training_snapshots": {
+            "enabled": false,
+            "frequency": 50
+        }
+    },
+    "parent_input_file": "square_101_IGA2x2_9IP_PE_NO_AN+30_ND",
+    "phasefield": {
+        "constraint": {
+            "numerical_coefficient": 1.0e-3,
+            "numerical_offset": 0.0,
+            "numerical_support": 8.0,
+            "type": "numerical"
+        },
+        "irreversibility_tolerance": 0.02
+    },
+    "pretraining_parameters": {
+        "enabled": true,
+        "mesh": {
+            "filename": "square_101",
+            "number_of_integration_points": -1,
+            "type": "nurbs"
+        },
+        "optimiser": ["ssBroydenArmijo_ME1000_MEM10"],
+        "reset_activation_coefficient": false
+    },
+    "seed": 1,
+    "training_parameters": {
+        "early_stopping": {
+            "absolute_threshold": 5.0e-6,
+            "enabled": true,
+            "mode": "relative",
+            "patience": 50,
+            "pretraining_stop": true,
+            "relative_threshold": 5.0e-5
+        },
+        "loss_reporting_frequency": 100,
+        "loss_terms": {
+            "energy_elastic": true,
+            "energy_irreversibility": true,
+            "energy_phasefield": true,
+            "weight_decay": true
+        },
+        "optimiser": ["rprop_LR1-5_ME10000"],
+        "weight_decay": 1.0e-5
+    },
+    "transfer_learning": {
+        "enabled": true,
+        "n_transferable_states": 1,
+        "transfer_optimiser": true
+    }
+}

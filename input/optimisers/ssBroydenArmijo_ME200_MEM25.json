@@ -1,0 +1,9 @@
+{
+    "atol": 1.0e-10,
+    "learning_rate_type": "constant",
+    "memory_size": 25,
+    "number_of_epochs": 200,
+    "optimiser": "ssBroydenArmijo",
+    "rtol": 1.0e-10,
+    "theta_mode": "auto"
+}

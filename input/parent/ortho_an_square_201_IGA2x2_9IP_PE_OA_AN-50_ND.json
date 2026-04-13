@@ -1,0 +1,8 @@
+{
+    "extends": "ortho_an_square_201_IGA2x2_9IP_PE_OA_AN+30_ND",
+    "overrides": {
+        "material_rotation": {
+            "angle": -50.0
+        }
+    }
+}

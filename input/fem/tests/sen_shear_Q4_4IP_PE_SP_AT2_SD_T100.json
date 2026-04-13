@@ -1,0 +1,73 @@
+{
+    "boundary_conditions_parameters": {
+        "constrain_directions": "xy",
+        "constrained_degrees_of_freedom": [0, 1, 2, 3, 5, 7, 9, 11, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 145, 147, 149, 151, 153, 155, 157, 159, 161, 163, 165, 167, 169, 171, 173, 175, 177, 179, 181, 183, 185, 187, 189, 191, 193, 195, 197, 199, 201, 203, 205, 207, 209, 211, 213, 215, 217, 219, 221, 223, 225, 227, 229, 231, 233, 235, 237, 239, 241, 243, 245, 247, 249, 251, 253, 255, 257, 259, 261, 263, 265, 267, 269, 271, 273, 275, 277, 279, 281, 283, 285, 287, 289, 291, 293, 295, 297, 299, 301, 303, 305, 307, 309, 311, 313, 315, 317, 387, 389, 391, 393, 395, 397, 399],
+        "dof_selection_mode": "explicit",
+        "window_value_threshold": 0.95
+    },
+    "forcing_parameters": {
+        "body_parameters": {
+            "magnitude_x": 1.0,
+            "magnitude_y": 2.0
+        },
+        "concentrated_parameters": {
+            "forced_degrees_of_freedom": [4],
+            "magnitude": 1.0
+        },
+        "mode": "concentrated",
+        "window_parameters": {
+            "filter_threshold": 0.1,
+            "magnitude": 1.0
+        }
+    },
+    "lagrange_multiplier_parameters": {
+        "bound_degrees_of_freedom": [],
+        "constrain_directions": "x",
+        "dof_selection_mode": "window",
+        "enabled": true,
+        "window_value_threshold": 0.95
+    },
+    "loop_parameters": {
+        "newton_raphson_maximum_steps": 50,
+        "newton_raphson_tolerance": 1.0e-6,
+        "timesteps": 100
+    },
+    "n_threads_petsc": 1,
+    "optimise_sparsity": true,
+    "output_parameters": {
+        "pvd_gif_parameters": {
+            "axis_limits": [],
+            "distortion_scaling": 0.0,
+            "enabled": false,
+            "fps": 20,
+            "include_every_n": 1,
+            "mesh_outline": false,
+            "target_fields": []
+        },
+        "save_logs": false,
+        "save_pickle": true,
+        "save_pvd": false,
+        "stream_outputs": false,
+        "timestamp": false
+    },
+    "parent_input_file": "tests/sen_shear_Q4_4IP_PE_SP_AT2_SD",
+    "penalty_method_parameters": {
+        "bound_degrees_of_freedom": [],
+        "constrain_directions": "xy",
+        "dof_selection_mode": "window",
+        "enabled": false,
+        "penalty_value": 1.0e+6,
+        "window_value_threshold": 0.95
+    },
+    "solution_parameters": {
+        "displacement_control_parameters": {
+            "loading_directions": [1],
+            "maximum_controlled_displacement": 0.02
+        },
+        "load_control_parameters": {
+            "loading_directions": [1]
+        },
+        "mode": "displacement control"
+    },
+    "sparse_solver": "petsc"
+}

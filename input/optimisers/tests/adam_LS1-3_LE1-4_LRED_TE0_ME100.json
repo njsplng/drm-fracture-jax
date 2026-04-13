@@ -1,0 +1,9 @@
+{
+    "learning_rate_decay_rate": 0.9,
+    "learning_rate_end": 1.0e-4,
+    "learning_rate_start": 1.0e-3,
+    "learning_rate_transition": 0,
+    "learning_rate_type": "exponential_decay",
+    "number_of_epochs": 100,
+    "optimiser": "adam"
+}

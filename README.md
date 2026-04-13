@@ -6,6 +6,31 @@ Companion repository for the paper "[Deep learning-based phase-field modelling o
 
 ---
 
+## Citing This Work
+
+If you use this code in your research, please cite the associated paper:
+
+> N. Plungė, P. Brommer, R. S. Edwards, E. G. Kakouris,
+> *"Deep learning-based phase-field modelling of brittle fracture in anisotropic media"*,
+> arXiv:2603.20120 [physics.comp-ph], 2026.
+> https://doi.org/10.48550/arXiv.2603.20120
+
+BibTeX:
+```bibtex
+@misc{plunge2026fracture,
+  author    = {Plungė, Nojus and Brommer, P. and Edwards, R. S. and Kakouris, E. G.},
+  title     = {Deep learning-based phase-field modelling of brittle fracture in anisotropic media},
+  year      = {2026},
+  eprint    = {2603.20120},
+  archivePrefix = {arXiv},
+  primaryClass  = {physics.comp-ph},
+  doi       = {10.48550/arXiv.2603.20120},
+  url       = {https://arxiv.org/abs/2603.20120}
+}
+```
+
+---
+
 ## Setup
 
 ### Environment

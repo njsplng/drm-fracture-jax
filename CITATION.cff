@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use this code in your research, please cite the associated paper below."
+type: software
+authors:
+  - family-names: Plungė
+    given-names: Nojus
+  - family-names: Brommer
+    given-names: P.
+  - family-names: Edwards
+    given-names: R. S.
+  - family-names: Kakouris
+    given-names: E. G.
+title: "DRM Fracture JAX"
+version: 1.0.0
+date-released: 2026-04-13
+license: MIT
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Plungė
+      given-names: Nojus
+    - family-names: Brommer
+      given-names: P.
+    - family-names: Edwards
+      given-names: R. S.
+    - family-names: Kakouris
+      given-names: E. G.
+  title: "Deep learning-based phase-field modelling of brittle fracture in anisotropic media"
+  year: 2026
+  url: "https://arxiv.org/abs/2603.20120"
+  doi: 10.48550/arXiv.2603.20120

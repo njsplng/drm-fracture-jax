@@ -295,7 +295,6 @@ class Simulation(ABC):
         resume = getattr(self, "_resumed_from_checkpoint", False) or hasattr(
             self, "_resume_step"
         )
-        print(resume)
         self.paraview_ctx = setup_paraview_output(
             file_name=self.title,
             coordinates=coordinates,
